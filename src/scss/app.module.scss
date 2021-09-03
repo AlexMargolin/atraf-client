@@ -1,0 +1,15 @@
+@import "variables/sizes";
+@import "variables/colors";
+@import "reset";
+
+
+html {
+  font-size: 100%;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: 'Rubik', sans-serif;
+}

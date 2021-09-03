@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0-alpha",
+  "name": "image-board",
+  "author": "Alex Margolin <csight@msn.com>",
+  "bugs": {
+    "email": "csight@msn.com"
+  },
+  "sideEffects": [
+    "*.scss",
+    "*.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexMargolin/image-board"
+  },
+  "scripts": {
+    "dev": "node scripts/dev",
+    "build": "node scripts/build",
+    "test": "jest --env=jsdom"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.10",
+    "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-router-dom": "^5.1.8",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.2.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-react": "^7.25.1",
+    "html-webpack-plugin": "^5.3.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.1.0",
+    "mini-css-extract-plugin": "^2.2.2",
+    "prettier": "2.3.2",
+    "sass": "^1.39.0",
+    "sass-loader": "^12.1.0",
+    "ts-jest": "^27.0.5",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.2",
+    "webpack": "^5.52.0",
+    "webpack-dev-server": "^4.1.0"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.1"
+  }
+}
