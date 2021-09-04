@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
-import { Button, Card, Input } from "@/components"
+import { Button, Card, Input, Icon } from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -20,15 +20,21 @@ const Login: FC = () => {
         <form>
           <Input
             required
+            autoFocus
             type='email'
             label='Email'
-            placeholder='john@doe.com'
+            __start={<Icon iconId='icon-at' />}
           />
-          <Input label='Password' />
+          <Input
+            required
+            type='password'
+            label='Password'
+            __start={<Icon iconId='icon-lock' />}
+          />
 
           <div className={classes(classNames.buttons)}>
             <Button grow type='submit' color='primary'>
-              Login
+              login
             </Button>
           </div>
         </form>

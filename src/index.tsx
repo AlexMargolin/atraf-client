@@ -7,6 +7,7 @@ import modules from "@/scss/app.module.scss"
 
 const classes = makeClasses(modules)
 
+// Application root element
 const root = document.createElement("DIV")
 
 Object.assign(root, {
