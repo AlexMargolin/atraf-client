@@ -31,7 +31,15 @@ const classNames = {
  */
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (props, forwardedRef) => {
-    const { helper, className, __end, __start, ...rest } = props
+    const {
+      className,
+      helper,
+      label,
+      required,
+      __end,
+      __start,
+      ...rest
+    } = props
 
     const uid = useUniqueId("input")
     const inputRef = useRef<HTMLInputElement>()
@@ -56,8 +64,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
      * @param event
      */
     const handleInput = (event: FormEvent): void => {
-      const target = event.target as HTMLInputElement
       const errors = []
+      const target = event.target as HTMLInputElement
 
       // native validation message
       if (!target.checkValidity()) {
@@ -73,8 +81,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           [classNames.hasError]: hasErrors,
         })}
       >
-        <Label required htmlFor={uid}>
-          Lorem ipsum dolor sit amet.
+        <Label htmlFor={uid} required={required}>
+          {label}
         </Label>
 
         <div className={classes(classNames.wrapper)}>
