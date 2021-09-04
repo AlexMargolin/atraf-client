@@ -16,9 +16,17 @@ export const classNames = {
  */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, forwardedRef) => {
-    const { children, className, variant, color, ...rest } = props
+    const {
+      children,
+      className,
+      grow,
+      variant = "filled",
+      color,
+      ...rest
+    } = props
 
     const attrClasses = {
+      [`button--grow`]: grow,
       [`button--${color}`]: !!color,
       [`button--${variant}`]: !!variant,
     }

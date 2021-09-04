@@ -12,6 +12,12 @@ const Router: FC = () => {
       <Suspense fallback='Loading...'>
         <Switch>
           <Route
+            exact
+            path={routes.login.path}
+            component={routes.login.component}
+          />
+
+          <Route
             path={routes.notFound.path}
             component={routes.notFound.component}
           />

@@ -4,8 +4,9 @@
 .alert {
   font-size: 11px;
   font-weight: 500;
-  padding: get-size(spacing-normal);
-  border-radius: get-size(border-radius);
+  padding: get-size(spacing-15);
+  margin-bottom: get-size(spacing-15);
+  border-radius: get-size(border-radius-3);
 
   &--info {
     color: #424242;

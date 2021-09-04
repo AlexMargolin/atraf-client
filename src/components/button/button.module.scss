@@ -10,7 +10,7 @@
   font-family: inherit;
   text-transform: uppercase;
   -webkit-appearance: button;
-  border-radius: get-size(border-radius);
+  border-radius: get-size(border-radius-3);
 
   $unique-id: unique-id();
   @include create-palette-variations("&--", $palette, $unique-id);
@@ -21,6 +21,10 @@
 
   &:focus {
     outline: 0;
+  }
+
+  &--grow {
+    flex-grow: 1;
   }
 
   &--filled {

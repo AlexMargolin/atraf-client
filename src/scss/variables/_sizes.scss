@@ -1,7 +1,8 @@
 $sizes: (
-        spacing-normal: 15px,
-        spacing-large: 50px,
-        border-radius: 3px,
+        spacing-5: 5px,
+        spacing-15: 15px,
+        spacing-50: 50px,
+        border-radius-3: 3px,
 );
 
 @function get-size($name) {

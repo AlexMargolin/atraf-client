@@ -3,7 +3,7 @@
 
 .input {
   width: 100%;
-  margin: 20px 0;
+  margin-bottom: 25px;
 
   &__wrapper {
     z-index: 1;
@@ -20,7 +20,7 @@
     // Style props
     border: none;
     transition: 0.1s box-shadow ease;
-    border-radius: get-size(border-radius);
+    border-radius: get-size(border-radius-3);
     box-shadow: 0 0 0 1px get-part-color(border);
   }
 
@@ -34,7 +34,7 @@
 
     // Style props
     font-size: 12px;
-    padding: 10px 8px;
+    padding: 15px 10px;
     color: get-part-color(black);
   }
 
