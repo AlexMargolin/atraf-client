@@ -3,6 +3,8 @@ $colors: (
         black: #252525,
         primary: #0cb750,
         secondary: #e42365,
+        error: red,
+        border: #efefef,
 );
 
 @function get-color($name) {

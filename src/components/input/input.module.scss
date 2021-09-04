@@ -1,0 +1,63 @@
+@import "~@/scss/variables/sizes";
+@import "~@/scss/variables/colors";
+
+.input {
+  width: 100%;
+  margin: 20px 0;
+
+  &__wrapper {
+    z-index: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    &:focus-within {
+      box-shadow: 0 0 0 2px get-color(primary);
+    }
+
+    // Style props
+    border: none;
+    transition: 0.1s box-shadow ease;
+    border-radius: get-size(border-radius);
+    box-shadow: 0 0 0 1px get-color(border);
+  }
+
+  &__field {
+    flex-grow: 1;
+    border: none;
+
+    &:focus {
+      outline: 0;
+    }
+
+    // Style props
+    font-size: 12px;
+    padding: 10px 8px;
+    color: get-color(black);
+  }
+
+  &__slot {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__helper {
+    width: 100%;
+    opacity: 0.6;
+    display: block;
+    margin-top: 8px;
+    font-size: 10px;
+    font-style: normal;
+    word-break: break-all;
+
+  }
+
+  &--error {
+  }
+}
