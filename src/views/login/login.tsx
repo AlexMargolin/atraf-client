@@ -1,5 +1,4 @@
 import { FC } from "react"
-import { NavigateTo } from "@/router"
 import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
 import { Button, Card, Input, Icon, Link } from "@/components"
@@ -31,7 +30,7 @@ const Login: FC = () => {
             required
             type='password'
             label='Password'
-            __start={<Icon iconId='icon-lock' />}
+            __start={<Icon iconId='icon-lock-bold' />}
             __helper={<Link route='login'>Forgot Password?</Link>}
           />
 
