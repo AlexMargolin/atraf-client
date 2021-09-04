@@ -1,0 +1,9 @@
+@import "~@/scss/variables";
+
+.line {
+  height: 1px;
+  width: 100%;
+  display: block;
+  margin: get-size(spacing-15) auto;
+  background-color: get-part-color(border);
+}
