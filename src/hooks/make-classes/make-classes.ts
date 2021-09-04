@@ -3,7 +3,7 @@ import {
   MakeClassesFunc,
   MakeClassesBound,
   ParseClassesFunc,
-} from "@/hooks/makeClasses"
+} from "./"
 
 /**
  * Accepts various type of arguments and returns an array of the "truthy" ones.

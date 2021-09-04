@@ -20,6 +20,13 @@
   -webkit-appearance: button;
   border-radius: get-size(border-radius);
 
+  // css variables unique identifier
+  $unique-id: unique-id();
+
+  // create a button class and define a css variable for every color
+  // eg: .button--black{ --upf0ty0: #000000; }
+  @include set-color-variables("&--", $unique-id);
+
   &:not(:disabled) {
     cursor: pointer;
   }
@@ -27,13 +34,6 @@
   &:focus {
     outline: 0;
   }
-
-  // css variables unique identifier
-  $unique-id: unique-id();
-
-  // create a button class and define a css variable for every color
-  // eg: .button--black{ --upf0ty0: #000000; }
-  @include set-color-variables("&--", $unique-id);
 
   &--filled {
     color: get-color(white);

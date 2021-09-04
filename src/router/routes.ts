@@ -5,7 +5,7 @@ const routes: Record<string, RouteProps> = {
   notFound: {
     path: "*",
     component: lazy(
-      () => import(/* webpackChunkName: "404" */ "@/views/NotFound"),
+      () => import(/* webpackChunkName: "404" */ "@/views/not-found"),
     ),
   },
 }
