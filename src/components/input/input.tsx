@@ -33,11 +33,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   (props, forwardedRef) => {
     const {
       className,
-      helper,
       label,
       required,
       __end,
       __start,
+      __helper,
       ...rest
     } = props
 
@@ -53,7 +53,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
      * @param element
      * @return ReactElement
      */
-    const cloneSlot = (element: ReactElement) => {
+    const attachSlotClass = (element: ReactElement) => {
       return cloneElement(element, {
         className: classes(classNames.slot, element.props.className),
       })
@@ -86,7 +86,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </Label>
 
         <div className={classes(classNames.wrapper)}>
-          {__start && cloneSlot(__start)}
+          {__start && attachSlotClass(__start)}
 
           <input
             id={uid}
@@ -98,7 +98,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...rest}
           />
 
-          {__end && cloneSlot(__end)}
+          {__end && attachSlotClass(__end)}
         </div>
 
         {hasErrors && (
@@ -107,9 +107,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </em>
         )}
 
-        {helper && !hasErrors && (
+        {__helper && !hasErrors && (
           <em id={helperId} className={classes(classNames.helper)}>
-            {helper}
+            {__helper}
           </em>
         )}
       </div>

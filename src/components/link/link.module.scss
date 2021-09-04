@@ -1,0 +1,17 @@
+@import "~@/scss/variables";
+
+.link {
+  font-size: 11px;
+  text-decoration: none;
+  display: inline-block;
+  color: get_part-color(black);
+
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover, &:focus {
+    color: get-palette(primary);
+  }
+}

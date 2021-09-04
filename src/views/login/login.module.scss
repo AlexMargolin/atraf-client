@@ -11,11 +11,16 @@
     font-weight: 700;
     text-transform: uppercase;
     color: get-part-color(black);
-    margin-bottom: get-size(spacing-15);
+    margin-bottom: get-size(spacing-5);
   }
 
   &__buttons {
     display: flex;
+  }
+
+  &__account {
+    text-align: center;
+    margin-top: get-size(spacing-15);
   }
 
   &__disclaimer {
