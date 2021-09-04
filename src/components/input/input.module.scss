@@ -3,25 +3,24 @@
 
 .input {
   width: 100%;
-  margin-bottom: 25px;
+  position: relative;
+  margin-bottom: 35px;
 
   &__wrapper {
     z-index: 1;
     display: flex;
     overflow: hidden;
-    position: relative;
     align-items: center;
     justify-content: space-between;
 
     &:focus-within {
-      box-shadow: 0 0 0 2px get-palette(primary);
+      box-shadow: inset 0 0 0 2px get-palette(primary);
     }
 
-    border: none;
     padding: 5px;
     transition: 0.1s box-shadow ease;
     border-radius: get-size(border-radius-3);
-    box-shadow: 0 0 0 1px get-part-color(border);
+    box-shadow: inset 0 0 0 1px get-part-color(border), 0 0 2px 1px rgba(241, 241, 241, 0.3);
   }
 
   &__field {
@@ -50,13 +49,16 @@
   }
 
   &__helper {
-    opacity: 1;
     width: 100%;
+    opacity: 0.9;
     display: flex;
     font-size: 11px;
+    overflow: hidden;
     font-style: normal;
-    word-break: break-all;
+    position: absolute;
+    white-space: nowrap;
     justify-content: flex-end;
     margin-top: get-size(spacing-10);
+
   }
 }

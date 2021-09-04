@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./register.module.scss"
-import { Button, Card, Input, Icon, Link } from "@/components"
+import { Card, Icon, Link, Input, Button } from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -10,13 +10,14 @@ const classNames = {
   title: "register__title",
   account: "register__account",
   buttons: "register__buttons",
+  shortcuts: "register__shortcuts",
   disclaimer: "register__disclaimer",
 }
 
 const Register: FC = () => {
   return (
     <div className={classes(classNames.root)}>
-      <h1 className={classes(classNames.title)}>Register</h1>
+      <h1 className={classes(classNames.title)}>New Account</h1>
       <Card>
         <form>
           <Input
@@ -31,6 +32,7 @@ const Register: FC = () => {
             required
             type='password'
             label='Password'
+            __helper='Should be at least 8 characters'
             __start={<Icon iconId='icon-lock-regular' />}
           />
 
@@ -50,7 +52,7 @@ const Register: FC = () => {
       </Card>
 
       <div className={classes(classNames.account)}>
-        <Link route='login'>I Already have an account</Link>
+        <Link route='login'>I already have an account</Link>
       </div>
 
       <div className={classes(classNames.disclaimer)}>
