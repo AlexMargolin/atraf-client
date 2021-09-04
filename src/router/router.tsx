@@ -1,14 +1,18 @@
-import { routes } from "./"
+import {
+  Route,
+  Switch,
+  Router as HistoryRouter,
+} from "react-router-dom"
+import { history, routes } from "./"
 import { FC, Suspense } from "react"
-import { Route, Switch, BrowserRouter } from "react-router-dom"
 
 /**
- * Router Component
+ * History Router Component
  * @constructor
  */
 const Router: FC = () => {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Suspense fallback='Loading...'>
         <Switch>
           <Route
@@ -18,12 +22,18 @@ const Router: FC = () => {
           />
 
           <Route
+            exact
+            path={routes.register.path}
+            component={routes.register.component}
+          />
+
+          <Route
             path={routes.notFound.path}
             component={routes.notFound.component}
           />
         </Switch>
       </Suspense>
-    </BrowserRouter>
+    </HistoryRouter>
   )
 }
 

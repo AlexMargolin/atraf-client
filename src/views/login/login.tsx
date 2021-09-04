@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { NavigateTo } from "@/router"
 import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
 import { Button, Card, Input, Icon, Link } from "@/components"
@@ -31,7 +32,7 @@ const Login: FC = () => {
             type='password'
             label='Password'
             __start={<Icon iconId='icon-lock' />}
-            __helper={<Link>Forgot Password?</Link>}
+            __helper={<Link route='login'>Forgot Password?</Link>}
           />
 
           <div className={classes(classNames.buttons)}>
@@ -43,13 +44,12 @@ const Login: FC = () => {
       </Card>
 
       <div className={classes(classNames.account)}>
-        <Link>I don&apos;t have an account</Link>
+        <Link route='register'>I don&apos;t have an account</Link>
       </div>
 
       <div className={classes(classNames.disclaimer)}>
-        This site is protected by reCAPTCHA and the{" "}
-        <Link>Google Privacy Policy</Link> and{" "}
-        <Link>Terms of Service</Link> apply.
+        This site is protected by reCAPTCHA and the Google Privacy
+        Policy and Terms of Service apply.
       </div>
     </div>
   )
