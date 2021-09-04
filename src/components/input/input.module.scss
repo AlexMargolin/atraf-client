@@ -14,14 +14,14 @@
     justify-content: space-between;
 
     &:focus-within {
-      box-shadow: 0 0 0 2px get-color(primary);
+      box-shadow: 0 0 0 2px get-palette(primary);
     }
 
     // Style props
     border: none;
     transition: 0.1s box-shadow ease;
     border-radius: get-size(border-radius);
-    box-shadow: 0 0 0 1px get-color(border);
+    box-shadow: 0 0 0 1px get-part-color(border);
   }
 
   &__field {
@@ -35,7 +35,7 @@
     // Style props
     font-size: 12px;
     padding: 10px 8px;
-    color: get-color(black);
+    color: get-part-color(black);
   }
 
   &__slot {

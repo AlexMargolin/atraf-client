@@ -9,6 +9,6 @@ html {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  color: get-color(black);
+  color: get-part-color(black);
   font-family: 'Rubik', sans-serif;
 }

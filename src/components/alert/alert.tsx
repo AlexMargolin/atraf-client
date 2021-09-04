@@ -16,7 +16,7 @@ export const classNames = {
  */
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (props, forwardedRef) => {
-    const { className, type = "info", ...rest } = props
+    const { className, children, type = "info", ...rest } = props
 
     const attrClasses = {
       [`alert--${type}`]: !!type,
@@ -28,7 +28,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className={classes(classNames.root, className, attrClasses)}
         {...rest}
       >
-        test
+        {children}
       </div>
     )
   },

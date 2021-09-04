@@ -1,0 +1,10 @@
+@import "~@/scss/variables";
+
+.card {
+  position: relative;
+  box-shadow: $box-shadow-normal;
+  padding: get-size(spacing-normal);
+  border-radius: get-size(border-radius);
+  background-color: get-part-color(white);
+  border: 1px solid get-part-color(border);
+}

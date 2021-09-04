@@ -1,4 +1,4 @@
-@mixin create-class-variations($selector, $data, $css-variable) {
+@mixin create-palette-variations($selector, $data, $css-variable) {
   @each $key, $value in $data {
     #{$selector}#{$key} {
       --#{$css-variable}: #{$value};

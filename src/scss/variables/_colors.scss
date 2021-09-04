@@ -1,15 +1,26 @@
-$colors: (
-        white: #ffffff,
-        black: #252525,
+$palette: (
         primary: #0cb750,
         secondary: #e42365,
-        error: red,
+);
+
+$part-colors: (
+        white: #ffffff,
+        black: #252525,
         border: #efefef,
 );
 
-@function get-color($name) {
-  @if map_has-key($colors, $name) {
-    @return map-get($colors, $name);
+@function get-palette($name) {
+  @if map_has-key($palette, $name) {
+    @return map-get($palette, $name);
+  }
+
+  @error "Color '#{$name}' is undefined"
+}
+
+
+@function get-part-color($name) {
+  @if map_has-key($part-colors, $name) {
+    @return map-get($part-colors, $name);
   }
 
   @error "Color '#{$name}' is undefined"

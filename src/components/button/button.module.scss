@@ -1,5 +1,4 @@
-@import "~@/scss/variables/colors";
-@import "~@/scss/variables/sizes";
+@import "~@/scss/variables";
 @import "~@/scss/mixins";
 
 .button {
@@ -14,7 +13,7 @@
   border-radius: get-size(border-radius);
 
   $unique-id: unique-id();
-  @include create-class-variations("&--", $colors, $unique-id);
+  @include create-palette-variations("&--", $palette, $unique-id);
 
   &:not(:disabled) {
     cursor: pointer;
@@ -25,25 +24,25 @@
   }
 
   &--filled {
-    color: get-color(white);
+    color: get-part-color(white);
     background-color: var(--#{$unique-id});
 
     &:hover,
     &:focus {
       color: var(--#{$unique-id});
-      background-color: get-color(white);
+      background-color: get-part-color(white);
       box-shadow: inset 0 0 0 2px var(--#{$unique-id});
     }
   }
 
   &--outlined {
     color: var(--#{$unique-id});
-    background-color: get-color(white);
+    background-color: get-part-color(white);
     box-shadow: inset 0 0 0 2px var(--#{$unique-id});
 
     &:hover,
     &:focus {
-      color: get-color(white);
+      color: get-part-color(white);
       background-color: var(--#{$unique-id});
     }
   }
