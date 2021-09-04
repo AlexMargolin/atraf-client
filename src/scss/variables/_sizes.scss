@@ -1,3 +1,14 @@
-$size-radius-normal: 2px;
-$size-padding-normal: 15px;
-$size-padding-large: 50px;
+$sizes: (
+        spacing-normal: 15px,
+        spacing-large: 50px,
+        border-radius: 2px,
+);
+
+@function get-size($name) {
+  @if map-has-key($sizes, $name) {
+    @return map-get($sizes, $name);
+  }
+
+  @error "Size '#{$name}' is undefined"
+}
+

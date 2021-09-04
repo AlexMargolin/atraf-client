@@ -34,7 +34,7 @@ const tsRule = () => ({
  * Style Rule.
  */
 const styleRule = () => ({
-  test: /\.(css|scss)$/,
+  test: /\.(scss)$/,
   use: [
     {
       loader: MiniCssExtractPlugin.loader,
@@ -46,10 +46,7 @@ const styleRule = () => ({
         sourceMap: envCmp(true, false),
         modules: {
           auto: true,
-          localIdentName: envCmp(
-            "[local]-[contenthash:5]",
-            "[contenthash:5]",
-          ),
+          localIdentName: envCmp("[local]", "[contenthash:5]"),
           exportLocalsConvention: "camelCase",
         },
       },

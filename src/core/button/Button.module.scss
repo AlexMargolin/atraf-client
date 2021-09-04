@@ -1,0 +1,66 @@
+@import "~@/scss/variables/colors";
+@import "~@/scss/variables/sizes";
+
+@mixin set-color-variables($selector,$variable-name) {
+  @each $color-name, $color-value in $colors {
+    #{$selector}#{$color-name} {
+      --#{$variable-name}: #{$color-value};
+    }
+  }
+}
+
+.button {
+  border: none;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 15px 20px;
+  line-height: inherit;
+  font-family: inherit;
+  text-transform: uppercase;
+  -webkit-appearance: button;
+  border-radius: get-size(border-radius);
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  // css variables unique identifier
+  $unique-id: unique-id();
+
+  // create a button class and define a css variable for every color
+  // eg: .button--black{ --upf0ty0: #000000; }
+  @include set-color-variables("&--", $unique-id);
+
+  &--filled {
+    color: get-color(white);
+    background-color: var(--#{$unique-id});
+
+    &:hover,
+    &:focus {
+      color: var(--#{$unique-id});
+      background-color: get-color(white);
+      box-shadow: inset 0 0 0 2px var(--#{$unique-id});
+    }
+  }
+
+  &--outlined {
+    color: var(--#{$unique-id});
+    background-color: get-color(white);
+    box-shadow: inset 0 0 0 2px var(--#{$unique-id});
+
+    &:hover,
+    &:focus {
+      color: get-color(white);
+      background-color: var(--#{$unique-id});
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
