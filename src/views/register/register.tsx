@@ -1,4 +1,5 @@
-import { FC } from "react"
+import api from "@/api"
+import React, { FC } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./register.module.scss"
 import { Card, Icon, Link, Input, Button } from "@/components"
@@ -14,17 +15,36 @@ const classNames = {
   disclaimer: "register__disclaimer",
 }
 
+const EMAIL_FIELD = "email"
+const PASSWORD_FIELD = "password"
+const PASSWORD_CONFIRM_FIELD = "confirm_password"
+
 const Register: FC = () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+
+    const form = event.target as HTMLFormElement
+    const data = new FormData(form)
+
+    const email = data.get(EMAIL_FIELD) as string
+    const password = data.get(PASSWORD_FIELD) as string
+    const confirm_password = data.get(PASSWORD_CONFIRM_FIELD)
+
+    // Create Account
+    await api.account.register(email, password)
+  }
+
   return (
     <div className={classes(classNames.root)}>
       <h1 className={classes(classNames.title)}>New Account</h1>
       <Card>
-        <form>
+        <form onSubmit={handleSubmit} noValidate>
           <Input
             required
             autoFocus
             type='email'
             label='Email'
+            name={EMAIL_FIELD}
             __start={<Icon iconId='icon-at' />}
           />
 
@@ -32,6 +52,7 @@ const Register: FC = () => {
             required
             type='password'
             label='Password'
+            name={PASSWORD_FIELD}
             __helper='Should be at least 12 characters long'
             __start={<Icon iconId='icon-lock-regular' />}
           />
@@ -40,6 +61,7 @@ const Register: FC = () => {
             required
             type='password'
             label='Confirm Password'
+            name={PASSWORD_CONFIRM_FIELD}
             __start={<Icon iconId='icon-lock-bold' />}
           />
 

@@ -1,8 +1,8 @@
 import { FC } from "react"
+import { Comment } from "@/features"
+import { makeClasses } from "@/hooks"
 import modules from "./post.module.scss"
 import { useParams } from "react-router-dom"
-import { makeClasses } from "@/hooks"
-import { Comment } from "@/features"
 import { CommentStatic } from "@/features/comment"
 
 const mc = makeClasses(modules)

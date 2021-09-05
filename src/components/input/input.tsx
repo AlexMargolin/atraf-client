@@ -49,20 +49,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const hasErrors = Boolean(errors.length)
     const helperId = `helper-${uid}`
 
-    /**
-     * @param element
-     * @return ReactElement
-     */
     const attachSlotClass = (element: ReactElement) => {
       return cloneElement(element, {
         className: classes(classNames.slot, element.props.className),
       })
     }
 
-    /**
-     * Handle Input <input> event
-     * @param event
-     */
     const handleInput = (event: FormEvent): void => {
       const errors = []
       const target = event.target as HTMLInputElement
@@ -90,6 +82,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
           <input
             id={uid}
+            required={required}
             onInput={handleInput}
             aria-invalid={hasErrors ? true : undefined}
             aria-describedby={hasErrors ? helperId : undefined}
