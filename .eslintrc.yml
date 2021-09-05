@@ -19,9 +19,9 @@ plugins:
   - '@typescript-eslint'
 rules:
   line-comment-position:
-    - "error"
+    - error
     - position: "above"
-  camelcase: "error"
+  camelcase: "off"
   no-console: "error"
   react/jsx-uses-react: "off"
   react/react-in-jsx-scope: "off"

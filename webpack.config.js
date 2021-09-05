@@ -126,6 +126,7 @@ module.exports = {
     main: appendRoot(defaults.srcDir, defaults.mainFile),
   },
   output: {
+    publicPath: "/",
     path: appendRoot(defaults.outputDir),
     filename: envCmp(
       "[name]-[contenthash:5].js",

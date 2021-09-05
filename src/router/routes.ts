@@ -17,6 +17,12 @@ const routes = {
         import(/* webpackChunkName: "register" */ "@/views/register"),
     ),
   },
+  post: {
+    path: "/post/:id",
+    component: lazy(
+      () => import(/* webpackChunkName: "post" */ "@/views/post"),
+    ),
+  },
   notFound: {
     path: "*",
     component: lazy(

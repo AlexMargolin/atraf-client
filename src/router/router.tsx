@@ -28,6 +28,12 @@ const Router: FC = () => {
           />
 
           <Route
+            exact
+            path={routes.post.path}
+            component={routes.post.component}
+          />
+
+          <Route
             path={routes.notFound.path}
             component={routes.notFound.component}
           />

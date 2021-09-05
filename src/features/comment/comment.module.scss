@@ -1,0 +1,48 @@
+@import "~@/scss/variables";
+
+.comment {
+  position: relative;
+  padding: get_size(spacing-15);
+  box-shadow: $box-shadow-normal;
+  margin-top: get_size(spacing-15);
+  background-color: get-part-color(white);
+  border: 1px solid get-part-color(border);
+  border-radius: get-size(border-radius-3);
+
+  &__header {
+    display: flex;
+    font-size: 11px;
+    align-items: center;
+    gap: get-size(spacing-10);
+    margin-bottom: get-size(spacing-10);
+  }
+
+  &__avatar {
+    width: 30px;
+    height: 30px;
+    background-color: get-part-color(gray);
+    border-radius: get_size(border-radius-2);
+  }
+
+  &__author {
+    font-size: 13px;
+    font-style: normal;
+
+    &-link {
+      color: inherit;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    &-time {
+      display: block;
+      font-size: 11px;
+    }
+  }
+
+  &__body {
+    font-size: 12px;
+    line-height: 1.5;
+    color: get-part-color(black);
+  }
+}
