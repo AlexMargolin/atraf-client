@@ -32,7 +32,7 @@ const Register: FC = () => {
             required
             type='password'
             label='Password'
-            __helper='Should be at least 8 characters'
+            __helper='Should be at least 12 characters long'
             __start={<Icon iconId='icon-lock-regular' />}
           />
 
