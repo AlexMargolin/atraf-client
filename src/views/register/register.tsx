@@ -38,7 +38,7 @@ const Register: FC = () => {
     <div className={classes(classNames.root)}>
       <h1 className={classes(classNames.title)}>New Account</h1>
       <Card>
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={handleSubmit}>
           <Input
             required
             autoFocus

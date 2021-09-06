@@ -1,7 +1,7 @@
 import { ButtonProps } from "./"
 import { forwardRef } from "react"
 import { makeClasses } from "@/hooks"
-import modules from "./Button.module.scss"
+import modules from "./button.module.scss"
 
 const classes = makeClasses(modules)
 
