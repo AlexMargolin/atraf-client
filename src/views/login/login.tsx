@@ -21,8 +21,6 @@ const Login: FC = () => {
   const [error, setError] = useState(0)
   const [loading, setLoading] = useState(false)
 
-  const isSuccess = 0 > error
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
@@ -58,7 +56,8 @@ const Login: FC = () => {
         <form onSubmit={handleSubmit}>
           {0 < error && (
             <Alert type='error'>
-              Umm... Something went wrong <code>(code: {error})</code>
+              <span>Umm... Something went wrong</span>{" "}
+              <code>(code: {error})</code>
             </Alert>
           )}
 
@@ -69,18 +68,19 @@ const Login: FC = () => {
           <Input
             required
             autoFocus
-            name='email'
             type='email'
             label='Email'
-            disabled={isSuccess}
+            name={EMAIL_FIELD}
+            disabled={loading}
             __start={<Icon iconId='icon-at' />}
           />
+
           <Input
             required
             type='password'
-            name='password'
             label='Password'
-            disabled={isSuccess}
+            disabled={loading}
+            name={PASSWORD_FIELD}
             __start={<Icon iconId='icon-lock-bold' />}
             __helper={<Link route='login'>Forgot Password?</Link>}
           />

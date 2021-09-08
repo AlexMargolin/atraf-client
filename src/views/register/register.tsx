@@ -23,8 +23,6 @@ const Register: FC = () => {
   const [error, setError] = useState(0)
   const [loading, setLoading] = useState(false)
 
-  const isSuccess = 0 > error
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
@@ -77,14 +75,14 @@ const Register: FC = () => {
             type='email'
             label='Email'
             name={EMAIL_FIELD}
-            disabled={isSuccess}
+            disabled={loading}
             __start={<Icon iconId='icon-at' />}
           />
 
           <Input
             required
             type='password'
-            disabled={isSuccess}
+            disabled={loading}
             label='Password'
             name={PASSWORD_FIELD}
             __helper='Should be at least 12 characters long'
@@ -94,7 +92,7 @@ const Register: FC = () => {
           <Input
             required
             type='password'
-            disabled={isSuccess}
+            disabled={loading}
             label='Confirm Password'
             name={PASSWORD_CONFIRM_FIELD}
             __start={<Icon iconId='icon-lock-bold' />}
