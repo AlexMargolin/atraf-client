@@ -6,7 +6,7 @@ import { APP_ROOT_ID } from "@/defines"
 import modules from "@/scss/app.module.scss"
 
 const classes = makeClasses(modules)
-const root = document.createElement("DIV")
+const root = document.createElement("div")
 
 Object.assign(root, {
   className: classes(APP_ROOT_ID),

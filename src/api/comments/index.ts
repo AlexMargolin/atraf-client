@@ -1,3 +1,6 @@
+import { User } from "@/api/users"
+import { ResponseStatic } from "@/api"
+
 export type Comment = {
   id: string
   user_id: string
@@ -39,8 +42,8 @@ export type UpdateFunc = (
 // ReadMany
 export type ReadManyResponse = {
   comments: Comment[]
-  users: any
+  users: User[]
 }
 export type ReadManyFunc = (
   source_id: string,
-) => Promise<ReadManyResponse>
+) => Promise<[ReadManyResponse, ResponseStatic]>

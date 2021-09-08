@@ -10,6 +10,7 @@ const routes = {
       () => import(/* webpackChunkName: "login" */ "@/views/login"),
     ),
   },
+
   register: {
     path: "/register",
     component: lazy(
@@ -17,14 +18,16 @@ const routes = {
         import(/* webpackChunkName: "register" */ "@/views/register"),
     ),
   },
+
   post: {
     path: "/post/:id",
     component: lazy(
       () => import(/* webpackChunkName: "post" */ "@/views/post"),
     ),
   },
+
   notFound: {
-    path: "*",
+    path: "/404",
     component: lazy(
       () => import(/* webpackChunkName: "404" */ "@/views/404"),
     ),

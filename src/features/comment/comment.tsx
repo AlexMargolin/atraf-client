@@ -1,11 +1,11 @@
 import { FC } from "react"
+import { CommentProps } from "./"
 import { makeClasses } from "@/hooks"
 import modules from "./comment.module.scss"
-import { CommentProps } from "@/features/comment/index"
 
-const mc = makeClasses(modules)
+const classes = makeClasses(modules)
 
-const classes = {
+const classNames = {
   root: "comment",
   header: "comment__header",
   avatar: "comment__avatar",
@@ -18,32 +18,36 @@ const classes = {
 }
 
 const Comment: FC<CommentProps> = props => {
-  const { comment } = props
+  const { data, user } = props
 
   return (
-    <div className={mc(classes.root)}>
-      <div className={mc(classes.header)}>
+    <div className={classes(classNames.root)}>
+      <div className={classes(classNames.header)}>
         <img
           alt='My Picture %s'
-          className={mc(classes.avatar)}
+          className={classes(classNames.avatar)}
           src='https://www.gravatar.com/avatar/e667fa431b98e1bb50bb42beb735ca9b'
         />
 
-        <address className={mc(classes.author.root)}>
+        <address className={classes(classNames.author.root)}>
           <a
             rel='author'
-            href={`#${comment.id}`}
-            className={mc(classes.author.link)}
+            href={`#${data.id}`}
+            className={classes(classNames.author.link)}
           >
-            Alex
+            {user.email}
           </a>
-          <time dateTime='%t' className={mc(classes.author.time)}>
-            {comment.created_at}
+
+          <time
+            dateTime='%t'
+            className={classes(classNames.author.time)}
+          >
+            {data.created_at}
           </time>
         </address>
       </div>
 
-      <div className={mc(classes.body)}>{comment.body}</div>
+      <div className={classes(classNames.body)}>{data.body}</div>
     </div>
   )
 }

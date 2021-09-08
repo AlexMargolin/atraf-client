@@ -1,13 +1,7 @@
-export type CommentStatic = {
-  id: string
-  user_id: string
-  post_id: string
-  parent_id?: string
-  body: string
-  created_at: string
-  updated_at?: string
-}
+import { User } from "@/api/users"
+import { Comment } from "@/api/comments"
 
 export type CommentProps = {
-  comment: CommentStatic
+  data: Comment
+  user: User
 }

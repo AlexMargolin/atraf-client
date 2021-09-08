@@ -51,13 +51,17 @@ export default class Comments {
    * @returns Promise<ReadManyResponse>
    */
   readMany: ReadManyFunc = async source_id => {
-    const readManyResponse: ReadManyResponse = {
-      comments: [],
+    let readManyResponse: ReadManyResponse = {
       users: [],
+      comments: [],
     }
 
-    // TODO implement ReadMany Method...
+    const response = await this.handler.get(`/comments/${source_id}`)
 
-    return readManyResponse
+    if (response.ok) {
+      readManyResponse = response.data as ReadManyResponse
+    }
+
+    return [readManyResponse, response]
   }
 }

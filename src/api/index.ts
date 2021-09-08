@@ -3,6 +3,7 @@ import Posts from "./posts/posts"
 import Users from "./users/users"
 import Account from "./account/account"
 import Comments from "./comments/comments"
+import { auth } from "./fetch/middleware"
 
 export type ResponseStatic = {
   ok: boolean
@@ -24,14 +25,16 @@ export interface Handler {
   delete: DeleteRequest
 }
 
+// Default API Url
 Fetch.setBaseUrl(process.env.APP_API_URL)
 
-Fetch.setDefaults({
-  headers: {
-    "content-type": "application/json",
-  },
-})
+// Default Fetch Config
+Fetch.setDefaults({ headers: { "content-type": "application/json" } })
 
+// Response Middleware
+Fetch.use(auth)
+
+// Handler instance
 const HTTP = new Fetch()
 
 export default {

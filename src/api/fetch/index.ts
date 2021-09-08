@@ -10,3 +10,5 @@ export type RequestFunc = (
   method: string,
   data: unknown,
 ) => Promise<ResponseStatic>
+
+export type FetchMiddleware = (status: number) => void

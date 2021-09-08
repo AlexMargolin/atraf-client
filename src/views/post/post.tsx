@@ -1,17 +1,20 @@
-import { FC } from "react"
-import { Comment } from "@/features"
+import api from "@/api"
+import { Post } from "@/api/posts"
+import { User } from "@/api/users"
 import { makeClasses } from "@/hooks"
+import { Comments } from "@/features"
+import { Spinner } from "@/components"
 import modules from "./post.module.scss"
 import { useParams } from "react-router-dom"
-import { CommentStatic } from "@/features/comment"
+import { FC, useEffect, useState } from "react"
 
-const mc = makeClasses(modules)
+const classes = makeClasses(modules)
 
 type PostRouteParams = {
   id: string
 }
 
-const cls = {
+const classNames = {
   root: "post",
   title: "post__title",
   info: "post__info",
@@ -24,60 +27,64 @@ const cls = {
     root: "post__media",
     image: "post__media-image",
   },
-  comments: {
-    root: "post__comments",
-    count: "post__comments-count",
-    header: "post__comments-header",
-  },
-}
-
-const mockComment: CommentStatic = {
-  body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, perspiciatis.",
-  created_at: "5 minutes ago",
-  id: "123456",
-  post_id: "",
-  user_id: "",
 }
 
 const Post: FC = () => {
-  const comments = Array.from(new Array(1))
   const { id } = useParams<PostRouteParams>()
 
-  return (
-    <div className={mc(cls.root)}>
-      <h1 className={mc(cls.title)}>
-        LOREM IPSUM DOLOR SIT AMET <code>({id})</code>
-      </h1>
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<User>(null)
+  const [post, setPost] = useState<Post>(null)
 
-      <div className={mc(cls.info)}>
-        <address className={mc(cls.author.root)}>
+  useEffect(() => {
+    const LoadPost = async () => {
+      const [result, response] = await api.posts.readOne(id)
+
+      if (response.ok) {
+        setPost(result.post)
+        setUser(result.user)
+        setLoading(false)
+      }
+    }
+    LoadPost()
+  }, [])
+
+  if (loading) {
+    return <Spinner active={loading} />
+  }
+
+  return (
+    <div className={classes(classNames.root)}>
+      <h1 className={classes(classNames.title)}>{post.title}</h1>
+
+      <div className={classes(classNames.info)}>
+        <address className={classes(classNames.author.root)}>
           By
-          <a href='#' rel='author' className={mc(cls.author.link)}>
+          <a
+            href=''
+            rel='author'
+            className={classes(classNames.author.link)}
+          >
             <span role='presentation'>@</span>
-            Alex
+            {user.email}
           </a>
         </address>
-        <time className={mc(cls.author.time)}>5 minutes ago</time>
+        <time className={classes(classNames.author.time)}>
+          {post.created_at}
+        </time>
       </div>
 
-      <div className={mc(cls.media.root)}>
+      <div className={classes(classNames.media.root)}>
         <img
           alt='%s'
-          className={mc(cls.media.image)}
-          src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+          className={classes(classNames.media.image)}
+          src='https://picsum.photos/770/855'
         />
       </div>
 
-      <div className={mc(cls.comments.root)}>
-        <h2 className={mc(cls.comments.header)}>
-          <strong className={mc(cls.comments.count)}>120</strong>{" "}
-          Comments
-        </h2>
+      <p>{post.body}</p>
 
-        {comments.map(c => (
-          <Comment key={c} comment={mockComment} />
-        ))}
-      </div>
+      <Comments postId={post.id} />
     </div>
   )
 }

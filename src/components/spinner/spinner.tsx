@@ -12,7 +12,7 @@ const classNames = {
 }
 
 const Spinner: FC<SpinnerProps> = props => {
-  const { active } = props
+  const { active, fullScreen = true } = props
 
   const spinner = (
     <div className={classNames.root}>
@@ -21,7 +21,11 @@ const Spinner: FC<SpinnerProps> = props => {
   )
 
   if (active) {
-    return createPortal(spinner, document.body)
+    if (fullScreen) {
+      return createPortal(spinner, document.body)
+    }
+
+    return spinner
   }
 
   return null

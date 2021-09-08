@@ -1,3 +1,6 @@
+import { User } from "@/api/users"
+import { ResponseStatic } from "@/api"
+
 export type Post = {
   id: string
   user_id: string
@@ -36,15 +39,17 @@ export type UpdateFunc = (
 // ReadOne
 export type ReadOneResponse = {
   post: Post
-  user: any
+  user: User
 }
-export type ReadOneFunc = (postId: string) => Promise<ReadOneResponse>
+export type ReadOneFunc = (
+  postId: string,
+) => Promise<[ReadOneResponse, ResponseStatic]>
 
 // ReadMany
 export type ReadManyResponse = {
   cursor: string
   posts: Post[]
-  users: any
+  users: User[]
 }
 export type ReadManyFunc = (
   limit: number,

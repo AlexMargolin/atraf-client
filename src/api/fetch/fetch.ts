@@ -6,11 +6,12 @@ import {
   DeleteRequest,
   ResponseStatic,
 } from "@/api"
-import { FetchFunc, RequestFunc } from "./"
+import { FetchFunc, FetchMiddleware, RequestFunc } from "./"
 
 export default class Fetch implements Handler {
   static defaults = {}
-  static base_url = {}
+  static base_url = ""
+  static middleware: FetchMiddleware[] = []
 
   /**
    * @param route
@@ -45,25 +46,35 @@ export default class Fetch implements Handler {
   /**
    * @param path
    * @param method
-   * @param data
+   * @param body
    */
-  private request: RequestFunc = async (path, method, data) => {
-    // Normalized result
+  private request: RequestFunc = async (path, method, body) => {
+    const config: RequestInit = {
+      method: method,
+    }
+
     const result: ResponseStatic = {
       status: 0,
       ok: false,
       data: null,
     }
 
+    // Set Body
+    if (null !== body) {
+      config.body = JSON.stringify(body)
+    }
+
     const url = this.getRequestUrl(path)
-    const response = await this.fetch(url, {
-      method: method,
-      body: JSON.stringify(data),
-    })
+    const response = await this.fetch(url, config)
 
     // Network error
     if (!response) {
       return result
+    }
+
+    // Use Middleware
+    for (const middleware of Fetch.middleware) {
+      middleware(response.status)
     }
 
     // Attempt to parse json data
@@ -124,5 +135,12 @@ export default class Fetch implements Handler {
    */
   public static setDefaults = (config: RequestInit): void => {
     Fetch.defaults = config
+  }
+
+  /**
+   * @param args
+   */
+  public static use = (...args: FetchMiddleware[]) => {
+    this.middleware = args
   }
 }

@@ -1,0 +1,18 @@
+@import "~@/scss/variables";
+
+.comments {
+  padding: get-size(spacing-20) 0;
+  margin-top: get-size(spacing-50);
+
+  &__header {
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    align-items: center;
+    text-transform: uppercase;
+  }
+
+  &__count {
+    margin-inline-end: get-size(spacing-5);
+  }
+}

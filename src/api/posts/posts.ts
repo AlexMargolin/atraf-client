@@ -54,14 +54,18 @@ export default class Posts {
    * @returns Promise<ReadOneResponse>
    */
   readOne: ReadOneFunc = async postId => {
-    const readOneResponse: ReadOneResponse = {
+    let readOneResponse: ReadOneResponse = {
       post: null,
       user: null,
     }
 
-    // TODO implement ReadOne Method...
+    const response = await this.handler.get(`/posts/${postId}`)
 
-    return readOneResponse
+    if (response.ok) {
+      readOneResponse = response.data as ReadOneResponse
+    }
+
+    return [readOneResponse, response]
   }
 
   /**
