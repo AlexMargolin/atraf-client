@@ -7,7 +7,7 @@ const Icon: FC<IconProps> = props => {
 
   return (
     <svg {...rest}>
-      <use xlinkHref={`${sprite}#${iconId}`}></use>
+      <use xlinkHref={`${sprite}#${iconId}`} />
     </svg>
   )
 }

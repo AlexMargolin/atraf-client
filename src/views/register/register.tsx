@@ -3,7 +3,6 @@ import { makeClasses } from "@/hooks"
 import React, { FC, useState } from "react"
 import modules from "./register.module.scss"
 import { Card, Icon, Link, Input, Button, Alert } from "@/components"
-import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
@@ -21,18 +20,13 @@ const PASSWORD_FIELD = "password"
 const PASSWORD_CONFIRM_FIELD = "confirm_password"
 
 const Register: FC = () => {
+  const [error, setError] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [hasError, setHasError] = useState(false)
-  const [errorCode, setErrorCode] = useState(null)
+
+  const isSuccess = 0 > error
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-
-    // Reset previous errors
-    setLoading(true)
-    setHasError(false)
-    setErrorCode(null)
 
     const form = event.target as HTMLFormElement
     const data = new FormData(form)
@@ -41,22 +35,23 @@ const Register: FC = () => {
     const password = data.get(PASSWORD_FIELD) as string
     const confirm_password = data.get(PASSWORD_CONFIRM_FIELD)
 
-    const [result, response] = await api.account.register({
+    // Set Loader
+    setLoading(true)
+
+    const [, response] = await api.account.register({
       email: email,
       password: password,
     })
 
+    // Error state
     if (!response.ok) {
       setLoading(false)
-      setHasError(true)
-      setErrorCode(response.status)
+      setError(response.status)
       return
     }
 
-    setSuccess(true)
-    setTimeout(() => {
-      NavigateTo("login")
-    }, 2000)
+    // Success state
+    setError(-1)
   }
 
   return (
@@ -64,28 +59,32 @@ const Register: FC = () => {
       <h1 className={classes(classNames.title)}>New Account</h1>
       <Card>
         <form onSubmit={handleSubmit}>
-          {hasError && (
+          {0 < error && (
             <Alert type='error'>
-              Something went wrong... <code>(code: {errorCode})</code>
+              Umm... Something went wrong <code>(code: {error})</code>
             </Alert>
           )}
-          {success && (
+
+          {0 > error && (
             <Alert type='success'>
-              Account created successfully!...Redirecting
+              Account created successfully!...
             </Alert>
           )}
+
           <Input
             required
             autoFocus
             type='email'
             label='Email'
             name={EMAIL_FIELD}
+            disabled={isSuccess}
             __start={<Icon iconId='icon-at' />}
           />
 
           <Input
             required
             type='password'
+            disabled={isSuccess}
             label='Password'
             name={PASSWORD_FIELD}
             __helper='Should be at least 12 characters long'
@@ -95,6 +94,7 @@ const Register: FC = () => {
           <Input
             required
             type='password'
+            disabled={isSuccess}
             label='Confirm Password'
             name={PASSWORD_CONFIRM_FIELD}
             __start={<Icon iconId='icon-lock-bold' />}

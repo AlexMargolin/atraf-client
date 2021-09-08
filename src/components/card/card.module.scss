@@ -1,6 +1,7 @@
 @import "~@/scss/variables";
 
 .card {
+  overflow: hidden;
   position: relative;
   padding: get-size(spacing-20);
   box-shadow: $box-shadow-normal;
