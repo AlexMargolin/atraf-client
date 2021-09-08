@@ -1,5 +1,5 @@
-import Posts from "./posts/posts"
 import Fetch from "./fetch/fetch"
+import Posts from "./posts/posts"
 import Comments from "./comments/comments"
 
 const Handler = new Fetch()
