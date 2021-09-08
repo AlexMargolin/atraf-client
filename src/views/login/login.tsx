@@ -1,8 +1,8 @@
 import api from "@/api"
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
-import { Button, Card, Input, Icon, Link } from "@/components"
+import { Button, Card, Input, Icon, Link, Alert } from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -18,19 +18,37 @@ const EMAIL_FIELD = "email"
 const PASSWORD_FIELD = "password"
 
 const Login: FC = () => {
+  const [error, setError] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  const isSuccess = 0 > error
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    const form = event.target as HTMLFormElement
 
+    const form = event.target as HTMLFormElement
     const data = new FormData(form)
 
     const email = data.get(EMAIL_FIELD) as string
     const password = data.get(PASSWORD_FIELD) as string
 
-    const [result, response] = await api.account.login({
+    // Set Loader
+    setLoading(true)
+
+    const [, response] = await api.account.login({
       email: email,
       password: password,
     })
+
+    // Error state
+    if (!response.ok) {
+      setLoading(false)
+      setError(response.status)
+      return
+    }
+
+    // Success state
+    setError(-1)
   }
 
   return (
@@ -38,12 +56,23 @@ const Login: FC = () => {
       <h1 className={classes(classNames.title)}>Login</h1>
       <Card>
         <form onSubmit={handleSubmit}>
+          {0 < error && (
+            <Alert type='error'>
+              Umm... Something went wrong <code>(code: {error})</code>
+            </Alert>
+          )}
+
+          {0 > error && (
+            <Alert type='success'>Logged in successfully!...</Alert>
+          )}
+
           <Input
             required
             autoFocus
             name='email'
             type='email'
             label='Email'
+            disabled={isSuccess}
             __start={<Icon iconId='icon-at' />}
           />
           <Input
@@ -51,12 +80,18 @@ const Login: FC = () => {
             type='password'
             name='password'
             label='Password'
+            disabled={isSuccess}
             __start={<Icon iconId='icon-lock-bold' />}
             __helper={<Link route='login'>Forgot Password?</Link>}
           />
 
           <div className={classes(classNames.buttons)}>
-            <Button grow type='submit' color='primary'>
+            <Button
+              grow
+              type='submit'
+              color='primary'
+              disabled={loading}
+            >
               login
             </Button>
           </div>
