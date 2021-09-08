@@ -1,0 +1,34 @@
+@import "~@/scss/variables";
+
+.spinner {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.65);
+
+  &__element {
+    width: 33px;
+    height: 33px;
+    display: block;
+    border-width: 3px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top-color: get-part-color(white);
+    animation: spinner-rotate infinite 1000ms ease;
+  }
+}
+
+@keyframes spinner-rotate {
+  from {
+    transform: rotate(0);
+  }
+  from {
+    transform: rotate(-360deg);
+  }
+}

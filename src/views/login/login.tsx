@@ -2,7 +2,15 @@ import api from "@/api"
 import React, { FC, useState } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
-import { Button, Card, Input, Icon, Link, Alert } from "@/components"
+import {
+  Button,
+  Card,
+  Input,
+  Icon,
+  Link,
+  Alert,
+  Spinner,
+} from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -51,6 +59,8 @@ const Login: FC = () => {
 
   return (
     <div className={classes(classNames.root)}>
+      <Spinner active={loading} />
+
       <h1 className={classes(classNames.title)}>Login</h1>
       <Card>
         <form onSubmit={handleSubmit}>

@@ -3,7 +3,7 @@ import {
   RegisterFunc,
   LoginResponse,
   RegisterResponse,
-} from "@/api/account/index"
+} from "./"
 import { Handler } from "@/api"
 
 export default class Account {

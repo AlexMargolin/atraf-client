@@ -2,7 +2,15 @@ import api from "@/api"
 import { makeClasses } from "@/hooks"
 import React, { FC, useState } from "react"
 import modules from "./register.module.scss"
-import { Card, Icon, Link, Input, Button, Alert } from "@/components"
+import {
+  Card,
+  Icon,
+  Link,
+  Input,
+  Button,
+  Alert,
+  Spinner,
+} from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -54,6 +62,8 @@ const Register: FC = () => {
 
   return (
     <div className={classes(classNames.root)}>
+      <Spinner active={loading} />
+
       <h1 className={classes(classNames.title)}>New Account</h1>
       <Card>
         <form onSubmit={handleSubmit}>
@@ -85,8 +95,8 @@ const Register: FC = () => {
             disabled={loading}
             label='Password'
             name={PASSWORD_FIELD}
-            __helper='Should be at least 12 characters long'
             __start={<Icon iconId='icon-lock-regular' />}
+            __helper='Should be at least 12 characters long'
           />
 
           <Input
