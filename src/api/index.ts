@@ -1,8 +1,9 @@
 import Fetch from "./fetch/fetch"
 import Posts from "./posts/posts"
+import Account from "./account/account"
 import Comments from "./comments/comments"
 
-const Handler = new Fetch()
+const HTTP = new Fetch()
 
 export interface Handler {
   get: () => void
@@ -12,6 +13,7 @@ export interface Handler {
 }
 
 export default {
-  posts: new Posts(Handler),
-  comments: new Comments(Handler),
+  posts: new Posts(HTTP),
+  account: new Account(HTTP),
+  comments: new Comments(HTTP),
 }

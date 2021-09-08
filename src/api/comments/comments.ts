@@ -9,13 +9,13 @@ import {
 import { Handler } from "@/api"
 
 export default class Comments {
-  protected HTTP: Handler
+  protected handler: Handler
 
   /**
    * @param {Handler} handler
    */
   constructor(handler: Handler) {
-    this.HTTP = handler
+    this.handler = handler
   }
 
   /**
