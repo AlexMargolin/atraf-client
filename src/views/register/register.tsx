@@ -1,8 +1,9 @@
 import api from "@/api"
 import { makeClasses } from "@/hooks"
-import React, { FC, useEffect } from "react"
+import React, { FC, useState } from "react"
 import modules from "./register.module.scss"
-import { Card, Icon, Link, Input, Button } from "@/components"
+import { Card, Icon, Link, Input, Button, Alert } from "@/components"
+import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
@@ -20,8 +21,18 @@ const PASSWORD_FIELD = "password"
 const PASSWORD_CONFIRM_FIELD = "confirm_password"
 
 const Register: FC = () => {
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [hasError, setHasError] = useState(false)
+  const [errorCode, setErrorCode] = useState(null)
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+
+    // Reset previous errors
+    setLoading(true)
+    setHasError(false)
+    setErrorCode(null)
 
     const form = event.target as HTMLFormElement
     const data = new FormData(form)
@@ -34,6 +45,18 @@ const Register: FC = () => {
       email: email,
       password: password,
     })
+
+    if (!response.ok) {
+      setLoading(false)
+      setHasError(true)
+      setErrorCode(response.status)
+      return
+    }
+
+    setSuccess(true)
+    setTimeout(() => {
+      NavigateTo("login")
+    }, 2000)
   }
 
   return (
@@ -41,6 +64,16 @@ const Register: FC = () => {
       <h1 className={classes(classNames.title)}>New Account</h1>
       <Card>
         <form onSubmit={handleSubmit}>
+          {hasError && (
+            <Alert type='error'>
+              Something went wrong... <code>(code: {errorCode})</code>
+            </Alert>
+          )}
+          {success && (
+            <Alert type='success'>
+              Account created successfully!...Redirecting
+            </Alert>
+          )}
           <Input
             required
             autoFocus
@@ -68,7 +101,12 @@ const Register: FC = () => {
           />
 
           <div className={classes(classNames.buttons)}>
-            <Button grow type='submit' color='primary'>
+            <Button
+              grow
+              type='submit'
+              color='primary'
+              disabled={loading}
+            >
               Create Account
             </Button>
           </div>
