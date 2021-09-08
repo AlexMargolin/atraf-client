@@ -1,4 +1,3 @@
-import api from "@/api"
 import React, { FC } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./register.module.scss"
@@ -29,9 +28,6 @@ const Register: FC = () => {
     const email = data.get(EMAIL_FIELD) as string
     const password = data.get(PASSWORD_FIELD) as string
     const confirm_password = data.get(PASSWORD_CONFIRM_FIELD)
-
-    // Create Account
-    await api.account.register(email, password)
   }
 
   return (
