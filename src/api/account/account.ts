@@ -1,10 +1,10 @@
-import { Handler } from "@/api"
 import {
   LoginFunc,
-  LoginResponse,
   RegisterFunc,
+  LoginResponse,
   RegisterResponse,
 } from "@/api/account/index"
+import { Handler } from "@/api"
 
 export default class Account {
   protected handler: Handler
@@ -18,25 +18,43 @@ export default class Account {
 
   /**
    * @param params
-   * @returns Promise<RegisterResponse>
+   * @return Promise<RegisterResponse>
    */
   register: RegisterFunc = async params => {
-    const registerResponse: RegisterResponse = {
+    let registerResponse: RegisterResponse = {
       user_id: null,
     }
 
-    return registerResponse
+    const response = await this.handler.post("/account/register", {
+      email: params.email,
+      password: params.password,
+    })
+
+    if (response.ok) {
+      registerResponse = response.data as RegisterResponse
+    }
+
+    return [registerResponse, response]
   }
 
   /**
    * @param params
-   * @returns Promise<LoginResponse>
+   * @return Promise<LoginResponse>
    */
   login: LoginFunc = async params => {
-    const loginResponse: LoginResponse = {
+    let loginResponse: LoginResponse = {
       access_token: null,
     }
 
-    return loginResponse
+    const response = await this.handler.post("/account/login", {
+      email: params.email,
+      password: params.password,
+    })
+
+    if (response.ok) {
+      loginResponse = response.data as LoginResponse
+    }
+
+    return [loginResponse, response]
   }
 }

@@ -29,6 +29,8 @@ export default class Posts {
       post_id: null,
     }
 
+    // TODO implement Create Method...
+
     return createResponse
   }
 
@@ -42,6 +44,8 @@ export default class Posts {
       post_id: null,
     }
 
+    // TODO implement Update Method...
+
     return updateResponse
   }
 
@@ -54,6 +58,8 @@ export default class Posts {
       post: null,
       user: null,
     }
+
+    // TODO implement ReadOne Method...
 
     return readOneResponse
   }
@@ -69,6 +75,8 @@ export default class Posts {
       posts: [],
       users: [],
     }
+
+    // TODO implement ReadMany Method...
 
     return getManyResponse
   }

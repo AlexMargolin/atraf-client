@@ -20,20 +20,27 @@ export interface CreateRequest extends CommentFields {
   parent_id?: string
 }
 
-export type CreateResponse = { comment_id: string }
+export type CreateResponse = {
+  comment_id: string
+}
 export type CreateFunc = (
   params: CreateRequest,
 ) => Promise<CreateResponse>
 
 // Update
 export type UpdateRequest = CommentFields
-export type UpdateResponse = { comment_id: string }
+export type UpdateResponse = {
+  comment_id: string
+}
 export type UpdateFunc = (
   params: UpdateRequest,
 ) => Promise<UpdateResponse>
 
 // ReadMany
-export type ReadManyResponse = { comments: Comment[]; users: any }
+export type ReadManyResponse = {
+  comments: Comment[]
+  users: any
+}
 export type ReadManyFunc = (
   source_id: string,
 ) => Promise<ReadManyResponse>

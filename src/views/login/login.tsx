@@ -1,4 +1,5 @@
-import { FC } from "react"
+import api from "@/api"
+import React, { FC } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
 import { Button, Card, Input, Icon, Link } from "@/components"
@@ -13,15 +14,34 @@ const classNames = {
   disclaimer: "login__disclaimer",
 }
 
+const EMAIL_FIELD = "email"
+const PASSWORD_FIELD = "password"
+
 const Login: FC = () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    const form = event.target as HTMLFormElement
+
+    const data = new FormData(form)
+
+    const email = data.get(EMAIL_FIELD) as string
+    const password = data.get(PASSWORD_FIELD) as string
+
+    const [result, response] = await api.account.login({
+      email: email,
+      password: password,
+    })
+  }
+
   return (
     <div className={classes(classNames.root)}>
       <h1 className={classes(classNames.title)}>Login</h1>
       <Card>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Input
             required
             autoFocus
+            name='email'
             type='email'
             label='Email'
             __start={<Icon iconId='icon-at' />}
@@ -29,6 +49,7 @@ const Login: FC = () => {
           <Input
             required
             type='password'
+            name='password'
             label='Password'
             __start={<Icon iconId='icon-lock-bold' />}
             __helper={<Link route='login'>Forgot Password?</Link>}

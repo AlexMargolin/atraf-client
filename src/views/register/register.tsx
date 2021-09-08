@@ -1,5 +1,6 @@
-import React, { FC } from "react"
+import api from "@/api"
 import { makeClasses } from "@/hooks"
+import React, { FC, useEffect } from "react"
 import modules from "./register.module.scss"
 import { Card, Icon, Link, Input, Button } from "@/components"
 
@@ -28,6 +29,11 @@ const Register: FC = () => {
     const email = data.get(EMAIL_FIELD) as string
     const password = data.get(PASSWORD_FIELD) as string
     const confirm_password = data.get(PASSWORD_CONFIRM_FIELD)
+
+    const [result, response] = await api.account.register({
+      email: email,
+      password: password,
+    })
   }
 
   return (

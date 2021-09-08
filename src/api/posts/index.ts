@@ -16,21 +16,28 @@ export type PostFields = {
 
 // Create
 export type CreateRequest = PostFields
-export type CreateResponse = { post_id: string }
+export type CreateResponse = {
+  post_id: string
+}
 export type CreateFunc = (
   params: CreateRequest,
 ) => Promise<CreateResponse>
 
 // Update
 export type UpdateRequest = PostFields
-export type UpdateResponse = { post_id: string }
+export type UpdateResponse = {
+  post_id: string
+}
 export type UpdateFunc = (
   postId: string,
   params: UpdateRequest,
 ) => Promise<UpdateResponse>
 
 // ReadOne
-export type ReadOneResponse = { post: Post; user: any }
+export type ReadOneResponse = {
+  post: Post
+  user: any
+}
 export type ReadOneFunc = (postId: string) => Promise<ReadOneResponse>
 
 // ReadMany

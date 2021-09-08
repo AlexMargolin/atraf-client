@@ -27,6 +27,8 @@ export default class Comments {
       comment_id: null,
     }
 
+    // TODO implement Create Method...
+
     return createResponse
   }
 
@@ -38,6 +40,8 @@ export default class Comments {
     const updateResponse: UpdateResponse = {
       comment_id: null,
     }
+
+    // TODO implement Update Method...
 
     return updateResponse
   }
@@ -51,6 +55,8 @@ export default class Comments {
       comments: [],
       users: [],
     }
+
+    // TODO implement ReadMany Method...
 
     return readManyResponse
   }

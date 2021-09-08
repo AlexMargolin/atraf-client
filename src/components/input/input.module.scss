@@ -62,3 +62,22 @@
 
   }
 }
+
+input:-webkit-autofill::first-line {
+  font-size: 12px;
+  font-weight: 400;
+  color: get-part-color(black);
+  font-family: 'Rubik', sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+input:-webkit-autofill:focus {
+  border: none;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
