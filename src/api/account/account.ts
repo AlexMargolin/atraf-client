@@ -21,9 +21,7 @@ export default class Account {
    * @return Promise<RegisterResponse>
    */
   register: RegisterFunc = async params => {
-    let registerResponse: RegisterResponse = {
-      user_id: null,
-    }
+    let registerResponse: RegisterResponse
 
     const response = await this.handler.post("/account/register", {
       email: params.email,
@@ -42,9 +40,7 @@ export default class Account {
    * @return Promise<LoginResponse>
    */
   login: LoginFunc = async params => {
-    let loginResponse: LoginResponse = {
-      access_token: null,
-    }
+    let loginResponse: LoginResponse
 
     const response = await this.handler.post("/account/login", {
       email: params.email,

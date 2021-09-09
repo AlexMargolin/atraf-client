@@ -5,3 +5,5 @@ export type CommentProps = {
   data: Comment
   user: User
 }
+
+export { default as Skeleton } from "./skeleton"

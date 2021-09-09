@@ -7,6 +7,7 @@ import { Spinner } from "@/components"
 import modules from "./post.module.scss"
 import { useParams } from "react-router-dom"
 import { FC, useEffect, useState } from "react"
+import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
@@ -32,7 +33,6 @@ const classNames = {
 const Post: FC = () => {
   const { id } = useParams<PostRouteParams>()
 
-  const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<User>(null)
   const [post, setPost] = useState<Post>(null)
 
@@ -43,14 +43,14 @@ const Post: FC = () => {
       if (response.ok) {
         setPost(result.post)
         setUser(result.user)
-        setLoading(false)
+        return
       }
     }
     LoadPost()
   }, [])
 
-  if (loading) {
-    return <Spinner active={loading} />
+  if (!user || !post) {
+    return null
   }
 
   return (
@@ -77,8 +77,8 @@ const Post: FC = () => {
       <div className={classes(classNames.media.root)}>
         <img
           alt='%s'
-          className={classes(classNames.media.image)}
           src='https://picsum.photos/770/855'
+          className={classes(classNames.media.image)}
         />
       </div>
 

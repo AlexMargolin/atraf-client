@@ -1,16 +1,9 @@
 import api from "@/api"
-import React, { FC, useState } from "react"
 import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
-import {
-  Button,
-  Card,
-  Input,
-  Icon,
-  Link,
-  Alert,
-  Spinner,
-} from "@/components"
+import React, { FC, useState } from "react"
+import { Button, Card, Input, Icon, Link, Alert } from "@/components"
+import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
@@ -26,7 +19,8 @@ const EMAIL_FIELD = "email"
 const PASSWORD_FIELD = "password"
 
 const Login: FC = () => {
-  const [error, setError] = useState(0)
+  const [error, setError] = useState(null)
+  const [logged, setLogged] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -38,40 +32,37 @@ const Login: FC = () => {
     const email = data.get(EMAIL_FIELD) as string
     const password = data.get(PASSWORD_FIELD) as string
 
-    // Set Loader
+    setError(null)
     setLoading(true)
 
-    const [, response] = await api.account.login({
+    const [result, response] = await api.account.login({
       email: email,
       password: password,
     })
 
-    // Error state
     if (!response.ok) {
       setLoading(false)
       setError(response.status)
       return
     }
 
-    // Success state
-    setError(-1)
+    setLogged(true)
+    sessionStorage.setItem("token", result.access_token)
   }
 
   return (
     <div className={classes(classNames.root)}>
-      <Spinner active={loading} />
-
-      <h1 className={classes(classNames.title)}>Login</h1>
-      <Card>
+      <Card loading={loading}>
+        <h1 className={classes(classNames.title)}>Login</h1>
         <form onSubmit={handleSubmit}>
-          {0 < error && (
+          {null !== error && !logged && (
             <Alert type='error'>
               <span>Umm... Something went wrong</span>{" "}
               <code>(code: {error})</code>
             </Alert>
           )}
 
-          {0 > error && (
+          {logged && (
             <Alert type='success'>Logged in successfully!...</Alert>
           )}
 

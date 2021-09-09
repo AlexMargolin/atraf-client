@@ -6,7 +6,6 @@ import { Comment } from "@/api/comments"
 import modules from "./comments.module.scss"
 import { FC, useEffect, useState } from "react"
 import { Comment as CommentComponent } from "@/features"
-import { Spinner } from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -50,10 +49,6 @@ const Comments: FC<CommentsProps> = props => {
 
     loadComments()
   }, [])
-
-  if (loading) {
-    return <Spinner active={loading} fullScreen={false} />
-  }
 
   return (
     <div className={classes(classNames.root)}>

@@ -51,6 +51,9 @@ export default class Fetch implements Handler {
   private request: RequestFunc = async (path, method, body) => {
     const config: RequestInit = {
       method: method,
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
     }
 
     const result: ResponseStatic = {

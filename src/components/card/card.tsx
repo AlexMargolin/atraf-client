@@ -1,6 +1,7 @@
 import { CardProps } from "./"
-import { FC, forwardRef } from "react"
+import { forwardRef } from "react"
 import { makeClasses } from "@/hooks"
+import { Spinner } from "@/components"
 import modules from "./card.module.scss"
 
 const classes = makeClasses(modules)
@@ -16,7 +17,7 @@ export const classNames = {
  */
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   (props, forwardedRef) => {
-    const { className, children, ...rest } = props
+    const { className, children, loading, ...rest } = props
 
     return (
       <div
@@ -24,6 +25,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         className={classes(classNames.root, className)}
         {...rest}
       >
+        <Spinner active={loading} />
         {children}
       </div>
     )

@@ -7,7 +7,7 @@ const routes = {
   login: {
     path: "/login",
     component: lazy(
-      () => import(/* webpackChunkName: "login" */ "@/views/login"),
+      () => import(/* webpackChunkName: "login" */ "@/pages/login"),
     ),
   },
 
@@ -15,21 +15,21 @@ const routes = {
     path: "/register",
     component: lazy(
       () =>
-        import(/* webpackChunkName: "register" */ "@/views/register"),
+        import(/* webpackChunkName: "register" */ "@/pages/register"),
     ),
   },
 
   post: {
     path: "/post/:id",
     component: lazy(
-      () => import(/* webpackChunkName: "post" */ "@/views/post"),
+      () => import(/* webpackChunkName: "post" */ "@/pages/post"),
     ),
   },
 
   notFound: {
     path: "/404",
     component: lazy(
-      () => import(/* webpackChunkName: "404" */ "@/views/404"),
+      () => import(/* webpackChunkName: "404" */ "@/pages/404"),
     ),
   },
 }

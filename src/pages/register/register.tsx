@@ -1,16 +1,10 @@
 import api from "@/api"
+import { NavigateTo } from "@/router"
 import { makeClasses } from "@/hooks"
 import React, { FC, useState } from "react"
+import { Card, Icon, Link, Input, Alert, Button } from "@/components"
+
 import modules from "./register.module.scss"
-import {
-  Card,
-  Icon,
-  Link,
-  Input,
-  Button,
-  Alert,
-  Spinner,
-} from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -28,7 +22,7 @@ const PASSWORD_FIELD = "password"
 const PASSWORD_CONFIRM_FIELD = "confirm_password"
 
 const Register: FC = () => {
-  const [error, setError] = useState(0)
+  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -41,7 +35,7 @@ const Register: FC = () => {
     const password = data.get(PASSWORD_FIELD) as string
     const confirm_password = data.get(PASSWORD_CONFIRM_FIELD)
 
-    // Set Loader
+    setError(null)
     setLoading(true)
 
     const [, response] = await api.account.register({
@@ -49,33 +43,23 @@ const Register: FC = () => {
       password: password,
     })
 
-    // Error state
     if (!response.ok) {
       setLoading(false)
       setError(response.status)
       return
     }
 
-    // Success state
-    setError(-1)
+    NavigateTo("login")
   }
 
   return (
     <div className={classes(classNames.root)}>
-      <Spinner active={loading} />
-
-      <h1 className={classes(classNames.title)}>New Account</h1>
-      <Card>
+      <Card loading={loading}>
+        <h1 className={classes(classNames.title)}>New Account</h1>
         <form onSubmit={handleSubmit}>
-          {0 < error && (
+          {null !== error && (
             <Alert type='error'>
               Umm... Something went wrong <code>(code: {error})</code>
-            </Alert>
-          )}
-
-          {0 > error && (
-            <Alert type='success'>
-              Account created successfully!...
             </Alert>
           )}
 
