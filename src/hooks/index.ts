@@ -1,2 +1,5 @@
-export { default as makeClasses } from "./make-classes/make-classes"
-export { default as useUniqueId } from "./use-unique-id/use-unique-id"
+export { default as useInView } from "./useInView/useInView"
+export { default as makeClasses } from "./makeClasses/makeClasses"
+export { default as useUniqueId } from "./useUniqueId/useUniqueId"
+export { default as useClickAway } from "./useClickAway/useClickAway"
+export { default as useEffectPrevious } from "./useEffectPrevious/useEffectPrevious"

@@ -3,7 +3,6 @@ import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
 import React, { FC, useState } from "react"
 import { Button, Card, Input, Icon, Link, Alert } from "@/components"
-import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 

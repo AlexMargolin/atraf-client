@@ -1,0 +1,72 @@
+body {
+  &.modal--active {
+    overflow: hidden;
+  }
+}
+
+.modal {
+  &__root{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    position: fixed;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__backdrop {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  &__dialog {
+    position: relative;
+
+    &:focus {
+      outline: 0;
+    }
+
+    // added when clicked outside a persistent modal's content area.
+    &--persistent{
+      animation: modal-x-bounce 2 150ms ease-in-out;
+    }
+  }
+
+  &__close {
+    left: 0;
+    right: 0;
+    top: -25px;
+    color: #fff;
+    border: none;
+    display: block;
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    position: absolute;
+    margin-inline-end: -25px;
+    margin-inline-start: auto;
+  }
+}
+
+@keyframes modal-x-bounce {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
