@@ -23,12 +23,6 @@ export const classNames = {
   persistent: "modal__dialog--persistent",
 }
 
-/**
- * Modal Component
- * Displays a "popup" window covering the entire document.
- *
- * @since 1.0.0
- */
 const Modal = forwardRef<ModalHandle, ModalProps>(
   (props, forwardedRef) => {
     const {
@@ -59,7 +53,7 @@ const Modal = forwardRef<ModalHandle, ModalProps>(
       [modalVisible],
     )
 
-    // handle modal dialog outside click
+    // handle dialog click outside
     useClickAway(dialogRef, event => {
       const isActivatorClick = event.target === activatorRef.current
 

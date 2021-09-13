@@ -1,8 +1,10 @@
 import {
   LoginFunc,
   RegisterFunc,
+  ActivateFunc,
   LoginResponse,
   RegisterResponse,
+  ActivateResponse,
 } from "./"
 import { Handler } from "@/api"
 
@@ -52,5 +54,23 @@ export default class Account {
     }
 
     return [loginResponse, response]
+  }
+
+  /**
+   * @param params
+   * @return Promise<ActivateResponse>
+   */
+  activate: ActivateFunc = async params => {
+    let activateResponse: ActivateResponse
+
+    const response = await this.handler.patch("/account/activate", {
+      code: params.code,
+    })
+
+    if (response.ok) {
+      activateResponse = response.data as LoginResponse
+    }
+
+    return [activateResponse, response]
   }
 }

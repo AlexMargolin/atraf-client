@@ -1,8 +1,8 @@
 import { AlertProps } from "./"
 import { forwardRef } from "react"
+import { Icon } from "@/components"
 import { makeClasses } from "@/hooks"
 import modules from "./alert.module.scss"
-import { Icon } from "@/components"
 
 const classes = makeClasses(modules)
 
@@ -18,9 +18,17 @@ export const classNames = {
  */
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (props, forwardedRef) => {
-    const { className, children, type = "info", ...rest } = props
+    const {
+      flat,
+      children,
+      hideIcon,
+      className,
+      type = "info",
+      ...rest
+    } = props
 
     const attrClasses = {
+      [`alert--flat`]: flat,
       [`alert--${type}`]: !!type,
     }
 
@@ -31,11 +39,13 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className={classes(classNames.root, className, attrClasses)}
         {...rest}
       >
-        <Icon
-          role='presentation'
-          iconId={`icon-${type}`}
-          className={classes(classNames.icon)}
-        />
+        {!hideIcon && (
+          <Icon
+            role='presentation'
+            iconId={`icon-${type}`}
+            className={classes(classNames.icon)}
+          />
+        )}
         {children}
       </div>
     )

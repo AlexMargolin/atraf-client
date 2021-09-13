@@ -6,7 +6,7 @@ export type RegisterRequest = {
 }
 
 export type RegisterResponse = {
-  user_id: string
+  access_token: string
 }
 
 export type RegisterFunc = (
@@ -25,3 +25,15 @@ export type LoginResponse = {
 export type LoginFunc = (
   params: LoginRequest,
 ) => Promise<[LoginResponse, ResponseStatic]>
+
+export type ActivateRequest = {
+  code: string
+}
+
+export type ActivateResponse = {
+  access_token: string
+}
+
+export type ActivateFunc = (
+  params: ActivateRequest,
+) => Promise<[ActivateResponse, ResponseStatic]>

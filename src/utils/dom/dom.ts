@@ -90,8 +90,6 @@ export const classOnAnimate: ClassOnAnimate = (
   className,
   onComplete,
 ) => {
-  let eventType
-
   // add the class right away
   addClass(element, className)
 
@@ -123,18 +121,13 @@ export const classOnAnimate: ClassOnAnimate = (
 
   // determine the transition/animation duration
   if (0 < transitionDuration) {
-    eventType = "transitionend"
+    setTimeout(removeHandler, transitionDuration)
   } else if (0 < animationDuration) {
-    eventType = "animationend"
+    setTimeout(removeHandler, animationDuration)
   } else {
     removeHandler()
     return
   }
-
-  // on transition / animation end
-  element.addEventListener(eventType, removeHandler, {
-    once: true,
-  })
 }
 
 /**

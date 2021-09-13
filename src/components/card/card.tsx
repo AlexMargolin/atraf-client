@@ -8,6 +8,7 @@ const classes = makeClasses(modules)
 
 export const classNames = {
   root: "card",
+  flat: "card--flat",
 }
 
 /**
@@ -17,12 +18,16 @@ export const classNames = {
  */
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   (props, forwardedRef) => {
-    const { className, children, loading, ...rest } = props
+    const { className, flat, children, loading, ...rest } = props
+
+    const modifiers = {
+      [classNames.flat]: flat,
+    }
 
     return (
       <div
         ref={forwardedRef}
-        className={classes(classNames.root, className)}
+        className={classes(classNames.root, modifiers, className)}
         {...rest}
       >
         <Spinner active={loading} />

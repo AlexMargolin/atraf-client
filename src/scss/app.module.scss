@@ -5,11 +5,14 @@ html {
   font-size: 100%;
 }
 
+body {
+  color: get-part-color(black);
+  font-family: 'Rubik', sans-serif;
+}
+
 .app {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   background-color: #fdfdff;
-  color: get-part-color(black);
-  font-family: 'Rubik', sans-serif;
 }

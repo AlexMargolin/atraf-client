@@ -41,14 +41,16 @@
   }
 
   &__slot {
-    width: 20px;
     margin: 5px;
-    height: 20px;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
+  }
 
+  svg{
+    width: 20px;
+    height: 20px;
   }
 
   &__helper {

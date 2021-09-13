@@ -4,6 +4,13 @@ import { history } from "./"
 export type NavigationRoutes = keyof typeof routes
 
 const routes = {
+  home: {
+    path: "/",
+    component: lazy(
+      () => import(/* webpackChunkName: "home" */ "@/pages/home"),
+    ),
+  },
+
   login: {
     path: "/login",
     component: lazy(

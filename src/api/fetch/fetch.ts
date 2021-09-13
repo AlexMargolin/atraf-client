@@ -3,6 +3,7 @@ import {
   GetRequest,
   PutRequest,
   PostRequest,
+  PatchRequest,
   DeleteRequest,
   ResponseStatic,
 } from "@/api"
@@ -32,6 +33,14 @@ export default class Fetch implements Handler {
    * @param path
    * @param data
    */
+  patch: PatchRequest = async (path, data) => {
+    return this.request(path, "PATCH", data)
+  }
+
+  /**
+   * @param path
+   * @param data
+   */
   put: PutRequest = async (path, data) => {
     return this.request(path, "PUT", data)
   }
@@ -52,6 +61,7 @@ export default class Fetch implements Handler {
     const config: RequestInit = {
       method: method,
       headers: {
+        // TODO: Set Access_Token
         authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
     }

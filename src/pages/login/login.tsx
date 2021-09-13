@@ -3,10 +3,11 @@ import { makeClasses } from "@/hooks"
 import modules from "./login.module.scss"
 import React, { FC, useState } from "react"
 import { Button, Card, Input, Icon, Link, Alert } from "@/components"
+import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
-const classNames = {
+export const classNames = {
   root: "login",
   title: "login__title",
   account: "login__account",
@@ -14,26 +15,23 @@ const classNames = {
   disclaimer: "login__disclaimer",
 }
 
-const EMAIL_FIELD = "email"
-const PASSWORD_FIELD = "password"
+export const fields = {
+  email: "email",
+  password: "password",
+}
 
 const Login: FC = () => {
   const [error, setError] = useState(null)
-  const [logged, setLogged] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+    const data = new FormData(event.target as HTMLFormElement)
 
-    const form = event.target as HTMLFormElement
-    const data = new FormData(form)
+    const email = data.get(fields.email) as string
+    const password = data.get(fields.password) as string
 
-    const email = data.get(EMAIL_FIELD) as string
-    const password = data.get(PASSWORD_FIELD) as string
-
-    setError(null)
     setLoading(true)
-
     const [result, response] = await api.account.login({
       email: email,
       password: password,
@@ -45,8 +43,11 @@ const Login: FC = () => {
       return
     }
 
-    setLogged(true)
+    setError(null)
+
+    // TODO: Set Access_Token
     sessionStorage.setItem("token", result.access_token)
+    NavigateTo("home")
   }
 
   return (
@@ -54,15 +55,11 @@ const Login: FC = () => {
       <Card loading={loading}>
         <h1 className={classes(classNames.title)}>Login</h1>
         <form onSubmit={handleSubmit}>
-          {null !== error && !logged && (
+          {null !== error && (
             <Alert type='error'>
               <span>Umm... Something went wrong</span>{" "}
               <code>(code: {error})</code>
             </Alert>
-          )}
-
-          {logged && (
-            <Alert type='success'>Logged in successfully!...</Alert>
           )}
 
           <Input
@@ -70,8 +67,8 @@ const Login: FC = () => {
             autoFocus
             type='email'
             label='Email'
-            name={EMAIL_FIELD}
             disabled={loading}
+            name={fields.email}
             __start={<Icon iconId='icon-at' />}
           />
 
@@ -80,7 +77,7 @@ const Login: FC = () => {
             type='password'
             label='Password'
             disabled={loading}
-            name={PASSWORD_FIELD}
+            name={fields.password}
             __start={<Icon iconId='icon-lock-bold' />}
             __helper={<Link route='login'>Forgot Password?</Link>}
           />

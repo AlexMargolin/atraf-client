@@ -6,6 +6,29 @@
   max-width: 500px;
   padding: 0 get-size(spacing-15);
 
+  &__card1 {
+    &.transition-leave {
+      transition: 0.3s all ease-in-out;
+    }
+
+    &.transition-leave-to {
+      opacity: 0;
+      filter: blur(20px);
+      transform: scale(1.05);
+      will-change: transform;
+    }
+  }
+
+  &__card2 {
+    &.transition-enter {
+      transition: 0.3s all ease-in-out;
+    }
+
+    &.transition-enter-from {
+      transform: translate3d(0, -10%, 0);
+    }
+  }
+
   &__title {
     font-size: 17px;
     font-weight: 700;
