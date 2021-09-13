@@ -32,7 +32,7 @@ const Login: FC = () => {
     const password = data.get(fields.password) as string
 
     setLoading(true)
-    const [result, response] = await api.account.login({
+    const [, response] = await api.account.login({
       email: email,
       password: password,
     })
@@ -44,9 +44,6 @@ const Login: FC = () => {
     }
 
     setError(null)
-
-    // TODO: Set Access_Token
-    sessionStorage.setItem("token", result.access_token)
     NavigateTo("home")
   }
 

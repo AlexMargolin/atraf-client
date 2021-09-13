@@ -1,12 +1,5 @@
-import {
-  LoginFunc,
-  RegisterFunc,
-  ActivateFunc,
-  LoginResponse,
-  RegisterResponse,
-  ActivateResponse,
-} from "./"
 import { Handler } from "@/api"
+import { LoginFunc, RegisterFunc, ActivateFunc } from "./"
 
 export default class Account {
   protected handler: Handler
@@ -23,18 +16,12 @@ export default class Account {
    * @return Promise<RegisterResponse>
    */
   register: RegisterFunc = async params => {
-    let registerResponse: RegisterResponse
-
     const response = await this.handler.post("/account/register", {
       email: params.email,
       password: params.password,
     })
 
-    if (response.ok) {
-      registerResponse = response.data as RegisterResponse
-    }
-
-    return [registerResponse, response]
+    return [null, response]
   }
 
   /**
@@ -42,18 +29,12 @@ export default class Account {
    * @return Promise<LoginResponse>
    */
   login: LoginFunc = async params => {
-    let loginResponse: LoginResponse
-
     const response = await this.handler.post("/account/login", {
       email: params.email,
       password: params.password,
     })
 
-    if (response.ok) {
-      loginResponse = response.data as LoginResponse
-    }
-
-    return [loginResponse, response]
+    return [null, response]
   }
 
   /**
@@ -61,16 +42,10 @@ export default class Account {
    * @return Promise<ActivateResponse>
    */
   activate: ActivateFunc = async params => {
-    let activateResponse: ActivateResponse
-
     const response = await this.handler.patch("/account/activate", {
       code: params.code,
     })
 
-    if (response.ok) {
-      activateResponse = response.data as LoginResponse
-    }
-
-    return [activateResponse, response]
+    return [null, response]
   }
 }

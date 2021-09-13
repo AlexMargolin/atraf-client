@@ -43,7 +43,7 @@ const Register: FC = () => {
     const confirm_password = data.get(fields.confirm) as string
 
     setLoading(true)
-    const [result, response] = await api.account.register({
+    const [, response] = await api.account.register({
       email: email,
       password: password,
     })
@@ -56,9 +56,6 @@ const Register: FC = () => {
 
     setError(null)
     setIsSignup(false)
-
-    // TODO: Set Access_Token
-    sessionStorage.setItem("token", result.access_token)
   }
 
   const handleActivate = async (event: React.FormEvent) => {
@@ -68,7 +65,7 @@ const Register: FC = () => {
     const code = data.get(fields.code) as string
 
     setLoading(true)
-    const [result, response] = await api.account.activate({
+    const [, response] = await api.account.activate({
       code: code,
     })
 
@@ -79,9 +76,6 @@ const Register: FC = () => {
     }
 
     setError(null)
-
-    // TODO: Set Access_Token
-    sessionStorage.setItem("token", result.access_token)
     NavigateTo("home")
   }
 
