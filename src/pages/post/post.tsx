@@ -3,11 +3,9 @@ import { Post } from "@/api/posts"
 import { User } from "@/api/users"
 import { makeClasses } from "@/hooks"
 import { Comments } from "@/features"
-import { Spinner } from "@/components"
 import modules from "./post.module.scss"
 import { useParams } from "react-router-dom"
 import { FC, useEffect, useState } from "react"
-import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
@@ -15,7 +13,7 @@ type PostRouteParams = {
   id: string
 }
 
-const classNames = {
+export const classNames = {
   root: "post",
   title: "post__title",
   info: "post__info",

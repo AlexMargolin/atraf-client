@@ -24,11 +24,11 @@ export interface CreateRequest extends CommentFields {
 }
 
 export type CreateResponse = {
-  comment_id: string
+  comment: Comment
 }
 export type CreateFunc = (
   params: CreateRequest,
-) => Promise<CreateResponse>
+) => Promise<[CreateResponse, ResponseStatic]>
 
 // Update
 export type UpdateRequest = CommentFields

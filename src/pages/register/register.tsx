@@ -1,10 +1,11 @@
 import api from "@/api"
 import { Transition } from "@/core"
+import { NavigateTo } from "@/router"
 import { makeClasses } from "@/hooks"
+import { ALERTS_TIMEOUT } from "@/defines"
 import React, { FC, useState } from "react"
 import modules from "./register.module.scss"
 import { Alert, Button, Card, Icon, Input, Link } from "@/components"
-import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
@@ -22,7 +23,6 @@ export const classNames = {
   buttons: "register__buttons",
   shortcuts: "register__shortcuts",
   disclaimer: "register__disclaimer",
-
   card1: "register__card1",
   card2: "register__card2",
 }
@@ -30,6 +30,7 @@ export const classNames = {
 const Register: FC = () => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [complete, setComplete] = useState(false)
 
   const [isSignup, setIsSignup] = useState(true)
   const [isVerify, setIsVerify] = useState(false)
@@ -37,7 +38,6 @@ const Register: FC = () => {
   const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault()
     const data = new FormData(event.target as HTMLFormElement)
-
     const email = data.get(fields.email) as string
     const password = data.get(fields.password) as string
     const confirm_password = data.get(fields.confirm) as string
@@ -61,22 +61,22 @@ const Register: FC = () => {
   const handleActivate = async (event: React.FormEvent) => {
     event.preventDefault()
     const data = new FormData(event.target as HTMLFormElement)
-
     const code = data.get(fields.code) as string
 
     setLoading(true)
     const [, response] = await api.account.activate({
       code: code,
     })
+    setLoading(false)
 
     if (!response.ok) {
-      setLoading(false)
       setError(response.status)
       return
     }
 
     setError(null)
-    NavigateTo("home")
+    setComplete(true)
+    setTimeout(() => NavigateTo("home"), ALERTS_TIMEOUT)
   }
 
   return (
@@ -109,8 +109,8 @@ const Register: FC = () => {
               autoFocus
               type='email'
               label='Email'
-              disabled={loading}
               name={fields.email}
+              disabled={loading || complete}
               __start={<Icon iconId='icon-at' />}
             />
 
@@ -118,8 +118,8 @@ const Register: FC = () => {
               required
               type='password'
               label='Password'
-              disabled={loading}
               name={fields.password}
+              disabled={loading || complete}
               __start={<Icon iconId='icon-lock-regular' />}
               __helper='Should be at least 12 characters long'
             />
@@ -127,9 +127,9 @@ const Register: FC = () => {
             <Input
               required
               type='password'
-              disabled={loading}
               name={fields.confirm}
               label='Confirm Password'
+              disabled={loading || complete}
               __start={<Icon iconId='icon-lock-bold' />}
             />
 
@@ -138,7 +138,7 @@ const Register: FC = () => {
                 grow
                 type='submit'
                 color='primary'
-                disabled={loading}
+                disabled={loading || complete}
               >
                 Create Account
               </Button>
@@ -152,7 +152,13 @@ const Register: FC = () => {
           <h1 className={classes(classNames.title)}>Verify</h1>
 
           <form onSubmit={handleActivate}>
-            {null == error && (
+            {complete && (
+              <Alert type='success'>
+                Account activated successfully!... Taking you home
+              </Alert>
+            )}
+
+            {null == error && false == complete && (
               <Alert flat>
                 An email with a 6 digit verification code was sent to
                 your mailbox.
@@ -171,15 +177,16 @@ const Register: FC = () => {
                 required
                 autoFocus
                 type='text'
-                disabled={loading}
                 name={fields.code}
                 label='Verification Code'
+                disabled={loading || complete}
                 __start={<Icon iconId='icon-shield' />}
                 __end={
                   <Button
                     size='small'
                     color='primary'
                     variant='filled'
+                    disabled={loading || complete}
                   >
                     Resend
                   </Button>
@@ -192,7 +199,7 @@ const Register: FC = () => {
                 grow
                 type='submit'
                 color='secondary'
-                disabled={loading}
+                disabled={loading || complete}
               >
                 Verify Account
               </Button>

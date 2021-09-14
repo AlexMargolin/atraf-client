@@ -5,7 +5,7 @@
   max-width: 800px;
   align-self: center;
   padding: 0 get-size(spacing-15);
-  margin-top: get-size(spacing-50);
+  margin-top: get-size(spacing-15);
 
   &__title {
     font-size: 25px;
@@ -39,7 +39,7 @@
     }
   }
 
-  &__media{
+  &__media {
     width: 100%;
     content: "";
     display: block;
@@ -47,7 +47,7 @@
     position: relative;
     background-color: #f1f1f1;
     padding-top: (10 / 9) * 100%;
-    margin-top: get-size(spacing-50);
+    margin-top: get-size(spacing-30);
 
     &-image {
       top: 0;

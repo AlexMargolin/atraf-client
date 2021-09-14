@@ -17,12 +17,13 @@ export default class Users {
    * @returns Promise<ReadOneResponse>
    */
   readOne: ReadOneFunc = async userId => {
-    const readOneResponse: ReadOneResponse = {
-      user: null,
+    let readOneResponse: ReadOneResponse
+
+    const response = await this.handler.get(`/users/${userId}`)
+    if (response.ok) {
+      readOneResponse = response.data as ReadOneResponse
     }
 
-    // TODO implement readOne Method...
-
-    return readOneResponse
+    return [readOneResponse, response]
   }
 }

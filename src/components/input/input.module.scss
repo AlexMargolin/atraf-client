@@ -14,6 +14,7 @@
     padding: get-size(spacing-5);
     justify-content: space-between;
     transition: 0.1s box-shadow ease;
+    background-color: get-part-color(white);
     border-radius: get-size(border-radius-3);
     box-shadow: inset 0 0 0 1px get-part-color(border), 0 0 2px 1px rgba(241, 241, 241, 0.3);
 
@@ -27,6 +28,7 @@
     flex-grow: 1;
     border: none;
     font-size: 12px;
+    background: none;
     padding: 10px 5px;
     color: get-part-color(black);
 

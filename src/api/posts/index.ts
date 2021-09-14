@@ -52,6 +52,6 @@ export type ReadManyResponse = {
   users: User[]
 }
 export type ReadManyFunc = (
-  limit: number,
   cursor?: string,
-) => Promise<ReadManyResponse>
+  limit?: number,
+) => Promise<[ReadManyResponse, ResponseStatic]>

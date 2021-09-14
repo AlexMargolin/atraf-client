@@ -54,13 +54,9 @@ export default class Posts {
    * @returns Promise<ReadOneResponse>
    */
   readOne: ReadOneFunc = async postId => {
-    let readOneResponse: ReadOneResponse = {
-      post: null,
-      user: null,
-    }
+    let readOneResponse: ReadOneResponse
 
     const response = await this.handler.get(`/posts/${postId}`)
-
     if (response.ok) {
       readOneResponse = response.data as ReadOneResponse
     }
@@ -69,19 +65,20 @@ export default class Posts {
   }
 
   /**
-   * @param limit
    * @param cursor
+   * @param limit
    * @returns Promise<ReadManyResponse>
    */
-  readMany: ReadManyFunc = async (limit, cursor) => {
-    const getManyResponse: ReadManyResponse = {
-      cursor: null,
-      posts: [],
-      users: [],
+  readMany: ReadManyFunc = async (cursor = "", limit = 9) => {
+    let readManyResponse: ReadManyResponse
+
+    const response = await this.handler.get(
+      `/posts?limit=${limit}&cursor=${cursor}`,
+    )
+    if (response.ok) {
+      readManyResponse = response.data as ReadManyResponse
     }
 
-    // TODO implement ReadMany Method...
-
-    return getManyResponse
+    return [readManyResponse, response]
   }
 }

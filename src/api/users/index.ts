@@ -1,3 +1,5 @@
+import { ResponseStatic } from "@/api"
+
 export type User = {
   id: string
   email: string
@@ -6,6 +8,10 @@ export type User = {
   profile_picture: string
   created_at: string
 }
+
+// Users returned from the API are always in an array form
+// Usually we would want to create a userId -> User map
+export type MappedUsers = Record<User["id"], User>
 
 export type UserFields = {
   email: string
@@ -17,4 +23,6 @@ export type UserFields = {
 export type ReadOneResponse = {
   user: User
 }
-export type ReadOneFunc = (userId: string) => Promise<ReadOneResponse>
+export type ReadOneFunc = (
+  userId: string,
+) => Promise<[ReadOneResponse, ResponseStatic]>

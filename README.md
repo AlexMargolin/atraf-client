@@ -7,3 +7,4 @@
 5. page titles
 6. move icon component to base
 7. author component
+8. merge comment and comments

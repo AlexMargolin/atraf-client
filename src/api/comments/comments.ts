@@ -23,13 +23,18 @@ export default class Comments {
    * @returns Promise<CreateResponse>
    */
   create: CreateFunc = async params => {
-    const createResponse: CreateResponse = {
-      comment_id: null,
+    let createResponse: CreateResponse
+
+    const response = await this.handler.post(`/comments`, {
+      source_id: params.source_id,
+      parent_id: params.parent_id,
+      body: params.body,
+    })
+    if (response.ok) {
+      createResponse = response.data as CreateResponse
     }
 
-    // TODO implement Create Method...
-
-    return createResponse
+    return [createResponse, response]
   }
 
   /**
@@ -51,13 +56,9 @@ export default class Comments {
    * @returns Promise<ReadManyResponse>
    */
   readMany: ReadManyFunc = async source_id => {
-    let readManyResponse: ReadManyResponse = {
-      users: [],
-      comments: [],
-    }
+    let readManyResponse: ReadManyResponse
 
     const response = await this.handler.get(`/comments/${source_id}`)
-
     if (response.ok) {
       readManyResponse = response.data as ReadManyResponse
     }

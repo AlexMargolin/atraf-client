@@ -1,9 +1,10 @@
 import api from "@/api"
 import { makeClasses } from "@/hooks"
+import { NavigateTo } from "@/router"
 import modules from "./login.module.scss"
+import { ALERTS_TIMEOUT } from "@/defines"
 import React, { FC, useState } from "react"
 import { Button, Card, Input, Icon, Link, Alert } from "@/components"
-import { NavigateTo } from "@/router"
 
 const classes = makeClasses(modules)
 
@@ -23,11 +24,11 @@ export const fields = {
 const Login: FC = () => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [complete, setComplete] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     const data = new FormData(event.target as HTMLFormElement)
-
     const email = data.get(fields.email) as string
     const password = data.get(fields.password) as string
 
@@ -44,7 +45,8 @@ const Login: FC = () => {
     }
 
     setError(null)
-    NavigateTo("home")
+    setComplete(true)
+    setTimeout(() => NavigateTo("home"), ALERTS_TIMEOUT)
   }
 
   return (
@@ -52,6 +54,10 @@ const Login: FC = () => {
       <Card loading={loading}>
         <h1 className={classes(classNames.title)}>Login</h1>
         <form onSubmit={handleSubmit}>
+          {complete && (
+            <Alert type='success'>Logged in successfully</Alert>
+          )}
+
           {null !== error && (
             <Alert type='error'>
               <span>Umm... Something went wrong</span>{" "}
