@@ -81,7 +81,7 @@ const Post: FC = () => {
 
       <p>{post.body}</p>
 
-      <Comments postId={post.id} />
+      <Comments sourceId={post.id} />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { Comment } from "@/api/comments";
 import { MappedUsers } from "@/api/users";
 import modules from "./comments.module.scss";
 import { FC, useEffect, useState } from "react";
+import { dispatchSnackbar } from "@/features/snackbar";
 import { Comment as CommentComponent, Editor } from "@/features";
 
 const classes = makeClasses(modules);
@@ -16,8 +17,19 @@ export const classNames = {
   list: "comments__list",
 };
 
+export const messages = {
+  comments: {
+    success: "Comment created successfully!",
+    fetch: "Failed fetching comments data",
+    create: "Failed creating a new comment",
+  },
+  users: {
+    fetch: "Failed fetching user data",
+  },
+};
+
 const Comments: FC<CommentsProps> = props => {
-  const { postId } = props;
+  const { sourceId } = props;
 
   const [creating, setCreating] = useState(false);
   const [users, setUsers] = useState<MappedUsers>({});
@@ -29,9 +41,12 @@ const Comments: FC<CommentsProps> = props => {
   // performance when rendering the comments.
   useEffect(() => {
     (async () => {
-      const [result, response] = await api.comments.readMany(postId);
+      const [result, response] = await api.comments.readMany(
+        sourceId,
+      );
 
       if (!response.ok) {
+        dispatchSnackbar({ message: messages.comments.fetch });
         return;
       }
 
@@ -43,41 +58,47 @@ const Comments: FC<CommentsProps> = props => {
       setUsers(usersMap);
       setComments(result.comments);
     })();
-  }, [postId]);
+  }, [sourceId]);
 
-  // handleSubmit creates a comment and updates the state with the
+  // handleCreateComment creates a comment and updates the state with the
   // newly inserted comment.
   // if the comment author is not yet part of the users map,
   // the user will also be fetched and the state will be updated.
-  const handleSubmit = async (value: string) => {
+  const handleCreateComment = async (value: string) => {
     setCreating(true);
 
-    // create new comment
-    const [{ comment }, response] = await api.comments.create({
+    const [create, response] = await api.comments.create({
       body: value,
-      source_id: postId,
+      source_id: sourceId,
     });
 
     if (!response.ok) {
+      setCreating(false);
+      dispatchSnackbar({ message: messages.comments.create });
       return;
     }
 
     // fetch missing user
     // maybe should be replaced with the current using context
-    if (!users[comment.user_id]) {
-      const [{ user }, response] = await api.users.readOne(
-        comment.user_id,
+    if (!users[create.comment.user_id]) {
+      const [read, response] = await api.users.readOne(
+        create.comment.user_id,
       );
 
       if (!response.ok) {
-        return;
+        setCreating(false);
+        dispatchSnackbar({ message: messages.users.fetch });
       }
 
-      setUsers(Object.assign(users, { [user.id]: user }));
+      const newUser = {
+        [read.user.id]: read.user,
+      };
+      setUsers(Object.assign(users, newUser));
     }
 
-    setComments([comment, ...comments]);
     setCreating(false);
+    setComments([create.comment, ...comments]);
+    dispatchSnackbar({ message: messages.comments.success });
   };
 
   if (0 === comments.length) {
@@ -90,7 +111,7 @@ const Comments: FC<CommentsProps> = props => {
         loading={creating}
         disabled={creating}
         submitLabel='Reply'
-        onSubmit={handleSubmit}
+        onSubmit={handleCreateComment}
       />
 
       <h2 className={classes(classNames.header)}>

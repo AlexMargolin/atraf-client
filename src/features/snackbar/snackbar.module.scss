@@ -1,0 +1,59 @@
+@import "~@/scss/_variables";
+
+.snackbar {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  font-size: 12px;
+  position: fixed;
+  max-width: 320px;
+  align-items: center;
+  margin: 0 auto 10px auto;
+  padding: get-size(spacing-10);
+  color: get-part-color(white);
+  transition: 50ms transform ease-in-out;
+  background-color: get-part-color(black);
+  border-radius: get-size(border-radius-3);
+
+  &.transition-enter-from,
+  &.transition-leave-to {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  &__close {
+    width: 25px;
+    height: 25px;
+    border: none;
+    display: flex;
+    flex-shrink: 0;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: 200ms background-color ease-in-out;
+
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:focus,
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &-icon {
+      width: 15px;
+      height: 15px;
+      fill: get-part-color(white)
+    }
+  }
+
+  &__message {
+    flex-grow: 1;
+  }
+}

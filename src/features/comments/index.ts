@@ -1,3 +1,3 @@
 export type CommentsProps = {
-  postId: string
-}
+  sourceId: string;
+};
