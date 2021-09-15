@@ -10,3 +10,4 @@
 8. merge comment and comments
 9. make sure components dont use other components, core doesnt... etc
 10. better load resource (use effect)
+11. add toasts to api calls

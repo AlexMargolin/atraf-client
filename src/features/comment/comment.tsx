@@ -1,9 +1,9 @@
-import { FC } from "react"
-import { CommentProps } from "./"
-import { makeClasses } from "@/hooks"
-import modules from "./comment.module.scss"
+import { FC } from "react";
+import { CommentProps } from "./";
+import { makeClasses } from "@/hooks";
+import modules from "./comment.module.scss";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 
 const classNames = {
   root: "comment",
@@ -15,13 +15,17 @@ const classNames = {
     time: "comment__author-time",
   },
   body: "comment__body",
-}
+};
 
 const Comment: FC<CommentProps> = props => {
-  const { data, user } = props
+  const { data, user, highlighted } = props;
+
+  const modifiers = {
+    ["comment--highlighted"]: highlighted,
+  };
 
   return (
-    <div className={classes(classNames.root)}>
+    <div className={classes(classNames.root, modifiers)}>
       <div className={classes(classNames.header)}>
         <img
           alt='My Picture %s'
@@ -49,7 +53,7 @@ const Comment: FC<CommentProps> = props => {
 
       <div className={classes(classNames.body)}>{data.body}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Comment
+export default Comment;

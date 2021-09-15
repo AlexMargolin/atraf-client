@@ -1,17 +1,17 @@
-import api from "@/api"
-import { Post } from "@/api/posts"
-import { User } from "@/api/users"
-import { makeClasses } from "@/hooks"
-import { Comments } from "@/features"
-import modules from "./post.module.scss"
-import { useParams } from "react-router-dom"
-import { FC, useEffect, useState } from "react"
+import api from "@/api";
+import { User } from "@/api/users";
+import { Post } from "@/api/posts";
+import { makeClasses } from "@/hooks";
+import { Comments } from "@/features";
+import modules from "./post.module.scss";
+import { useParams } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 
 type PostRouteParams = {
-  id: string
-}
+  id: string;
+};
 
 export const classNames = {
   root: "post",
@@ -26,29 +26,31 @@ export const classNames = {
     root: "post__media",
     image: "post__media-image",
   },
-}
+};
 
 const Post: FC = () => {
-  const { id } = useParams<PostRouteParams>()
+  const { id } = useParams<PostRouteParams>();
+  const [user, setUser] = useState<User>(null);
+  const [post, setPost] = useState<Post>(null);
 
-  const [user, setUser] = useState<User>(null)
-  const [post, setPost] = useState<Post>(null)
+  // Loading flag
+  const isPostLoading = !user || !post;
 
   useEffect(() => {
-    const LoadPost = async () => {
-      const [result, response] = await api.posts.readOne(id)
+    (async () => {
+      const [result, response] = await api.posts.readOne(id);
 
-      if (response.ok) {
-        setPost(result.post)
-        setUser(result.user)
-        return
+      if (!response.ok) {
+        return;
       }
-    }
-    LoadPost()
-  }, [])
 
-  if (!user || !post) {
-    return null
+      setUser(result.user);
+      setPost(result.post);
+    })();
+  }, [id]);
+
+  if (isPostLoading) {
+    return <div>Post Loading...</div>;
   }
 
   return (
@@ -84,7 +86,7 @@ const Post: FC = () => {
 
       <Comments postId={post.id} />
     </div>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

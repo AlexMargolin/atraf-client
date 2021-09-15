@@ -37,7 +37,8 @@
     }
 
     &:disabled {
-      color: rgba(0, 0, 0, 0.2);
+      opacity: 0.35;
+      color: rgba(0, 0, 0, 1);
       background-color: inherit;
     }
   }
