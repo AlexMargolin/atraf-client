@@ -15,6 +15,7 @@ export const classNames = {
   header: "comments__header",
   count: "comments__count",
   list: "comments__list",
+  empty: "comments__empty",
 };
 
 export const messages = {
@@ -31,6 +32,7 @@ export const messages = {
 const Comments: FC<CommentsProps> = props => {
   const { sourceId } = props;
 
+  const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [users, setUsers] = useState<MappedUsers>({});
   const [comments, setComments] = useState<Comment[]>([]);
@@ -44,6 +46,8 @@ const Comments: FC<CommentsProps> = props => {
       const [result, response] = await api.comments.readMany(
         sourceId,
       );
+
+      setLoading(false);
 
       if (!response.ok) {
         dispatchSnackbar({ message: messages.comments.fetch });
@@ -79,7 +83,7 @@ const Comments: FC<CommentsProps> = props => {
     }
 
     // fetch missing user
-    // maybe should be replaced with the current using context
+    // maybe should be replaced with the current user context
     if (!users[create.comment.user_id]) {
       const [read, response] = await api.users.readOne(
         create.comment.user_id,
@@ -101,7 +105,7 @@ const Comments: FC<CommentsProps> = props => {
     dispatchSnackbar({ message: messages.comments.success });
   };
 
-  if (0 === comments.length) {
+  if (loading) {
     return <div>loading comments...</div>;
   }
 
@@ -114,22 +118,33 @@ const Comments: FC<CommentsProps> = props => {
         onSubmit={handleCreateComment}
       />
 
-      <h2 className={classes(classNames.header)}>
-        <strong className={classes(classNames.count)}>
-          {comments.length}
-        </strong>
-        Comments
-      </h2>
+      {0 === comments.length && (
+        <div className={classes(classNames.empty)}>
+          There arent any comments just yet, be the first to write
+          something nice :)
+        </div>
+      )}
 
-      <div className={classes(classNames.list)}>
-        {comments.map(comment => (
-          <CommentComponent
-            data={comment}
-            key={comment.id}
-            user={users[comment.user_id]}
-          />
-        ))}
-      </div>
+      {0 < comments.length && (
+        <>
+          <h2 className={classes(classNames.header)}>
+            <strong className={classes(classNames.count)}>
+              {comments.length}
+            </strong>
+            Comments
+          </h2>
+
+          <div className={classes(classNames.list)}>
+            {comments.map(comment => (
+              <CommentComponent
+                data={comment}
+                key={comment.id}
+                user={users[comment.user_id]}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

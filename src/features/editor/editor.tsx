@@ -1,45 +1,46 @@
-import { EditorProps } from "./"
-import { FC, useRef } from "react"
-import { makeClasses } from "@/hooks"
-import modules from "./editor.module.scss"
-import { Button, Icon, Input, Kbd } from "@/components"
+import { EditorProps } from "./";
+import { FC, useRef } from "react";
+import { makeClasses } from "@/hooks";
+import modules from "./editor.module.scss";
+import { Button, Icon, Input, Kbd } from "@/components";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 
 export const classNames = {
   root: "editor",
   shortcuts: "editor__shortcuts",
-}
+};
 
 const Editor: FC<EditorProps> = props => {
-  const { loading, disabled, onChange, onSubmit, submitLabel } = props
+  const { loading, disabled, onChange, onSubmit, submitLabel } =
+    props;
 
-  const formRef = useRef<HTMLFormElement>()
-  const inputRef = useRef<HTMLInputElement>()
+  const formRef = useRef<HTMLFormElement>();
+  const inputRef = useRef<HTMLInputElement>();
 
-  // Replaced the default "enter" to submit behaviour with
+  // Replace the default "enter" to submit behaviour with
   // "shift" + "enter"
   const handleKeydown = (event: React.KeyboardEvent) => {
     if ("Enter" === event.key && !event.shiftKey) {
-      event.preventDefault()
+      event.preventDefault();
     }
-  }
+  };
 
   const handleChange = () => {
     if (onChange instanceof Function) {
-      onChange(inputRef.current.value)
+      onChange(inputRef.current.value);
     }
-  }
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (onSubmit instanceof Function) {
-      onSubmit(inputRef.current.value)
+      onSubmit(inputRef.current.value);
     }
 
-    formRef.current.reset()
-  }
+    formRef.current.reset();
+  };
 
   return (
     <form
@@ -76,7 +77,7 @@ const Editor: FC<EditorProps> = props => {
         }
       />
     </form>
-  )
-}
+  );
+};
 
-export default Editor
+export default Editor;

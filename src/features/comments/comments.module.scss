@@ -15,4 +15,14 @@
   &__count {
     margin-inline-end: get-size(spacing-5);
   }
+
+  &__empty {
+    font-size: 13px;
+    text-align: center;
+    color: get-palette(gray);
+    padding: get-size(spacing-20);
+    margin-top: get-size(spacing-50);
+    border-radius: get-size(border-radius-2);
+    background-color: rgba(get-palette(gray), 10%);
+  }
 }

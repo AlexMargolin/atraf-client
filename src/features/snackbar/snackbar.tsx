@@ -20,6 +20,10 @@ export const classNames = {
   },
 };
 
+/**
+ * Snackbar should be triggered by dispatching a
+ * SNACKBAR_EVENT_TYPE event.
+ */
 const Snackbar: FC<SnackbarProps> = props => {
   const { className, ...rest } = props;
 
@@ -30,8 +34,6 @@ const Snackbar: FC<SnackbarProps> = props => {
     setVisible(false);
   };
 
-  // Snackbar is triggered by dispatching a
-  // SNACKBAR_EVENT_TYPE event
   useEffect(() => {
     const dispatchHandler = (event: CustomEvent) => {
       const data = event.detail as DispatchEvent;
