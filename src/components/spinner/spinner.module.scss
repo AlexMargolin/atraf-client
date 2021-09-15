@@ -1,27 +1,21 @@
 @import "~@/scss/variables";
 
 .spinner {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  display: flex;
+  width: 30px;
+  height: 30px;
+  display: block;
+  border-width: 3px;
   position: absolute;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  border-style: solid;
+  border-color: rgba(get-palette(primary), 5%);
+  border-top-color: get-palette(primary);
+  animation: spinner-rotate infinite 1000ms ease;
 
-  &__element {
-    width: 30px;
-    height: 30px;
-    display: block;
-    border-width: 3px;
-    border-radius: 50%;
-    border-style: solid;
-    border-color: rgba(get-palette(primary), 4%);
-    border-top-color: get-palette(primary);
-    animation: spinner-rotate infinite 1000ms ease;
+  &--small {
+    width: 18px;
+    height: 18px;
+    border-width: 2px;
   }
 }
 

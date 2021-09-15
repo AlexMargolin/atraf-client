@@ -1,19 +1,31 @@
+import { EditorProps } from "./"
 import { FC, useRef } from "react"
-import { Button, Icon, Input } from "@/components"
+import { makeClasses } from "@/hooks"
+import modules from "./editor.module.scss"
+import { Button, Icon, Input, Kbd } from "@/components"
 
-export type EditorProps = {
-  onChange?: (value: string) => void
-  onSubmit?: (value: string) => void
+const classes = makeClasses(modules)
+
+export const classNames = {
+  root: "editor",
+  shortcuts: "editor__shortcuts",
 }
 
 const Editor: FC<EditorProps> = props => {
-  const { onChange, onSubmit } = props
+  const { loading, disabled, onChange, onSubmit, submitLabel } = props
 
+  const formRef = useRef<HTMLFormElement>()
   const inputRef = useRef<HTMLInputElement>()
 
-  const handleChange = (event: React.FormEvent) => {
-    event.preventDefault()
+  // Replaced the default "enter" to submit behaviour with
+  // "shift" + "enter"
+  const handleKeydown = (event: React.KeyboardEvent) => {
+    if ("Enter" === event.key && !event.shiftKey) {
+      event.preventDefault()
+    }
+  }
 
+  const handleChange = () => {
     if (onChange instanceof Function) {
       onChange(inputRef.current.value)
     }
@@ -25,21 +37,45 @@ const Editor: FC<EditorProps> = props => {
     if (onSubmit instanceof Function) {
       onSubmit(inputRef.current.value)
     }
+
+    formRef.current.reset()
   }
 
   return (
-    <Input
-      ref={inputRef}
-      label='Add a comment'
+    <form
+      ref={formRef}
+      autoComplete='off'
       onChange={handleChange}
-      placeholder='Write something nice...'
-      __start={<Icon iconId='icon-chat' />}
-      __end={
-        <Button onClick={handleSubmit} color='primary' size='small'>
-          Reply
-        </Button>
-      }
-    />
+      onSubmit={handleSubmit}
+      onKeyDown={handleKeydown}
+      className={classes(classNames.root)}
+    >
+      <Input
+        required={true}
+        ref={inputRef}
+        disabled={disabled}
+        label='Add a comment'
+        placeholder='Write something nice...'
+        __start={<Icon iconId='icon-chat' />}
+        __end={
+          <Button
+            size='small'
+            type='submit'
+            color='primary'
+            loading={loading}
+          >
+            {submitLabel}
+          </Button>
+        }
+        __helper={
+          <span className={classes(classNames.shortcuts)}>
+            or
+            <Kbd keyName='Shift' iconId='icon-kbd-shift' />+
+            <Kbd keyName='Return' iconId='icon-kbd-return' />
+          </span>
+        }
+      />
+    </form>
   )
 }
 

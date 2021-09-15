@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { forwardRef } from "react"
 import { SpinnerProps } from "./"
 import { makeClasses } from "@/hooks"
 import modules from "./spinner.module.scss"
@@ -7,17 +7,24 @@ const classes = makeClasses(modules)
 
 const classNames = {
   root: "spinner",
-  element: "spinner__element",
 }
 
-const Spinner: FC<SpinnerProps> = props => {
-  const { active } = props
+const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
+  (props, forwardedRef) => {
+    const { className, active, size, ...rest } = props
 
-  return !active ? null : (
-    <div className={classes(classNames.root)}>
-      <span className={classes(classNames.element)} />
-    </div>
-  )
-}
+    const modifiers = {
+      [`spinner--${size}`]: !!size,
+    }
+
+    return !active ? null : (
+      <span
+        ref={forwardedRef}
+        className={classes(classNames.root, modifiers, className)}
+        {...rest}
+      />
+    )
+  },
+)
 
 export default Spinner

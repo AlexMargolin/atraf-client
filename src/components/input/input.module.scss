@@ -50,9 +50,11 @@
     justify-content: center;
   }
 
-  svg{
-    width: 20px;
-    height: 20px;
+  svg {
+    &.input__slot {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   &__helper {
@@ -70,7 +72,7 @@
   }
 }
 
-input:-webkit-autofill::first-line{
+input:-webkit-autofill::first-line {
   font-size: 12px;
   font-weight: 400;
   color: get-part-color(black);

@@ -1,33 +1,31 @@
 import { ButtonProps } from "./"
 import { forwardRef } from "react"
 import { makeClasses } from "@/hooks"
+import { Spinner } from "@/components"
 import modules from "./button.module.scss"
 
 const classes = makeClasses(modules)
-
 export const classNames = {
   root: "button",
 }
 
-/**
- * Button Core
- *
- * @since 1.0.0
- */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, forwardedRef) => {
     const {
       grow,
       size,
+      color,
+      loading,
       children,
+      disabled,
       className,
       variant = "filled",
-      color,
       ...rest
     } = props
 
-    const attrClasses = {
+    const modifiers = {
       [`button--grow`]: grow,
+      [`button--loading`]: loading,
       [`button--${size}`]: !!size,
       [`button--${color}`]: !!color,
       [`button--${variant}`]: !!variant,
@@ -36,10 +34,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={forwardedRef}
-        className={classes(classNames.root, attrClasses, className)}
+        disabled={disabled || loading}
+        className={classes(classNames.root, modifiers, className)}
         {...rest}
       >
         {children}
+        <Spinner size='small' active={loading} />
       </button>
     )
   },

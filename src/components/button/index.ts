@@ -9,4 +9,5 @@ export interface ButtonProps extends ComponentPropsWithRef<"button"> {
   color?: ButtonColors
   size?: ButtonSizes
   grow?: boolean
+  loading?: boolean
 }

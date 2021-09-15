@@ -19,19 +19,24 @@ export const classNames = {
 const Comments: FC<CommentsProps> = props => {
   const { postId } = props
 
-  const [unmapped, setUnmapped] = useState<User[]>([])
+  const [loading, setLoading] = useState(false)
   const [comments, setComments] = useState<Comment[]>([])
+  const [unMappedUsers, setUnmappedUsers] = useState<User[]>([])
 
+  // Since the API returns the users in an array structure,
+  // we map it to a user_id:user object to improve lookup performance
+  // when rendering the comments.
   const users = useMemo(() => {
     const map: Record<string, User> = {}
 
-    for (const user of unmapped) {
+    for (const user of unMappedUsers) {
       map[user.id] = user
     }
 
     return map
-  }, [unmapped])
+  }, [unMappedUsers])
 
+  // Fetch comments from the API on initial component render.
   useEffect(() => {
     const loadComments = async () => {
       const [result, response] = await api.comments.readMany(postId)
@@ -39,7 +44,7 @@ const Comments: FC<CommentsProps> = props => {
         return
       }
 
-      setUnmapped(result.users)
+      setUnmappedUsers(result.users)
       setComments(result.comments)
     }
 
@@ -47,6 +52,8 @@ const Comments: FC<CommentsProps> = props => {
   }, [])
 
   const handleSubmit = async (value: string) => {
+    setLoading(true)
+
     const [{ comment }, response] = await api.comments.create({
       body: value,
       source_id: postId,
@@ -58,7 +65,7 @@ const Comments: FC<CommentsProps> = props => {
     }
 
     // When a user creates a comment, unless previously commented,
-    // the user object will not be present in the unmapped array
+    // the user object will not be present in the unMappedUsers array
     if (!users[comment.user_id]) {
       const [{ user }, response] = await api.users.readOne(
         comment.user_id,
@@ -68,15 +75,21 @@ const Comments: FC<CommentsProps> = props => {
         console.warn("Error, create toast")
         return
       }
-      setUnmapped([user, ...unmapped])
+      setUnmappedUsers([user, ...unMappedUsers])
     }
 
     setComments([comment, ...comments])
+    setLoading(false)
   }
 
   return (
     <div className={classes(classNames.root)}>
-      <Editor onSubmit={handleSubmit} />
+      <Editor
+        loading={loading}
+        disabled={loading}
+        submitLabel='Reply'
+        onSubmit={handleSubmit}
+      />
 
       <h2 className={classes(classNames.header)}>
         <strong className={classes(classNames.count)}>

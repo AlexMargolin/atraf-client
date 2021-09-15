@@ -1,0 +1,8 @@
+.editor {
+  &__shortcuts {
+    display: grid;
+    grid-gap: 5px;
+    align-items: center;
+    grid-auto-flow: column;
+  }
+}
