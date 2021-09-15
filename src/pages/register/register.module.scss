@@ -8,12 +8,12 @@
 
   &__card1 {
     &.transition-leave {
-      transition: 0.3s all ease-in-out;
+      transition: 0.2s all ease-in-out;
     }
 
     &.transition-leave-to {
       opacity: 0;
-      filter: blur(20px);
+      filter: blur(10px);
       transform: scale(1.05);
       will-change: transform;
     }

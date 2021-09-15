@@ -1,20 +1,20 @@
-import api from "@/api"
-import { Transition } from "@/core"
-import { NavigateTo } from "@/router"
-import { makeClasses } from "@/hooks"
-import { ALERTS_TIMEOUT } from "@/defines"
-import React, { FC, useState } from "react"
-import modules from "./register.module.scss"
-import { Alert, Button, Card, Icon, Input, Link } from "@/components"
+import api from "@/api";
+import { Transition } from "@/core";
+import { NavigateTo } from "@/router";
+import { makeClasses } from "@/hooks";
+import { ALERTS_TIMEOUT } from "@/defines";
+import React, { FC, useState } from "react";
+import modules from "./register.module.scss";
+import { Alert, Button, Card, Icon, Input, Link } from "@/components";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 
 export const fields = {
   email: "email",
   password: "password",
   confirm: "password_confirm",
   code: "code",
-}
+};
 
 export const classNames = {
   root: "register",
@@ -25,59 +25,59 @@ export const classNames = {
   disclaimer: "register__disclaimer",
   card1: "register__card1",
   card2: "register__card2",
-}
+};
 
 const Register: FC = () => {
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [complete, setComplete] = useState(false)
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [complete, setComplete] = useState(false);
 
-  const [isSignup, setIsSignup] = useState(true)
-  const [isVerify, setIsVerify] = useState(false)
+  const [isSignup, setIsSignup] = useState(true);
+  const [isVerify, setIsVerify] = useState(false);
 
   const handleRegister = async (event: React.FormEvent) => {
-    event.preventDefault()
-    const data = new FormData(event.target as HTMLFormElement)
-    const email = data.get(fields.email) as string
-    const password = data.get(fields.password) as string
-    const confirm_password = data.get(fields.confirm) as string
+    event.preventDefault();
+    const data = new FormData(event.target as HTMLFormElement);
+    const email = data.get(fields.email) as string;
+    const password = data.get(fields.password) as string;
+    const confirm_password = data.get(fields.confirm) as string;
 
-    setLoading(true)
+    setLoading(true);
     const [, response] = await api.account.register({
       email: email,
       password: password,
-    })
-    setLoading(false)
+    });
+    setLoading(false);
 
     if (!response.ok) {
-      setError(response.status)
-      return
+      setError(response.status);
+      return;
     }
 
-    setError(null)
-    setIsSignup(false)
-  }
+    setError(null);
+    setIsSignup(false);
+  };
 
   const handleActivate = async (event: React.FormEvent) => {
-    event.preventDefault()
-    const data = new FormData(event.target as HTMLFormElement)
-    const code = data.get(fields.code) as string
+    event.preventDefault();
+    const data = new FormData(event.target as HTMLFormElement);
+    const code = data.get(fields.code) as string;
 
-    setLoading(true)
+    setLoading(true);
     const [, response] = await api.account.activate({
       code: code,
-    })
-    setLoading(false)
+    });
+    setLoading(false);
 
     if (!response.ok) {
-      setError(response.status)
-      return
+      setError(response.status);
+      return;
     }
 
-    setError(null)
-    setComplete(true)
-    setTimeout(() => NavigateTo("home"), ALERTS_TIMEOUT)
-  }
+    setError(null);
+    setComplete(true);
+    setTimeout(() => NavigateTo("home"), ALERTS_TIMEOUT);
+  };
 
   return (
     <div className={classes(classNames.root)}>
@@ -217,7 +217,7 @@ const Register: FC = () => {
         Policy and Terms of Service apply.
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

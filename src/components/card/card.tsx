@@ -1,28 +1,24 @@
-import { CardProps } from "./"
-import { forwardRef } from "react"
-import { makeClasses } from "@/hooks"
-import { Spinner } from "@/components"
-import modules from "./card.module.scss"
+import { CardProps } from "./";
+import { forwardRef } from "react";
+import { makeClasses } from "@/hooks";
+import { Spinner } from "@/components";
+import modules from "./card.module.scss";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 
 export const classNames = {
   root: "card",
   flat: "card--flat",
-}
+  overlay: "card__overlay",
+};
 
-/**
- * Card Component
- *
- * @since 1.0.0
- */
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   (props, forwardedRef) => {
-    const { className, flat, children, loading, ...rest } = props
+    const { className, flat, children, loading, ...rest } = props;
 
     const modifiers = {
       [classNames.flat]: flat,
-    }
+    };
 
     return (
       <div
@@ -30,11 +26,15 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         className={classes(classNames.root, modifiers, className)}
         {...rest}
       >
-        <Spinner active={loading} />
+        {loading && (
+          <div className={classes(classNames.overlay)}>
+            <Spinner />
+          </div>
+        )}
         {children}
       </div>
-    )
+    );
   },
-)
+);
 
-export default Card
+export default Card;

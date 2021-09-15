@@ -1,13 +1,13 @@
-import { ButtonProps } from "./"
-import { forwardRef } from "react"
-import { makeClasses } from "@/hooks"
-import { Spinner } from "@/components"
-import modules from "./button.module.scss"
+import { ButtonProps } from "./";
+import { forwardRef } from "react";
+import { makeClasses } from "@/hooks";
+import { Spinner } from "@/components";
+import modules from "./button.module.scss";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 export const classNames = {
   root: "button",
-}
+};
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, forwardedRef) => {
@@ -21,7 +21,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant = "filled",
       ...rest
-    } = props
+    } = props;
 
     const modifiers = {
       [`button--grow`]: grow,
@@ -29,7 +29,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [`button--${size}`]: !!size,
       [`button--${color}`]: !!color,
       [`button--${variant}`]: !!variant,
-    }
+    };
 
     return (
       <button
@@ -39,10 +39,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...rest}
       >
         {children}
-        <Spinner size='small' active={loading} />
+        {loading && <Spinner size='small' />}
       </button>
-    )
+    );
   },
-)
+);
 
-export default Button
+export default Button;
