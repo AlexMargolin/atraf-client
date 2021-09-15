@@ -1,7 +1,7 @@
-import { lazy } from "react"
-import { history } from "./"
+import { lazy } from "react";
+import { history } from "./";
 
-export type NavigationRoutes = keyof typeof routes
+export type NavigationRoutes = keyof typeof routes;
 
 const routes = {
   home: {
@@ -39,14 +39,14 @@ const routes = {
       () => import(/* webpackChunkName: "404" */ "@/pages/404"),
     ),
   },
-}
+};
 
 /**
  * Router history.push wrapper
  * @param route
  */
 export const NavigateTo = (route: NavigationRoutes): void => {
-  history.push(routes[route].path)
-}
+  history.push(routes[route].path);
+};
 
-export default routes
+export default routes;

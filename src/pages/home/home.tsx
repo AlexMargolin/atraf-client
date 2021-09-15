@@ -7,6 +7,8 @@ import { FC, useEffect, useState } from "react";
 const Home: FC = () => {
   const history = useHistory();
 
+  const [loading, setLoading] = useState(true);
+
   const [cursor, setCursor] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
   const [users, setUsers] = useState<MappedUsers>({});
@@ -23,6 +25,8 @@ const Home: FC = () => {
         return;
       }
 
+      setLoading(false);
+
       const usersMap: MappedUsers = {};
       for (const user of result.users) {
         usersMap[user.id] = user;
@@ -34,7 +38,7 @@ const Home: FC = () => {
     })();
   }, []);
 
-  if (0 === posts.length) {
+  if (loading) {
     return <div>loading posts...</div>;
   }
 

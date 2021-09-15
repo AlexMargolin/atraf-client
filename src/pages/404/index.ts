@@ -1,2 +1,2 @@
-import { default as NotFound } from "./not-found"
-export default NotFound
+import { default as NotFound } from "./notfound";
+export default NotFound;

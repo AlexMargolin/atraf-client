@@ -1,0 +1,11 @@
+@import "~@/scss/variables";
+
+.notfound {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 get-size(spacing-15);
+}
