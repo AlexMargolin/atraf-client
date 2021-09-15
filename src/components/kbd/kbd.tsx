@@ -1,19 +1,19 @@
-import { KbdProps } from "./"
-import { forwardRef } from "react"
-import { makeClasses } from "@/hooks"
-import modules from "./kbd.modules.scss"
-import { Icon } from "@/components"
+import { KbdProps } from "./";
+import { Icon } from "@/base";
+import { forwardRef } from "react";
+import { makeClasses } from "@/hooks";
+import modules from "./kbd.modules.scss";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 
 export const classNames = {
   root: "kbd",
   icon: "kbd__icon",
-}
+};
 
 const Kbd = forwardRef<HTMLElement, KbdProps>(
   (props, forwardedRef) => {
-    const { className, iconId, keyName, ...rest } = props
+    const { className, iconId, keyName, ...rest } = props;
 
     return (
       <kbd
@@ -24,8 +24,8 @@ const Kbd = forwardRef<HTMLElement, KbdProps>(
       >
         <Icon iconId={iconId} className={classes(classNames.icon)} />
       </kbd>
-    )
+    );
   },
-)
+);
 
-export default Kbd
+export default Kbd;

@@ -1,12 +1,13 @@
-import api from "@/api"
-import { makeClasses } from "@/hooks"
-import { NavigateTo } from "@/router"
-import modules from "./login.module.scss"
-import { ALERTS_TIMEOUT } from "@/defines"
-import React, { FC, useState } from "react"
-import { Button, Card, Input, Icon, Link, Alert } from "@/components"
+import api from "@/api";
+import { Icon } from "@/base";
+import { makeClasses } from "@/hooks";
+import { NavigateTo } from "@/router";
+import modules from "./login.module.scss";
+import React, { FC, useState } from "react";
+import { dispatchSnackbar } from "@/features/snackbar";
+import { Button, Card, Input, Link, Alert } from "@/components";
 
-const classes = makeClasses(modules)
+const classes = makeClasses(modules);
 
 export const classNames = {
   root: "login",
@@ -14,50 +15,51 @@ export const classNames = {
   account: "login__account",
   buttons: "login__buttons",
   disclaimer: "login__disclaimer",
-}
+};
 
 export const fields = {
   email: "email",
   password: "password",
-}
+};
+
+export const messages = {
+  login: {
+    success: "logged in successfully",
+  },
+};
 
 const Login: FC = () => {
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [complete, setComplete] = useState(false)
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault()
-    const data = new FormData(event.target as HTMLFormElement)
-    const email = data.get(fields.email) as string
-    const password = data.get(fields.password) as string
+    event.preventDefault();
+    const data = new FormData(event.target as HTMLFormElement);
+    const email = data.get(fields.email) as string;
+    const password = data.get(fields.password) as string;
 
-    setLoading(true)
+    setLoading(true);
     const [, response] = await api.account.login({
       email: email,
       password: password,
-    })
+    });
+    setLoading(false);
 
     if (!response.ok) {
-      setLoading(false)
-      setError(response.status)
-      return
+      setError(response.status);
+      return;
     }
 
-    setError(null)
-    setComplete(true)
-    setTimeout(() => NavigateTo("home"), ALERTS_TIMEOUT)
-  }
+    setError(null);
+    dispatchSnackbar({ message: messages.login.success });
+    NavigateTo("home");
+  };
 
   return (
     <div className={classes(classNames.root)}>
       <Card loading={loading}>
         <h1 className={classes(classNames.title)}>Login</h1>
         <form onSubmit={handleSubmit}>
-          {complete && (
-            <Alert type='success'>Logged in successfully</Alert>
-          )}
-
           {null !== error && (
             <Alert type='error'>
               <span>Umm... Something went wrong</span>{" "}
@@ -107,7 +109,7 @@ const Login: FC = () => {
         Policy and Terms of Service apply.
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

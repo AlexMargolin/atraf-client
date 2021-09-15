@@ -1,52 +1,18 @@
-import { HTMLAttributes, ReactElement } from "react"
+import { ComponentPropsWithRef, ReactElement } from "react";
 
-/**
- * Modal Imperative Handle.
- * Use to gain control of the modal from parent components.
- */
 export type ModalHandle = {
-  /**
-   * Open Modal method
-   */
-  open: () => void
+  open: () => void;
+  close: () => void;
+  toggle: () => void;
+};
 
-  /**
-   * Close Modal method
-   */
-  close: () => void
-
-  /**
-   * Toggle Modal method
-   */
-  toggle: () => void
+export interface ModalProps extends ComponentPropsWithRef<"div"> {
+  defaultVisible?: boolean;
+  persistent?: boolean;
+  __activator?: ReactElement;
 }
 
-/**
- * Modal Component Props
- */
-export interface ModalProps extends HTMLAttributes<HTMLElement> {
-  /**
-   * Default Modal state
-   * @default false
-   */
-  defaultVisible?: boolean
+import { default as Modal } from "./modal";
+export default Modal;
 
-  /**
-   * When true, disables the option to close the modal when a click
-   * outside the dialog occurs or the ESC key is pressed.
-   * @default false
-   */
-  persistent?: boolean
-
-  /**
-   * Modal trigger element
-   * Provided element which will trigger the modal.
-   * @default undefined
-   */
-  __activator?: ReactElement
-}
-
-import Modal from "./Modal"
-export default Modal
-
-export * from "./Modal"
+export * from "./modal";

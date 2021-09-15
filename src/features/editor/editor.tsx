@@ -1,8 +1,9 @@
+import { Icon } from "@/base";
 import { EditorProps } from "./";
 import { FC, useRef } from "react";
 import { makeClasses } from "@/hooks";
 import modules from "./editor.module.scss";
-import { Button, Icon, Input, Kbd } from "@/components";
+import { Button, Input, Kbd } from "@/components";
 
 const classes = makeClasses(modules);
 
@@ -70,9 +71,9 @@ const Editor: FC<EditorProps> = props => {
         }
         __helper={
           <span className={classes(classNames.shortcuts)}>
-            or
+            Or send with
             <Kbd keyName='Shift' iconId='icon-kbd-shift' />+
-            <Kbd keyName='Return' iconId='icon-kbd-return' />
+            <Kbd keyName='Enter' iconId='icon-kbd-return' />
           </span>
         }
       />

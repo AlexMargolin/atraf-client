@@ -1,4 +1,4 @@
-import { Icon } from "@/components";
+import { Icon } from "@/base";
 import { Transition } from "@/core";
 import { makeClasses } from "@/hooks";
 import { createPortal } from "react-dom";

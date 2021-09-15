@@ -1,7 +1,7 @@
 import { ButtonProps } from "./";
+import { Spinner } from "@/base";
 import { forwardRef } from "react";
 import { makeClasses } from "@/hooks";
-import { Spinner } from "@/components";
 import modules from "./button.module.scss";
 
 const classes = makeClasses(modules);

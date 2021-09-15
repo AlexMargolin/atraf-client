@@ -1,7 +1,7 @@
 import { CardProps } from "./";
+import { Spinner } from "@/base";
 import { forwardRef } from "react";
 import { makeClasses } from "@/hooks";
-import { Spinner } from "@/components";
 import modules from "./card.module.scss";
 
 const classes = makeClasses(modules);

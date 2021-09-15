@@ -1,4 +1,4 @@
-export { default as mergeRefs } from "./merge-refs/merge-refs"
+export { default as mergeRefs } from "./mergeRefs/mergeRefs";
 
 export {
   addClass,
@@ -13,4 +13,4 @@ export {
   getAppendSizeUnit,
   getDOMElementCoords,
   getAnimationDuration,
-} from "./dom/dom"
+} from "./dom/dom";

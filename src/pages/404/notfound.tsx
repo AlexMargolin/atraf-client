@@ -2,8 +2,8 @@ import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
 import modules from "./notfound.module.scss";
 import { FC, useRef, useState } from "react";
-import { Card, Button, Line } from "@/components";
 import Modal, { ModalHandle } from "@/base/modal";
+import { Card, Button, Line } from "@/components";
 
 const classes = makeClasses(modules);
 

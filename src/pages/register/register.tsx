@@ -1,11 +1,13 @@
 import api from "@/api";
+import { Icon } from "@/base";
 import { Transition } from "@/core";
 import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
 import { ALERTS_TIMEOUT } from "@/defines";
 import React, { FC, useState } from "react";
 import modules from "./register.module.scss";
-import { Alert, Button, Card, Icon, Input, Link } from "@/components";
+import { Alert, Button, Card, Input, Link } from "@/components";
+import { dispatchSnackbar } from "@/features/snackbar";
 
 const classes = makeClasses(modules);
 
@@ -25,6 +27,16 @@ export const classNames = {
   disclaimer: "register__disclaimer",
   card1: "register__card1",
   card2: "register__card2",
+};
+
+export const messages = {
+  register: {
+    success: "account created successfully",
+  },
+
+  activate: {
+    success: "account activated successfully",
+  },
 };
 
 const Register: FC = () => {
@@ -56,6 +68,7 @@ const Register: FC = () => {
 
     setError(null);
     setIsSignup(false);
+    dispatchSnackbar({ message: messages.register.success });
   };
 
   const handleActivate = async (event: React.FormEvent) => {
@@ -76,7 +89,8 @@ const Register: FC = () => {
 
     setError(null);
     setComplete(true);
-    setTimeout(() => NavigateTo("home"), ALERTS_TIMEOUT);
+    dispatchSnackbar({ message: messages.activate.success });
+    NavigateTo("home");
   };
 
   return (
