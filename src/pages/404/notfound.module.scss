@@ -6,6 +6,48 @@
   display: flex;
   max-width: 500px;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   padding: 0 get-size(spacing-15);
+
+  &__title {
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+
+    small {
+      display: block;
+      font-size: 10px;
+    }
+  }
+
+  &__buttons {
+    display: grid;
+    grid-gap: 10px;
+    text-align: center;
+    align-items: center;
+    margin-top: get-size(spacing-20);
+  }
+
+  &__lorem {
+    margin: 10px;
+    line-height: 2;
+    display: block;
+    font-size: 11px;
+    max-width: 400px;
+    text-align: center;
+    color: get-part-color(black);
+    padding: get-size(spacing-10);
+
+    &-buttons{
+      display: flex;
+    }
+  }
 }
