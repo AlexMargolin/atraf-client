@@ -1,41 +1,42 @@
-import api from "@/api"
-import { Post } from "@/api/posts"
-import { useHistory } from "react-router-dom"
-import { MappedUsers, User } from "@/api/users"
-import { FC, useEffect, useState } from "react"
+import api from "@/api";
+import { Post } from "@/api/posts";
+import { MappedUsers } from "@/api/users";
+import { useHistory } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
 
 const Home: FC = () => {
-  const history = useHistory()
+  const history = useHistory();
 
-  const [cursor, setCursor] = useState("")
-  const [posts, setPosts] = useState<Post[]>([])
-  const [users, setUsers] = useState<MappedUsers>({})
+  const [cursor, setCursor] = useState("");
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [users, setUsers] = useState<MappedUsers>({});
 
   const handlePostClick = (id: Post["id"]) => {
-    history.push(`/post/${id}`)
-  }
+    history.push(`/post/${id}`);
+  };
 
   useEffect(() => {
-    const loadPosts = async () => {
-      const [result, response] = await api.posts.readMany()
+    (async () => {
+      const [result, response] = await api.posts.readMany();
+
       if (!response.ok) {
-        console.warn(response)
-        return
+        return;
       }
 
-      // Create users map
-      const usersMap: Record<string, User> = {}
+      const usersMap: MappedUsers = {};
       for (const user of result.users) {
-        usersMap[user.id] = user
+        usersMap[user.id] = user;
       }
 
-      setUsers(usersMap)
-      setPosts(result.posts)
-      setCursor(result.cursor)
-    }
+      setUsers(usersMap);
+      setPosts(result.posts);
+      setCursor(result.cursor);
+    })();
+  }, []);
 
-    loadPosts()
-  }, [])
+  if (0 === posts.length) {
+    return <div>loading posts...</div>;
+  }
 
   return (
     <div>
@@ -47,7 +48,7 @@ const Home: FC = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

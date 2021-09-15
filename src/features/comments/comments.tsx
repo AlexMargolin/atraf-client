@@ -80,6 +80,10 @@ const Comments: FC<CommentsProps> = props => {
     setCreating(false);
   };
 
+  if (0 === comments.length) {
+    return <div>loading comments...</div>;
+  }
+
   return (
     <div className={classes(classNames.root)}>
       <Editor

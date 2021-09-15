@@ -7,11 +7,11 @@ import modules from "./post.module.scss";
 import { useParams } from "react-router-dom";
 import { FC, useEffect, useState } from "react";
 
-const classes = makeClasses(modules);
-
-type PostRouteParams = {
+export type PostRouteParams = {
   id: string;
 };
+
+const classes = makeClasses(modules);
 
 export const classNames = {
   root: "post",
@@ -33,9 +33,6 @@ const Post: FC = () => {
   const [user, setUser] = useState<User>(null);
   const [post, setPost] = useState<Post>(null);
 
-  // Loading flag
-  const isPostLoading = !user || !post;
-
   useEffect(() => {
     (async () => {
       const [result, response] = await api.posts.readOne(id);
@@ -49,8 +46,8 @@ const Post: FC = () => {
     })();
   }, [id]);
 
-  if (isPostLoading) {
-    return <div>Post Loading...</div>;
+  if (!user || !post) {
+    return <div>loading post...</div>;
   }
 
   return (

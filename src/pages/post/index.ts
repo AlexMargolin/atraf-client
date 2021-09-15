@@ -1,2 +1,2 @@
-import Post from "@/pages/post/post"
-export default Post
+import Post from "@/pages/post/post";
+export default Post;
