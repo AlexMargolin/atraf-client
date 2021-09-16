@@ -15,13 +15,14 @@ const classes = makeClasses(modules);
 export const classNames = {
   root: "home",
   loader: "home__loader",
+  end: "home__end",
 };
 
 const Home: FC = () => {
   const [cursor, setCursor] = useState<string>();
-  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<Post[]>([]);
   const [users, setUsers] = useState<MappedUsers>({});
+  const [loading, setLoading] = useState(true);
 
   const lastPost = posts[posts.length - 1];
   const lastPostRef = useRef<HTMLDivElement>();
@@ -91,6 +92,15 @@ const Home: FC = () => {
               user={users[post.user_id]}
             />
           ),
+        )}
+
+        {!loading && !cursor && (
+          <div className={classes(classNames.end)}>
+            <q>
+              There is no real ending. It&apos;s just the place where
+              you stop the story.
+            </q>
+          </div>
         )}
       </div>
 

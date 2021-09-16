@@ -8,6 +8,7 @@ const classes = makeClasses(modules);
 export const classNames = {
   root: "post",
   title: "post__title",
+  link: "post__link",
   author: {
     root: "post__author",
     time: "post__author-time",
@@ -26,7 +27,16 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
 
     return (
       <div ref={forwardedRef} className={classes(classNames.root)}>
-        <h3 className={classes(classNames.title)}>{post.title}</h3>
+        <h3 className={classes(classNames.title)}>
+          <a
+            target='_blank'
+            rel='noreferrer'
+            href={`/post/${post.id}`}
+            className={classes(classNames.link)}
+          >
+            {post.title}
+          </a>
+        </h3>
 
         <div className={classes(classNames.author.root)}>
           <a href='#' className={classes(classNames.author.link)}>
