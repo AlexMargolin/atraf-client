@@ -1,10 +1,10 @@
 /* eslint-disable max-lines */
-const webpack = require("webpack")
-const envs = require("./env.config")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const { appendRoot, envCmp } = require("./scripts/utils")
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const webpack = require("webpack");
+const envs = require("./env.config");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { appendRoot, envCmp } = require("./scripts/utils");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 /**
  * default paths & files.
@@ -14,7 +14,7 @@ const defaults = {
   outputDir: "build",
   publicDir: "public",
   mainFile: "index.tsx",
-}
+};
 
 /**
  * Typescript Rule.
@@ -28,7 +28,7 @@ const tsRule = () => ({
     },
   },
   include: [appendRoot(defaults.srcDir)],
-})
+});
 
 /**
  * Style Rule.
@@ -59,7 +59,7 @@ const styleRule = () => ({
       },
     },
   ],
-})
+});
 
 /**
  * Images Rule.
@@ -73,7 +73,7 @@ const imagesRule = () => ({
       "assets/[contenthash:5][ext]",
     ),
   },
-})
+});
 
 /**
  * @type {HtmlWebpackPlugin}
@@ -87,7 +87,7 @@ const htmlPlugin = new HtmlWebpackPlugin({
   },
   template: appendRoot(defaults.publicDir, "index.ejs"),
   favicon: appendRoot(defaults.publicDir, "favicon.ico"),
-})
+});
 
 /**
  * @type {MiniCssExtractPlugin}
@@ -101,24 +101,25 @@ const cssExtractPlugin = new MiniCssExtractPlugin({
     "[name]-[contenthash:5].css",
     "[contenthash:5].css",
   ),
-})
+});
 
 /**
  * @type {CleanWebpackPlugin}
  */
 const cleanPlugin = new CleanWebpackPlugin({
   cleanStaleWebpackAssets: true,
-})
+});
 
 /**
  * @type {webpack.EnvironmentPlugin}
  */
-const environmentPlugin = new webpack.EnvironmentPlugin(envs)
+const environmentPlugin = new webpack.EnvironmentPlugin(envs);
 
 /**
  * @type {webpack.Configuration}
  */
 module.exports = {
+  stats: "errors-only",
   bail: envCmp(false, true),
   mode: envCmp("development", "production"),
   devtool: envCmp("inline-source-map", false),
@@ -155,8 +156,9 @@ module.exports = {
     },
   },
   devServer: {
-    port: 9000,
     historyApiFallback: true,
+    host: process.env.APP_DEV_SERVER_HOST,
+    port: process.env.APP_DEV_SERVER_PORT,
   },
   module: {
     rules: [tsRule(), styleRule(), imagesRule()],
@@ -167,4 +169,4 @@ module.exports = {
     cssExtractPlugin,
     environmentPlugin,
   ],
-}
+};
