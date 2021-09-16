@@ -49,15 +49,15 @@
     &:hover,
     &:focus {
       color: var(--#{$unique-id});
-      background-color: get-part-color(white);
-      box-shadow: inset 0 0 0 2px var(--#{$unique-id});
+      background-color: transparent;
+      box-shadow: 0 0 0 2px var(--#{$unique-id});
     }
   }
 
   &--outlined {
     color: var(--#{$unique-id});
-    background-color: get-part-color(white);
-    box-shadow: inset 0 0 0 2px var(--#{$unique-id});
+    background-color: transparent;
+    box-shadow: 0 0 0 2px var(--#{$unique-id});
 
     &:hover,
     &:focus {

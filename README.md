@@ -13,3 +13,4 @@
 11. add toasts to api calls
 12. fix snackbar close icon in iphone safari
 13. post - initial view should be 100vh
+14. post - should be a full screen popup (better for mobile and return functionality)
