@@ -1,0 +1,9 @@
+@import "~@/scss/variables";
+
+.container {
+  width: 100%;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 get-size(spacing-10);
+}

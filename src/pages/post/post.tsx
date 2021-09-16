@@ -4,6 +4,7 @@ import { Post } from "@/api/posts";
 import { makeClasses } from "@/hooks";
 import { Comments } from "@/features";
 import modules from "./post.module.scss";
+import { Container } from "@/components";
 import { useParams } from "react-router-dom";
 import { FC, useEffect, useState } from "react";
 
@@ -51,7 +52,7 @@ const Post: FC = () => {
   }
 
   return (
-    <div className={classes(classNames.root)}>
+    <Container className={classes(classNames.root)}>
       <h1 className={classes(classNames.title)}>{post.title}</h1>
 
       <div className={classes(classNames.info)}>
@@ -82,7 +83,7 @@ const Post: FC = () => {
       <p>{post.body}</p>
 
       <Comments sourceId={post.id} />
-    </div>
+    </Container>
   );
 };
 

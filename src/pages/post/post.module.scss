@@ -1,10 +1,6 @@
 @import "~@/scss/variables";
 
 .post {
-  width: 100%;
-  max-width: 800px;
-  align-self: center;
-  padding: 0 get-size(spacing-15);
   margin-top: get-size(spacing-15);
 
   &__title {

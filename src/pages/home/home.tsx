@@ -1,9 +1,9 @@
 import api from "@/api";
 import { Spinner } from "@/base";
 import { Post } from "@/api/posts";
-import { NavigateTo } from "@/router";
 import { POSTS_LIMIT } from "@/defines";
 import modules from "./home.module.scss";
+import { Container } from "@/components";
 import { MappedUsers } from "@/api/users";
 import { makeClasses, useInView } from "@/hooks";
 import { Post as PostComponent } from "@/features";
@@ -75,7 +75,7 @@ const Home: FC = () => {
 
   return (
     <>
-      <div className={classes(classNames.root)}>
+      <Container className={classes(classNames.root)}>
         {posts.map(post =>
           post.id === lastPost.id ? (
             <PostComponent
@@ -101,7 +101,7 @@ const Home: FC = () => {
             </q>
           </div>
         )}
-      </div>
+      </Container>
 
       {loading && (
         <Spinner

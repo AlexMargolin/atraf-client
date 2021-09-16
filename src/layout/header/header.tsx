@@ -1,20 +1,27 @@
 import { FC } from "react";
-import { Button } from "@/components";
 import { makeClasses } from "@/hooks";
 import modules from "./header.module.scss";
+import { Button, Container } from "@/components";
 
 const classes = makeClasses(modules);
 
 export const classNames = {
   root: "header",
+  newpost: "header__newpost",
 };
 
 const Header: FC = () => {
   return (
     <header className={classes(classNames.root)}>
-      <Button color='pink' variant='outlined'>
-        Add New Post
-      </Button>
+      <Container>
+        <Button
+          color='pink'
+          variant='outlined'
+          className={classes(classNames.newpost)}
+        >
+          Add New Post
+        </Button>
+      </Container>
     </header>
   );
 };

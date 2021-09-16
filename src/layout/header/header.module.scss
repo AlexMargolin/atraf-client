@@ -6,7 +6,11 @@
   display: flex;
   position: sticky;
   justify-content: flex-end;
-  padding: get-size(spacing-15);
+  padding: get-size(spacing-15) 0;
   background-color: get-part-color(white);
   border-bottom: 1px solid get-part-color(border);
+
+  &__newpost {
+    margin-inline-start: auto;
+  }
 }
