@@ -1,11 +1,13 @@
 import api from "@/api";
 import { Spinner } from "@/base";
 import { Post } from "@/api/posts";
+import { NavigateTo } from "@/router";
 import { POSTS_LIMIT } from "@/defines";
 import modules from "./home.module.scss";
 import { MappedUsers } from "@/api/users";
 import { makeClasses, useInView } from "@/hooks";
 import { Post as PostComponent } from "@/features";
+import { dispatchSnackbar } from "@/features/snackbar";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 const classes = makeClasses(modules);
@@ -33,6 +35,10 @@ const Home: FC = () => {
     setLoading(false);
 
     if (!response.ok) {
+      dispatchSnackbar({
+        message: `Oh oh, Something went wrong [e:${response.status}]`,
+      });
+      NavigateTo("notFound");
       return;
     }
 
