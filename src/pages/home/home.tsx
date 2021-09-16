@@ -1,6 +1,7 @@
 import api from "@/api";
 import { Spinner } from "@/base";
 import { Post } from "@/api/posts";
+import { POSTS_LIMIT } from "@/defines";
 import modules from "./home.module.scss";
 import { MappedUsers } from "@/api/users";
 import { makeClasses, useInView } from "@/hooks";
@@ -15,18 +16,20 @@ export const classNames = {
 };
 
 const Home: FC = () => {
-  const lastPostRef = useRef<HTMLDivElement>();
-
   const [cursor, setCursor] = useState<string>();
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<Post[]>([]);
   const [users, setUsers] = useState<MappedUsers>({});
 
   const lastPost = posts[posts.length - 1];
+  const lastPostRef = useRef<HTMLDivElement>();
 
   const load = async () => {
     setLoading(true);
-    const [result, response] = await api.posts.readMany(cursor, 5);
+    const [result, response] = await api.posts.readMany(
+      cursor,
+      POSTS_LIMIT,
+    );
     setLoading(false);
 
     if (!response.ok) {
