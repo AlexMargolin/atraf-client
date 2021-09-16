@@ -39,7 +39,6 @@ const Home: FC = () => {
       dispatchSnackbar({
         message: `Oh oh, Something went wrong [e:${response.status}]`,
       });
-      NavigateTo("notFound");
       return;
     }
 

@@ -2,9 +2,10 @@ import {
   Route,
   Switch,
   Router as HistoryRouter,
-} from "react-router-dom"
-import { history, routes } from "./"
-import { FC, Suspense } from "react"
+  Redirect,
+} from "react-router-dom";
+import { history, routes } from "./";
+import { FC, Suspense } from "react";
 
 /**
  * History Router Component
@@ -13,7 +14,7 @@ import { FC, Suspense } from "react"
 const Router: FC = () => {
   return (
     <HistoryRouter history={history}>
-      <Suspense fallback='Loading...'>
+      <Suspense fallback=''>
         <Switch>
           <Route
             exact
@@ -40,13 +41,16 @@ const Router: FC = () => {
           />
 
           <Route
+            exact
             path={routes.notFound.path}
             component={routes.notFound.component}
           />
+
+          <Redirect from='*' to={routes.notFound.path} />
         </Switch>
       </Suspense>
     </HistoryRouter>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;
