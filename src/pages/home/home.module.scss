@@ -1,0 +1,15 @@
+@import "~@/scss/variables";
+
+.home {
+  width: 100%;
+  max-width: 700px;
+  align-self: center;
+  padding: 0 get-size(spacing-15);
+  margin-top: get-size(spacing-15);
+
+  &__loader {
+    align-self: center;
+    margin-top: get-size(spacing-30);
+    margin-bottom: get-size(spacing-50);
+  }
+}

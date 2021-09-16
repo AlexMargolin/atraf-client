@@ -1,57 +1,97 @@
 import api from "@/api";
+import { Spinner } from "@/base";
 import { Post } from "@/api/posts";
+import modules from "./home.module.scss";
 import { MappedUsers } from "@/api/users";
-import { useHistory } from "react-router-dom";
-import { FC, useEffect, useState } from "react";
+import { makeClasses, useInView } from "@/hooks";
+import { Post as PostComponent } from "@/features";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+
+const classes = makeClasses(modules);
+
+export const classNames = {
+  root: "home",
+  loader: "home__loader",
+};
 
 const Home: FC = () => {
-  const history = useHistory();
+  const lastPostRef = useRef<HTMLDivElement>();
 
+  const [cursor, setCursor] = useState<string>();
   const [loading, setLoading] = useState(true);
-
-  const [cursor, setCursor] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
   const [users, setUsers] = useState<MappedUsers>({});
 
-  const handlePostClick = (id: Post["id"]) => {
-    history.push(`/post/${id}`);
+  const lastPost = posts[posts.length - 1];
+
+  const load = async () => {
+    setLoading(true);
+    const [result, response] = await api.posts.readMany(cursor, 5);
+    setLoading(false);
+
+    if (!response.ok) {
+      return;
+    }
+
+    const usersMap: MappedUsers = {};
+    for (const user of result.users) {
+      usersMap[user.id] = user;
+    }
+
+    setCursor(result.cursor);
+    setUsers(Object.assign(users, usersMap));
+    setPosts(posts.concat(result.posts));
   };
 
+  // initial render
   useEffect(() => {
-    (async () => {
-      const [result, response] = await api.posts.readMany();
-
-      if (!response.ok) {
-        return;
-      }
-
-      setLoading(false);
-
-      const usersMap: MappedUsers = {};
-      for (const user of result.users) {
-        usersMap[user.id] = user;
-      }
-
-      setUsers(usersMap);
-      setPosts(result.posts);
-      setCursor(result.cursor);
-    })();
+    load();
   }, []);
 
-  if (loading) {
-    return <div>loading posts...</div>;
-  }
+  // load additional posts when the last post is in the viewport
+  useInView(
+    lastPostRef,
+    useCallback(
+      entry => {
+        // load new data only when the last post is in view
+        // and the cursor is present in the previous API response
+        if (entry.isIntersecting && cursor) {
+          load();
+        }
+      },
+      [lastPost],
+    ),
+    { once: true },
+  );
 
   return (
-    <div>
-      {posts.map(post => (
-        <div key={post.id}>
-          <button onClick={() => handlePostClick(post.id)}>
-            {post.title}
-          </button>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className={classes(classNames.root)}>
+        {posts.map(post =>
+          post.id === lastPost.id ? (
+            <PostComponent
+              post={post}
+              key={post.id}
+              ref={lastPostRef}
+              user={users[post.user_id]}
+            />
+          ) : (
+            <PostComponent
+              post={post}
+              key={post.id}
+              user={users[post.user_id]}
+            />
+          ),
+        )}
+      </div>
+
+      {loading && (
+        <Spinner
+          absolute={false}
+          className={classes(classNames.loader)}
+        />
+      )}
+    </>
   );
 };
 

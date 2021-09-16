@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { createThreshold, UseInViewHook } from "@/hooks/useInView"
+import { useEffect } from "react";
+import { createThreshold, UseInViewHook } from "@/hooks/useInView";
 
 /**
  * Intersection Observer API wrapper hook.
@@ -13,36 +13,36 @@ const useInView: UseInViewHook = (
   callback,
   init = {},
 ) => {
-  const { steps = 0, once = true, threshold, ...rest } = init
+  const { steps = 0, once = true, threshold, ...rest } = init;
 
   useEffect(() => {
     if (!("current" in observedRef) || !observedRef.current) {
-      return null
+      return null;
     }
 
     const observerInit = {
       threshold: threshold || createThreshold(steps),
       ...rest,
-    }
+    };
 
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
-        callback(entry, observer)
+        callback(entry, observer);
 
         if (once && entry.isIntersecting) {
-          observer.disconnect()
-          return
+          observer.disconnect();
+          return;
         }
-      })
-    }, observerInit)
+      });
+    }, observerInit);
 
-    const target = observedRef.current as unknown as HTMLElement
-    observer.observe(target)
+    const target = observedRef.current as unknown as HTMLElement;
+    observer.observe(target);
 
     return () => {
-      observer.disconnect()
-    }
-  }, [observedRef, callback])
-}
+      observer.disconnect();
+    };
+  }, [observedRef, callback]);
+};
 
-export default useInView
+export default useInView;

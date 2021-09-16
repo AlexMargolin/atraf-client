@@ -11,10 +11,11 @@ const classNames = {
 
 const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
   (props, forwardedRef) => {
-    const { className, size, ...rest } = props;
+    const { className, size, absolute = true, ...rest } = props;
 
     const modifiers = {
       [`spinner--${size}`]: !!size,
+      [`spinner--absolute`]: absolute,
     };
 
     return (
