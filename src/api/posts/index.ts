@@ -6,6 +6,7 @@ export type Post = {
   user_id: string;
   title: string;
   body: string;
+  attachment: string;
   created_at: string;
   updated_at: string;
 };
@@ -15,6 +16,7 @@ export type Post = {
 export type PostFields = {
   title: string;
   body: string;
+  file: File;
 };
 
 // Create
@@ -24,7 +26,7 @@ export type CreateResponse = {
 };
 export type CreateFunc = (
   params: CreateRequest,
-) => Promise<CreateResponse>;
+) => Promise<[CreateResponse, ResponseStatic]>;
 
 // Update
 export type UpdateRequest = PostFields;

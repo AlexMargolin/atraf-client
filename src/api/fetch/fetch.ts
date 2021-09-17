@@ -71,7 +71,11 @@ export default class Fetch implements Handler {
 
     // Set Body
     if (null !== body) {
-      config.body = JSON.stringify(body);
+      if (body instanceof FormData) {
+        config.body = body;
+      } else {
+        config.body = JSON.stringify(body);
+      }
     }
 
     const url = this.getRequestUrl(path);
