@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { makeClasses } from "@/hooks";
+import { NavigateTo } from "@/router";
 import modules from "./header.module.scss";
 import { Button, Container } from "@/components";
 
@@ -17,6 +18,7 @@ const Header: FC = () => {
         <Button
           color='pink'
           variant='outlined'
+          onClick={() => NavigateTo("new")}
           className={classes(classNames.newpost)}
         >
           Add New Post

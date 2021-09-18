@@ -10,8 +10,9 @@
   max-width: 320px;
   align-items: center;
   margin: 0 auto 10px auto;
-  padding: get-size(spacing-10);
   color: get-part-color(white);
+  padding: get-size(spacing-10);
+  justify-content: space-between;
   transition: 50ms transform ease-in-out;
   background-color: get-part-color(black);
   border-radius: get-size(border-radius-3);

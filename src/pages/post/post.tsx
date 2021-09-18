@@ -75,7 +75,7 @@ const Post: FC = () => {
       <div className={classes(classNames.media.root)}>
         <img
           alt='%s'
-          src='https://picsum.photos/770/855'
+          src={post.attachment}
           className={classes(classNames.media.image)}
         />
       </div>

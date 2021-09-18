@@ -29,8 +29,9 @@
   }
 
   &--small {
-    padding: 10px;
-    font-size: 10px;
+    padding: 8px;
+    line-height: 1;
+    font-size: 9px;
   }
 
   &--large {
@@ -44,20 +45,21 @@
 
   &--filled {
     color: get-part-color(white);
+    border: 2px solid var(--#{$unique-id});
     background-color: var(--#{$unique-id});
 
     &:hover,
     &:focus {
       color: var(--#{$unique-id});
       background-color: transparent;
-      box-shadow: 0 0 0 2px var(--#{$unique-id});
     }
   }
 
   &--outlined {
+    font-weight: 700;
     color: var(--#{$unique-id});
     background-color: transparent;
-    box-shadow: 0 0 0 2px var(--#{$unique-id});
+    border: 2px solid var(--#{$unique-id});
 
     &:hover,
     &:focus {
@@ -73,8 +75,8 @@
 
   &--loading {
     transition: none;
-    box-shadow: none;
     color: transparent;
+    border-color: transparent;
     background-color: transparent;
 
     &:disabled {

@@ -14,3 +14,11 @@
 12. fix snackbar close icon in iphone safari
 13. post - initial view should be 100vh
 14. post - should be a full screen popup (better for mobile and return functionality)
+15. normalize titles
+16. normalize author tag
+17. tag icons
+18. button icons
+19. merge post and home page post
+20. post button is sticky at the bottom
+21. fix transition css modules
+22. better card component

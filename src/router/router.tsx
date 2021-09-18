@@ -1,8 +1,8 @@
 import {
   Route,
   Switch,
-  Router as HistoryRouter,
   Redirect,
+  Router as HistoryRouter,
 } from "react-router-dom";
 import { history, routes } from "./";
 import { FC, Suspense } from "react";
@@ -38,6 +38,12 @@ const Router: FC = () => {
             exact
             path={routes.post.path}
             component={routes.post.component}
+          />
+
+          <Route
+            exact
+            path={routes.new.path}
+            component={routes.new.component}
           />
 
           <Route

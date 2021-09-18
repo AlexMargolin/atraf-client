@@ -1,9 +1,10 @@
 import api from "@/api";
 import { Icon } from "@/base";
+import { FC, useState } from "react";
+import { Reset } from "@/pages/login";
 import { makeClasses } from "@/hooks";
 import { NavigateTo } from "@/router";
 import modules from "./login.module.scss";
-import React, { FC, useState } from "react";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Button, Card, Input, Link, Alert } from "@/components";
 
@@ -84,7 +85,7 @@ const Login: FC = () => {
             disabled={loading}
             name={fields.password}
             __start={<Icon iconId='icon-lock-bold' />}
-            __helper={<Link route='login'>Forgot Password?</Link>}
+            __end={<Reset />}
           />
 
           <div className={classes(classNames.buttons)}>

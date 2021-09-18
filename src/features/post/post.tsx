@@ -51,7 +51,7 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
           <img
             loading='lazy'
             alt={post.body}
-            src={`https://picsum.photos/770/855?t=${post.id}`}
+            src={post.attachment}
             className={classes(classNames.media.image)}
           />
         </div>
