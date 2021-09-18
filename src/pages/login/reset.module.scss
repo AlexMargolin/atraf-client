@@ -1,0 +1,21 @@
+@import "~@/scss/variables";
+
+.reset {
+  width: 95vw;
+  max-width: 500px;
+
+  &__title {
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: get-part-color(black);
+    margin-bottom: get-size(spacing-10);
+  }
+
+  &__buttons {
+    display: grid;
+    grid-gap: get-size(spacing-10);
+    margin-top: get_size(spacing-20);
+    grid-template-columns: 1fr auto;
+  }
+}

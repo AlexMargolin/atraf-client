@@ -5,7 +5,7 @@ body {
 }
 
 .modal {
-  &__root{
+  &__root {
     top: 0;
     left: 0;
     right: 0;
@@ -24,7 +24,7 @@ body {
     right: 0;
     bottom: 0;
     position: fixed;
-    background-color: rgba(199, 199, 199, 0.77);
+    background-color: rgba(199, 199, 199, 0.89);
   }
 
   &__dialog {
@@ -35,7 +35,7 @@ body {
     }
 
     // added when clicked outside a persistent modal's content area.
-    &--persistent{
+    &--persistent {
       animation: modal-x-bounce 2 150ms ease-in-out;
     }
   }

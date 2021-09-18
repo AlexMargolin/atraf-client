@@ -3,11 +3,10 @@ import { Icon } from "@/base";
 import { Transition } from "@/core";
 import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
-import { ALERTS_TIMEOUT } from "@/defines";
 import React, { FC, useState } from "react";
 import modules from "./register.module.scss";
-import { Alert, Button, Card, Input, Link } from "@/components";
 import { dispatchSnackbar } from "@/features/snackbar";
+import { Alert, Button, Card, Input, Link } from "@/components";
 
 const classes = makeClasses(modules);
 

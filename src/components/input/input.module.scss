@@ -13,6 +13,7 @@
     align-items: center;
     padding: get-size(spacing-5);
     justify-content: space-between;
+    min-height: get-size(spacing-50);
     transition: 0.1s box-shadow ease;
     background-color: get-part-color(white);
     border-radius: get-size(border-radius-3);

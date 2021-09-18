@@ -16,7 +16,7 @@ export type Post = {
 export type PostFields = {
   title: string;
   body: string;
-  file: File;
+  attachment: File;
 };
 
 // Create

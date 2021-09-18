@@ -24,7 +24,7 @@ export const classNames = {
 
   drop: {
     root: "drop",
-    inner: "drop__inner",
+    description: "drop__description",
   },
 };
 
@@ -44,12 +44,12 @@ const New: FC = () => {
 
     const title = data.get("title") as string;
     const body = data.get("body") as string;
-    const file = data.get("file") as File;
+    const file = data.get("attachment") as File;
 
     const [result, response] = await api.posts.create({
       title: title,
       body: body,
-      file: file,
+      attachment: file,
     });
 
     if (!response.ok) {
@@ -82,18 +82,20 @@ const New: FC = () => {
         </div>
 
         <input
-          name='file'
           type='file'
           ref={fileRef}
+          name='attachment'
           style={{ display: "none" }}
         />
 
         <div className={classes(classNames.drop.root)}>
-          <div>Drag and drop files, or select from your device</div>
+          <div className={classes(classNames.drop.description)}>
+            Drag and drop files, or select from your device
+          </div>
 
           <Button
             type='button'
-            color='secondary'
+            color='primary'
             variant='outlined'
             onClick={handleBrowse}
           >
@@ -102,7 +104,9 @@ const New: FC = () => {
         </div>
 
         <div className={classes(classNames.form.buttons)}>
-          <Button color='primary'>Publish</Button>
+          <Button grow color='primary'>
+            Publish
+          </Button>
         </div>
       </form>
     </Container>

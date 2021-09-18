@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { makeClasses } from "@/hooks";
+import { NavigateTo } from "@/router";
 import modules from "./header.module.scss";
 import { Button, Container } from "@/components";
-import { NavigateTo } from "@/router";
 
 const classes = makeClasses(modules);
 

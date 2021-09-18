@@ -30,7 +30,7 @@ export default class Posts {
     const data = new FormData();
     data.append("title", params.title);
     data.append("body", params.body);
-    data.append("file", params.file);
+    data.append("attachment", params.attachment);
 
     const response = await this.handler.post("/posts", data);
     if (response.ok) {
