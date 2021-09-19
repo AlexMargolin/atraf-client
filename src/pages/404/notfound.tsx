@@ -1,21 +1,18 @@
 import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
+import { Card, Button } from "@/components";
 import modules from "./notfound.module.scss";
 import { FC, useRef, useState } from "react";
 import Modal, { ModalHandle } from "@/base/modal";
-import { Card, Button, Line } from "@/components";
 
 const classes = makeClasses(modules);
 
 export const classNames = {
   root: "notfound",
+  card: "notfound__card",
   title: "notfound__title",
   subtitle: "notfound__subtitle",
   buttons: "notfound__buttons",
-  lorem: {
-    root: "notfound__lorem",
-    buttons: "notfound__lorem-buttons",
-  },
 };
 
 const Notfound: FC = () => {
@@ -25,7 +22,6 @@ const Notfound: FC = () => {
   return (
     <div className={classes(classNames.root)}>
       <h1 className={classes(classNames.title)}>Page not found</h1>
-
       <p className={classes(classNames.subtitle)}>
         Good news!
         <br />
@@ -49,9 +45,10 @@ const Notfound: FC = () => {
             </Button>
           }
         >
-          <Card flat className={classes(classNames.lorem.root)}>
-            <h2>Really...? oh well</h2>
-            <p>
+          <Card flat className={classes(classNames.card)}>
+            <Card.Title>Really...? oh well</Card.Title>
+
+            <Card.Content>
               Lorem ipsum dolor sit amet, consectetur adipisicing
               elit. Assumenda atque blanditiis, corporis, cumque ea
               enim, esse hic modi nulla omnis placeat provident
@@ -62,20 +59,17 @@ const Notfound: FC = () => {
               perferendis quam quas qui quos repellendus repudiandae
               rerum sapiente sed tempora tempore ullam vero? Autem
               fuga iste iusto odio quasi.
-            </p>
+            </Card.Content>
 
-            <Line />
-
-            <div className={classes(classNames.lorem.buttons)}>
+            <Card.Actions>
               <Button
                 grow
-                size='small'
                 color='secondary'
                 onClick={() => modalController.current.close()}
               >
                 That was great, thank you
               </Button>
-            </div>
+            </Card.Actions>
           </Card>
         </Modal>
       </div>

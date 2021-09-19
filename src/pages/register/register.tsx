@@ -19,10 +19,7 @@ export const fields = {
 
 export const classNames = {
   root: "register",
-  title: "register__title",
   account: "register__account",
-  buttons: "register__buttons",
-  shortcuts: "register__shortcuts",
   disclaimer: "register__disclaimer",
   card1: "register__card1",
   card2: "register__card2",
@@ -100,7 +97,7 @@ const Register: FC = () => {
         onComplete={() => setIsVerify(!isSignup)}
       >
         <Card loading={loading} className={classes(classNames.card1)}>
-          <h1 className={classes(classNames.title)}>New Account</h1>
+          <Card.Title>New Account</Card.Title>
 
           <form onSubmit={handleRegister}>
             {null == error && (
@@ -146,7 +143,7 @@ const Register: FC = () => {
               __start={<Icon iconId='icon-lock-bold' />}
             />
 
-            <div className={classes(classNames.buttons)}>
+            <Card.Actions>
               <Button
                 grow
                 type='submit'
@@ -155,14 +152,14 @@ const Register: FC = () => {
               >
                 Create Account
               </Button>
-            </div>
+            </Card.Actions>
           </form>
         </Card>
       </Transition>
 
       <Transition in={isVerify} className={classes(classNames.card2)}>
         <Card loading={loading} className={classes(classNames.card2)}>
-          <h1 className={classes(classNames.title)}>Verify</h1>
+          <Card.Title>Verify</Card.Title>
 
           <form onSubmit={handleActivate}>
             {complete && (
@@ -198,7 +195,7 @@ const Register: FC = () => {
                   <Button
                     size='small'
                     color='primary'
-                    variant='filled'
+                    variant='outlined'
                     disabled={loading || complete}
                   >
                     Resend
@@ -207,7 +204,7 @@ const Register: FC = () => {
               />
             </div>
 
-            <div className={classes(classNames.buttons)}>
+            <Card.Actions>
               <Button
                 grow
                 type='submit'
@@ -216,7 +213,7 @@ const Register: FC = () => {
               >
                 Verify Account
               </Button>
-            </div>
+            </Card.Actions>
           </form>
         </Card>
       </Transition>

@@ -15,8 +15,6 @@ export const fields = {
 
 export const classNames = {
   root: "reset",
-  title: "reset__title",
-  buttons: "reset__buttons",
 };
 
 const Reset: FC = () => {
@@ -70,11 +68,8 @@ const Reset: FC = () => {
         loading={loading}
         className={classes(classNames.root)}
       >
+        <Card.Title>Password Reset</Card.Title>
         <form onSubmit={handleSubmit}>
-          <h3 className={classes(classNames.title)}>
-            Password Reset
-          </h3>
-
           {true === complete && (
             <Alert type='success' flat>
               Check your mailbox for the password reset link ;)
@@ -106,7 +101,7 @@ const Reset: FC = () => {
             __start={<Icon iconId='icon-at' />}
           />
 
-          <div className={classes(classNames.buttons)}>
+          <Card.Actions>
             <Button disabled={disabled} color='pink' type='submit'>
               Reset
             </Button>
@@ -120,7 +115,7 @@ const Reset: FC = () => {
             >
               close
             </Button>
-          </div>
+          </Card.Actions>
         </form>
       </Card>
     </Modal>

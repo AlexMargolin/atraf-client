@@ -12,9 +12,7 @@ const classes = makeClasses(modules);
 
 export const classNames = {
   root: "login",
-  title: "login__title",
   account: "login__account",
-  buttons: "login__buttons",
   disclaimer: "login__disclaimer",
 };
 
@@ -59,7 +57,7 @@ const Login: FC = () => {
   return (
     <div className={classes(classNames.root)}>
       <Card loading={loading}>
-        <h1 className={classes(classNames.title)}>Login</h1>
+        <Card.Title>Login</Card.Title>
         <form onSubmit={handleSubmit}>
           {null !== error && (
             <Alert type='error'>
@@ -88,7 +86,7 @@ const Login: FC = () => {
             __end={<Reset />}
           />
 
-          <div className={classes(classNames.buttons)}>
+          <Card.Actions>
             <Button
               grow
               type='submit'
@@ -97,7 +95,7 @@ const Login: FC = () => {
             >
               login
             </Button>
-          </div>
+          </Card.Actions>
         </form>
       </Card>
 

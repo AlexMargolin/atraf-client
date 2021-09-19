@@ -36,18 +36,9 @@
     margin-top: get-size(spacing-20);
   }
 
-  &__lorem {
+  &__card {
     margin: 10px;
-    line-height: 2;
-    display: block;
-    font-size: 11px;
     max-width: 400px;
-    text-align: center;
-    color: get-part-color(black);
     padding: get-size(spacing-10);
-
-    &-buttons{
-      display: flex;
-    }
   }
 }

@@ -1,14 +1,14 @@
-import { Handler } from "@/api"
-import { ReadOneFunc, ReadOneResponse } from "./"
+import { Handler } from "@/api";
+import { ReadOneFunc, ReadOneResponse } from "./";
 
 export default class Users {
-  protected handler: Handler
+  protected handler: Handler;
 
   /**
    * @param {Handler} handler
    */
   constructor(handler: Handler) {
-    this.handler = handler
+    this.handler = handler;
   }
 
   /**
@@ -17,13 +17,13 @@ export default class Users {
    * @returns Promise<ReadOneResponse>
    */
   readOne: ReadOneFunc = async userId => {
-    let readOneResponse: ReadOneResponse
+    let readOneResponse: ReadOneResponse;
 
-    const response = await this.handler.get(`/users/${userId}`)
+    const response = await this.handler.get(`/users/${userId}`);
     if (response.ok) {
-      readOneResponse = response.data as ReadOneResponse
+      readOneResponse = response.data as ReadOneResponse;
     }
 
-    return [readOneResponse, response]
-  }
+    return [readOneResponse, response];
+  };
 }

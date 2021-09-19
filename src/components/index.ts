@@ -1,5 +1,5 @@
 export { default as Kbd } from "./kbd/kbd";
-export { default as Card } from "./card/card";
+export { default as Card } from "./card";
 export { default as Link } from "./link/link";
 export { default as Line } from "./line/line";
 export { default as Input } from "./input/input";
