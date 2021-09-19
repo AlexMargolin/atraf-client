@@ -69,6 +69,7 @@ const Reset: FC = () => {
         className={classes(classNames.root)}
       >
         <Card.Title>Password Reset</Card.Title>
+
         <form onSubmit={handleSubmit}>
           {true === complete && (
             <Alert type='success' flat>

@@ -10,19 +10,19 @@ import { Alert, Button, Card, Input, Link } from "@/components";
 
 const classes = makeClasses(modules);
 
-export const fields = {
-  email: "email",
-  password: "password",
-  confirm: "password_confirm",
-  code: "code",
-};
-
 export const classNames = {
   root: "register",
   account: "register__account",
   disclaimer: "register__disclaimer",
   card1: "register__card1",
   card2: "register__card2",
+};
+
+export const fields = {
+  email: "email",
+  password: "password",
+  confirm: "password_confirm",
+  code: "code",
 };
 
 export const messages = {
@@ -93,7 +93,6 @@ const Register: FC = () => {
     <div className={classes(classNames.root)}>
       <Transition
         in={isSignup}
-        className={classes(classNames.card1)}
         onComplete={() => setIsVerify(!isSignup)}
       >
         <Card loading={loading} className={classes(classNames.card1)}>
@@ -101,7 +100,7 @@ const Register: FC = () => {
 
           <form onSubmit={handleRegister}>
             {null == error && (
-              <Alert flat hideIcon type='info'>
+              <Alert flat type='info'>
                 An email will be sent to the provided mailbox with the
                 account verification code.
               </Alert>
@@ -157,7 +156,7 @@ const Register: FC = () => {
         </Card>
       </Transition>
 
-      <Transition in={isVerify} className={classes(classNames.card2)}>
+      <Transition in={isVerify}>
         <Card loading={loading} className={classes(classNames.card2)}>
           <Card.Title>Verify</Card.Title>
 
