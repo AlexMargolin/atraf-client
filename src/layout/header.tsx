@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { New } from "@/features";
 import { Icon } from "@/base";
 import { makeClasses } from "@/hooks";
 import modules from "./header.module.scss";
@@ -14,12 +15,14 @@ export const classNames = {
 const Header: FC = () => {
   return (
     <header className={classes(classNames.root)}>
-      <a href='#' className={classes(classNames.link)}>
+      <a href='/' className={classes(classNames.link)}>
         <Icon
           iconId='icon-home'
           className={classes(classNames.icon)}
         />
       </a>
+
+      <New />
     </header>
   );
 };

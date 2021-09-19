@@ -1,6 +1,9 @@
 @import "~@/scss/variables";
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid get-part-color(border);
   padding: get-size(spacing-10) get-size(spacing-20);
 
