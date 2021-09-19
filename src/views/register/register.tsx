@@ -193,7 +193,7 @@ const Register: FC = () => {
                 __end={
                   <Button
                     size='small'
-                    color='primary'
+                    color='secondary'
                     variant='outlined'
                     disabled={loading || complete}
                   >
@@ -207,7 +207,7 @@ const Register: FC = () => {
               <Button
                 grow
                 type='submit'
-                color='secondary'
+                color='primary'
                 disabled={loading || complete}
               >
                 Verify Account

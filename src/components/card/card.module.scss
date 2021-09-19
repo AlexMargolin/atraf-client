@@ -45,6 +45,7 @@
     display: grid;
     align-items: center;
     grid-auto-flow: column;
+    grid-template-columns: 1fr;
     grid-gap: get-size(spacing-5);
     margin-top: get-size(spacing-20);
   }

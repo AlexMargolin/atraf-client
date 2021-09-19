@@ -43,10 +43,10 @@ const Comments: FC<CommentsProps> = props => {
   // performance when rendering the comments.
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const [result, response] = await api.comments.readMany(
         sourceId,
       );
-
       setLoading(false);
 
       if (!response.ok) {

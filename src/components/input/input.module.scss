@@ -4,19 +4,19 @@
 .input {
   width: 100%;
   position: relative;
-  margin-bottom: 35px;
+  margin-bottom: get-size(spacing-30);
 
   &__wrapper {
     z-index: 1;
     display: flex;
     overflow: hidden;
     align-items: center;
-    padding: get-size(spacing-5);
     justify-content: space-between;
     min-height: get-size(spacing-50);
     transition: 0.1s box-shadow ease;
     background-color: get-part-color(white);
     border-radius: get-size(border-radius-3);
+    padding: get-size(spacing-5) get-size(spacing-10);
     box-shadow: inset 0 0 0 1px get-part-color(border), 0 0 2px 1px rgba(241, 241, 241, 0.3);
 
     &:focus-within {

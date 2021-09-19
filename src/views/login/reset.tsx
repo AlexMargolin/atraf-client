@@ -51,15 +51,16 @@ const Reset: FC = () => {
   return (
     <Modal
       persistent
+      defaultVisible={false}
       ref={modalController}
       __activator={
         <Button
           size='small'
-          color='pink'
           type='button'
+          color='primary'
           variant='outlined'
         >
-          Brain Freeze?
+          Reset
         </Button>
       }
     >
@@ -103,13 +104,17 @@ const Reset: FC = () => {
           />
 
           <Card.Actions>
-            <Button disabled={disabled} color='pink' type='submit'>
+            <Button
+              type='submit'
+              color='secondary'
+              disabled={disabled}
+            >
               Reset
             </Button>
 
             <Button
-              color='gray'
               type='button'
+              color='secondary'
               variant='outlined'
               disabled={loading}
               onClick={() => modalController.current.close()}

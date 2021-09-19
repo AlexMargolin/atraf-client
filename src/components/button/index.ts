@@ -5,7 +5,7 @@ export type ButtonVariants = "outlined" | "filled";
 export type ButtonColors =
   | "primary"
   | "secondary"
-  | "pink"
+  | "accent-1"
   | "gray"
   | "error";
 

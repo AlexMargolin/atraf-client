@@ -14,8 +14,8 @@ const classes = makeClasses(modules);
 
 export const classNames = {
   root: "home",
-  loader: "home__loader",
   end: "home__end",
+  loader: "home__loader",
 };
 
 const Home: FC = () => {

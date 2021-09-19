@@ -1,7 +1,7 @@
 import api from "@/api";
 import { Icon } from "@/base";
 import { FC, useState } from "react";
-import { Reset } from "@/pages/login";
+import { Reset } from "@/views/login";
 import { makeClasses } from "@/hooks";
 import { NavigateTo } from "@/router";
 import modules from "./login.module.scss";
@@ -88,12 +88,7 @@ const Login: FC = () => {
           />
 
           <Card.Actions>
-            <Button
-              grow
-              type='submit'
-              color='primary'
-              disabled={loading}
-            >
+            <Button type='submit' color='primary' disabled={loading}>
               login
             </Button>
           </Card.Actions>
