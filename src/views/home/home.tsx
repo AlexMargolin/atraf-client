@@ -37,7 +37,7 @@ const Home: FC = () => {
 
     if (!response.ok) {
       dispatchSnackbar({
-        message: `Oh oh, Something went wrong [e:${response.status}]`,
+        message: `Oh oh, Something went wrong (${response.status})`,
       });
       return;
     }

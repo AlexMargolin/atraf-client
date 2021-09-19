@@ -1,8 +1,8 @@
+import { FC, useRef } from "react";
 import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
 import { Card, Button } from "@/components";
 import modules from "./notfound.module.scss";
-import { FC, useRef, useState } from "react";
 import Modal, { ModalHandle } from "@/base/modal";
 
 const classes = makeClasses(modules);
@@ -17,7 +17,6 @@ export const classNames = {
 
 const Notfound: FC = () => {
   const modalController = useRef<ModalHandle>();
-  const [lorem, setLorem] = useState(false);
 
   return (
     <div className={classes(classNames.root)}>
@@ -36,17 +35,13 @@ const Notfound: FC = () => {
         <Modal
           ref={modalController}
           __activator={
-            <Button
-              variant='outlined'
-              color='secondary'
-              onClick={() => setLorem(!lorem)}
-            >
+            <Button variant='outlined' color='secondary'>
               Read some Lorem Ipsum
             </Button>
           }
         >
           <Card flat className={classes(classNames.card)}>
-            <Card.Title>Really...? oh well</Card.Title>
+            <Card.Title>wth...?</Card.Title>
 
             <Card.Content>
               Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -63,11 +58,10 @@ const Notfound: FC = () => {
 
             <Card.Actions>
               <Button
-                grow
                 color='secondary'
                 onClick={() => modalController.current.close()}
               >
-                That was great, thank you
+                That was great, thank you!
               </Button>
             </Card.Actions>
           </Card>

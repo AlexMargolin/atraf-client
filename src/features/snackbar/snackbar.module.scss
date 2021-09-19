@@ -14,7 +14,7 @@
   padding: get-size(spacing-10);
   justify-content: space-between;
   transition: 50ms transform ease-in-out;
-  background-color: get-part-color(black);
+  background-color: get-palette(secondary);
   border-radius: get-size(border-radius-3);
 
   &.transition-enter-from,

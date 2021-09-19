@@ -1,0 +1,29 @@
+@import "~@/scss/variables";
+
+.header {
+  border-bottom: 1px solid get-part-color(border);
+  padding: get-size(spacing-10) get-size(spacing-20);
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: get-palette(secondary);
+    transition: 150ms fill ease-in-out;
+  }
+
+  &__link {
+    line-height: 0;
+    display: inline-block;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:focus,
+    &:hover {
+      .header__icon {
+        fill: get-palette(primary);
+      }
+    }
+  }
+}
