@@ -33,13 +33,6 @@ const routes = {
     ),
   },
 
-  new: {
-    path: "/new",
-    component: lazy(
-      () => import(/* webpackChunkName: "new" */ "@/pages/new"),
-    ),
-  },
-
   notFound: {
     path: "/404",
     component: lazy(

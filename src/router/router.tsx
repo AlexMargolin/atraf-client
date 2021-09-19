@@ -42,12 +42,6 @@ const Router: FC = () => {
 
           <Route
             exact
-            path={routes.new.path}
-            component={routes.new.component}
-          />
-
-          <Route
-            exact
             path={routes.notFound.path}
             component={routes.notFound.component}
           />
