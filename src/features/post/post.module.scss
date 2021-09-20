@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "~@/scss/variables";
 
 .post {
@@ -67,8 +68,8 @@
     display: block;
     max-height: 500px;
     position: relative;
-    padding-top: (10 / 9) * 100%;
     margin-top: get-size(spacing-15);
+    padding-top: math.div(10,9) * 100%;
     background-color: get-part-color(black);
 
     &-image {

@@ -1,6 +1,6 @@
 @mixin create-palette-variations($selector, $data, $css-variable) {
   @each $key, $value in $data {
-    #{$selector}#{$key} {
+    #{$selector}#{"#{$key}"} {
       --#{$css-variable}: #{$value};
     }
   }

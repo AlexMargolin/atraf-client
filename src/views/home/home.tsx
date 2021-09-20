@@ -52,26 +52,26 @@ const Home: FC = () => {
     setPosts(posts.concat(result.posts));
   };
 
+  // load new data only when the last post is in view
+  // and the cursor is present in the previous API response
+  const inViewCallback = useCallback(
+    entry => {
+      if (entry.isIntersecting && cursor) {
+        load();
+      }
+    },
+    [lastPost],
+  );
+
   // initial render
   useEffect(() => {
     load();
   }, []);
 
   // load additional posts when the last post is in the viewport
-  useInView(
-    lastPostRef,
-    useCallback(
-      entry => {
-        // load new data only when the last post is in view
-        // and the cursor is present in the previous API response
-        if (entry.isIntersecting && cursor) {
-          load();
-        }
-      },
-      [lastPost],
-    ),
-    { once: true },
-  );
+  useInView(lastPostRef, inViewCallback, {
+    once: true,
+  });
 
   return (
     <>
@@ -93,7 +93,7 @@ const Home: FC = () => {
           ),
         )}
 
-        {!loading && !cursor && (
+        {!cursor && 0 !== posts.length && (
           <Icon
             iconId='icon-flag'
             className={classes(classNames.end)}
