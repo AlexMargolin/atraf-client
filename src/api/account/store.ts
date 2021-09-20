@@ -4,8 +4,8 @@ export default class AccountStore {
   /**
    * @return string
    */
-  private static getKey(): string {
-    return "auth-store";
+  protected getKey(): string {
+    return "sid";
   }
 
   /**
@@ -13,16 +13,21 @@ export default class AccountStore {
    * @return void
    */
   protected setStore(data: AuthResponse): void {
-    const key = AccountStore.getKey();
+    const key = this.getKey();
 
-    localStorage.setItem(key, JSON.stringify(data));
+    if (data) {
+      localStorage.setItem(key, JSON.stringify(data));
+      return;
+    }
+
+    this.resetStore();
   }
 
   /**
    * @return {AuthResponse|null} data
    */
-  static getStore(): AuthResponse {
-    const key = AccountStore.getKey();
+  protected getStore(): AuthResponse {
+    const key = this.getKey();
     const str = localStorage.getItem(key);
 
     if (null !== str) {
@@ -35,8 +40,8 @@ export default class AccountStore {
   /**
    * @return void
    */
-  static resetStore(): void {
-    const key = AccountStore.getKey();
+  protected resetStore(): void {
+    const key = this.getKey();
 
     localStorage.removeItem(key);
   }
