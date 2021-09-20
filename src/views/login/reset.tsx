@@ -60,7 +60,7 @@ const Reset: FC = () => {
           color='primary'
           variant='outlined'
         >
-          Reset
+          Password Reset
         </Button>
       }
     >

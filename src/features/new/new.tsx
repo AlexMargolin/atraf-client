@@ -111,6 +111,7 @@ const New: FC = () => {
             __end={
               <Button
                 size='small'
+                type='button'
                 color='primary'
                 variant='outlined'
                 onClick={() => attachmentRef.current.click()}
