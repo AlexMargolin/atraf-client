@@ -26,6 +26,14 @@ const routes = {
     ),
   },
 
+  activate: {
+    path: "/activate",
+    component: lazy(
+      () =>
+        import(/* webpackChunkName: "activate" */ "@/views/activate"),
+    ),
+  },
+
   post: {
     path: "/post/:id",
     component: lazy(

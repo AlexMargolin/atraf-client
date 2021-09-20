@@ -3,43 +3,38 @@ import { Icon } from "@/base";
 import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
 import React, { FC, useState } from "react";
-import modules from "./register.module.scss";
+import modules from "./activate.module.scss";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Alert, Button, Card, Input, Link } from "@/components";
 
 const classes = makeClasses(modules);
 
 export const classNames = {
-  root: "register",
-  options: "register__options",
-  recaptcha: "register__recaptcha",
+  root: "activate",
+  options: "activate__options",
+  recaptcha: "activate__recaptcha",
 };
 
 export const fields = {
-  email: "email",
-  password: "password",
-  confirm: "password_confirm",
+  code: "code",
 };
 
 export const messages = {
-  success: "account created successfully",
+  success: "account activated successfully",
 };
 
-const Register: FC = () => {
+const Activate: FC = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const data = new FormData(event.target as HTMLFormElement);
-    const email = data.get(fields.email) as string;
-    const password = data.get(fields.password) as string;
-    const confirm_password = data.get(fields.confirm) as string;
+    const code = data.get(fields.code) as string;
 
     setLoading(true);
-    const [, response] = await api.account.register({
-      email: email,
-      password: password,
+    const [, response] = await api.account.activate({
+      code: code,
     });
     setLoading(false);
 
@@ -50,19 +45,19 @@ const Register: FC = () => {
 
     setError(null);
     dispatchSnackbar({ message: messages.success });
-    NavigateTo("activate");
+    NavigateTo("home");
   };
 
   return (
     <div className={classes(classNames.root)}>
       <Card loading={loading}>
-        <Card.Title>New Account</Card.Title>
+        <Card.Title>Account activation</Card.Title>
 
         <form onSubmit={handleSubmit}>
           {null === error ? (
-            <Alert flat type='info'>
-              An email will be sent to the provided mailbox with the
-              account verification code.
+            <Alert flat>
+              An email with a 6 digit verification code was sent to
+              your mailbox.
             </Alert>
           ) : (
             <Alert type='error'>
@@ -73,35 +68,26 @@ const Register: FC = () => {
           <Input
             required
             autoFocus
-            type='email'
-            label='Email'
-            name={fields.email}
+            type='text'
+            name={fields.code}
+            label='Verification Code'
             disabled={loading}
-            __start={<Icon iconId='icon-at' />}
-          />
-
-          <Input
-            required
-            type='password'
-            label='Password'
-            name={fields.password}
-            disabled={loading}
-            __start={<Icon iconId='icon-lock-regular' />}
-            __helper='Should be at least 12 characters long'
-          />
-
-          <Input
-            required
-            type='password'
-            name={fields.confirm}
-            label='Confirm Password'
-            disabled={loading}
-            __start={<Icon iconId='icon-lock-bold' />}
+            __start={<Icon iconId='icon-shield' />}
+            __end={
+              <Button
+                size='small'
+                color='secondary'
+                variant='outlined'
+                disabled={loading}
+              >
+                Resend
+              </Button>
+            }
           />
 
           <Card.Actions>
             <Button type='submit' color='primary' disabled={loading}>
-              Create Account
+              Verify Account
             </Button>
           </Card.Actions>
         </form>
@@ -119,4 +105,4 @@ const Register: FC = () => {
   );
 };
 
-export default Register;
+export default Activate;

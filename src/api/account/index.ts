@@ -1,8 +1,7 @@
 import { ResponseStatic } from "@/api";
 
-export type AuthResponse = {
-  account_id: string;
-  account_active: string;
+export type Account = {
+  active: boolean;
 };
 
 // Register
@@ -10,7 +9,7 @@ export type RegisterRequest = {
   email: string;
   password: string;
 };
-export type RegisterResponse = AuthResponse;
+export type RegisterResponse = Account;
 export type RegisterFunc = (
   params: RegisterRequest,
 ) => Promise<[RegisterResponse, ResponseStatic]>;
@@ -19,7 +18,7 @@ export type RegisterFunc = (
 export type ActivateRequest = {
   code: string;
 };
-export type ActivateResponse = AuthResponse;
+export type ActivateResponse = Account;
 export type ActivateFunc = (
   params: ActivateRequest,
 ) => Promise<[ActivateResponse, ResponseStatic]>;
@@ -29,7 +28,7 @@ export type LoginRequest = {
   email: string;
   password: string;
 };
-export type LoginResponse = AuthResponse;
+export type LoginResponse = Account;
 export type LoginFunc = (
   params: LoginRequest,
 ) => Promise<[LoginResponse, ResponseStatic]>;

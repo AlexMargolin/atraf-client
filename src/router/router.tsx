@@ -36,6 +36,12 @@ const Router: FC = () => {
 
           <Route
             exact
+            path={routes.activate.path}
+            component={routes.activate.component}
+          />
+
+          <Route
+            exact
             path={routes.post.path}
             component={routes.post.component}
           />

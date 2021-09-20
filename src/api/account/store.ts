@@ -1,4 +1,4 @@
-import { AuthResponse } from "./";
+import { Account } from "./";
 
 export default class AccountStore {
   /**
@@ -9,10 +9,10 @@ export default class AccountStore {
   }
 
   /**
-   * @param {AuthResponse} data
+   * @param {Account} data
    * @return void
    */
-  protected setStore(data: AuthResponse): void {
+  protected setStore(data: Account): void {
     const key = this.getKey();
 
     if (data) {
@@ -24,25 +24,25 @@ export default class AccountStore {
   }
 
   /**
-   * @return {AuthResponse|null} data
-   */
-  protected getStore(): AuthResponse {
-    const key = this.getKey();
-    const str = localStorage.getItem(key);
-
-    if (null !== str) {
-      return JSON.parse(str) as AuthResponse;
-    }
-
-    return null;
-  }
-
-  /**
    * @return void
    */
   protected resetStore(): void {
     const key = this.getKey();
 
     localStorage.removeItem(key);
+  }
+
+  /**
+   * @return {Account|null} data
+   */
+  public getStore(): Account {
+    const key = this.getKey();
+    const str = localStorage.getItem(key);
+
+    if (null !== str) {
+      return JSON.parse(str) as Account;
+    }
+
+    return null;
   }
 }

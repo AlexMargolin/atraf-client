@@ -5,6 +5,7 @@ import { makeClasses } from "@/hooks";
 import modules from "./button.module.scss";
 
 const classes = makeClasses(modules);
+
 export const classNames = {
   root: "button",
 };
@@ -19,6 +20,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       disabled,
       className,
+      type = "button",
       variant = "filled",
       ...rest
     } = props;
@@ -33,6 +35,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
+        type={type}
         ref={forwardedRef}
         disabled={disabled || loading}
         className={classes(classNames.root, modifiers, className)}

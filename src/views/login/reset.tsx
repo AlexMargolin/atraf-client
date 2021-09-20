@@ -54,12 +54,7 @@ const Reset: FC = () => {
       defaultVisible={false}
       ref={modalController}
       __activator={
-        <Button
-          size='small'
-          type='button'
-          color='primary'
-          variant='outlined'
-        >
+        <Button size='small' color='primary' variant='outlined'>
           Password Reset
         </Button>
       }
@@ -113,7 +108,6 @@ const Reset: FC = () => {
             </Button>
 
             <Button
-              type='button'
               color='secondary'
               variant='outlined'
               disabled={loading}
