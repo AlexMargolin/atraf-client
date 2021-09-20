@@ -19,10 +19,11 @@
   &__empty {
     font-size: 13px;
     text-align: center;
-    color: get-palette(gray);
+    color: get-part-color(black);
     padding: get-size(spacing-20);
     margin-top: get-size(spacing-50);
+    margin-bottom: get-size(spacing-20);
     border-radius: get-size(border-radius-2);
-    background-color: rgba(get-palette(gray), 10%);
+    border: 1px dashed get-part-color(border);
   }
 }

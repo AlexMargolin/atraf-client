@@ -71,7 +71,7 @@ const New: FC = () => {
           {null === error && (
             <Alert type='info' flat>
               Since you haven&apos;t updated your personal details,
-              post author will be <q>anonymous</q>
+              post author will be anonymous.
             </Alert>
           )}
 
@@ -132,7 +132,7 @@ const New: FC = () => {
               disabled={loading}
               onClick={() => modalController.current.close()}
             >
-              Close
+              Cancel
             </Button>
           </Card.Actions>
         </form>

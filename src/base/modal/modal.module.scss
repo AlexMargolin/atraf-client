@@ -1,6 +1,6 @@
 body {
   &.modal--active {
-    overflow: hidden;
+    //overflow: hidden;
   }
 }
 
@@ -24,7 +24,7 @@ body {
     right: 0;
     bottom: 0;
     position: fixed;
-    background-color: rgba(199, 199, 199, 0.89);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 
   &__dialog {
@@ -34,7 +34,6 @@ body {
       outline: 0;
     }
 
-    // added when clicked outside a persistent modal's content area.
     &--persistent {
       animation: modal-x-bounce 2 150ms ease-in-out;
     }

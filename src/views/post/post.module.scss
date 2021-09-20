@@ -41,9 +41,9 @@
     display: block;
     max-height: 500px;
     position: relative;
-    background-color: #f1f1f1;
     padding-top: (10 / 9) * 100%;
     margin-top: get-size(spacing-30);
+    background-color: get-part-color(black);
 
     &-image {
       top: 0;

@@ -10,13 +10,10 @@
   }
 
   &__end {
-    font-size: 13px;
-    text-align: center;
-    color: get-palette(gray);
-    padding: get-size(spacing-20);
-    margin-top: get-size(spacing-30);
-    margin-bottom: get-size(spacing-20);
-    border-radius: get-size(border-radius-2);
-    background-color: rgba(get-palette(gray), 10%);
+    width: 30px;
+    height: 30px;
+    display: block;
+    fill: get-part-color(border);
+    margin: 100px auto 20px auto;
   }
 }

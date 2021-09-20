@@ -1,6 +1,6 @@
 import api from "@/api";
-import { Spinner } from "@/base";
 import { Post } from "@/api/posts";
+import { Icon, Spinner } from "@/base";
 import { POSTS_LIMIT } from "@/defines";
 import modules from "./home.module.scss";
 import { Container } from "@/components";
@@ -94,12 +94,10 @@ const Home: FC = () => {
         )}
 
         {!loading && !cursor && (
-          <div className={classes(classNames.end)}>
-            <q>
-              There is no real ending. It&apos;s just the place where
-              you stop the story.
-            </q>
-          </div>
+          <Icon
+            iconId='icon-flag'
+            className={classes(classNames.end)}
+          />
         )}
       </Container>
 
