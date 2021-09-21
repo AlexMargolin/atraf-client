@@ -18,6 +18,7 @@ export const classNames = {
 export const fields = {
   email: "email",
   password: "password",
+  nickname: "nickname",
   confirm: "password_confirm",
 };
 
@@ -35,12 +36,14 @@ const Register: FC = () => {
     const data = new FormData(event.target as HTMLFormElement);
     const email = data.get(fields.email) as string;
     const password = data.get(fields.password) as string;
+    const nickname = data.get(fields.nickname) as string;
     const confirm_password = data.get(fields.confirm) as string;
 
     setLoading(true);
     const [account, response] = await api.account.register({
       email: email,
       password: password,
+      nickname: nickname,
     });
     setLoading(false);
 
@@ -78,24 +81,34 @@ const Register: FC = () => {
             name={fields.email}
             disabled={loading}
             __start={<Icon iconId='icon-at' />}
+            __helper='Kept private. Only used as the account identifier'
+          />
+
+          <Input
+            required
+            type='text'
+            label='Nickname'
+            disabled={loading}
+            name={fields.nickname}
+            __helper='Your publicly visible name'
+            __start={<Icon iconId='icon-user' />}
           />
 
           <Input
             required
             type='password'
             label='Password'
-            name={fields.password}
             disabled={loading}
+            name={fields.password}
             __start={<Icon iconId='icon-lock-regular' />}
-            __helper='Should be at least 12 characters long'
           />
 
           <Input
             required
             type='password'
+            disabled={loading}
             name={fields.confirm}
             label='Confirm Password'
-            disabled={loading}
             __start={<Icon iconId='icon-lock-bold' />}
           />
 

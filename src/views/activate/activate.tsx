@@ -5,13 +5,12 @@ import React, { FC, useState } from "react";
 import modules from "./activate.module.scss";
 import { useAccount } from "@/providers/account";
 import { dispatchSnackbar } from "@/features/snackbar";
-import { Alert, Button, Card, Input, Link } from "@/components";
+import { Alert, Button, Card, Input } from "@/components";
 
 const classes = makeClasses(modules);
 
 export const classNames = {
   root: "activate",
-  options: "activate__options",
   recaptcha: "activate__recaptcha",
 };
 
@@ -92,10 +91,6 @@ const Activate: FC = () => {
           </Card.Actions>
         </form>
       </Card>
-
-      <div className={classes(classNames.options)}>
-        <Link route='login'>I already have an account</Link>
-      </div>
 
       <div className={classes(classNames.recaptcha)}>
         This site is protected by reCAPTCHA and the Google Privacy

@@ -2,11 +2,13 @@ import { ResponseStatic } from "@/api";
 
 export type Account = {
   active: boolean;
+  nickname: string;
 };
 
 // Register
 export type RegisterRequest = {
   email: string;
+  nickname: string;
   password: string;
 };
 export type RegisterResponse = Account;

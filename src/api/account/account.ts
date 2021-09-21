@@ -31,6 +31,7 @@ export default class Account extends AccountStore {
     const response = await this.handler.post("/account/register", {
       email: params.email,
       password: params.password,
+      nickname: params.nickname,
     });
 
     if (response.ok) {
