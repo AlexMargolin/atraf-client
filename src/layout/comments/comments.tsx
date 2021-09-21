@@ -112,7 +112,7 @@ const Comments: FC<CommentsProps> = props => {
       <Editor
         loading={creating}
         disabled={creating}
-        submitLabel='Reply'
+        submitLabel='Post'
         onSubmit={handleCreateComment}
       />
 
@@ -142,8 +142,8 @@ const Comments: FC<CommentsProps> = props => {
           <div className={classes(classNames.list)}>
             {comments.map(comment => (
               <CommentComponent
-                data={comment}
                 key={comment.id}
+                comment={comment}
                 user={users[comment.user_id]}
               />
             ))}

@@ -19,14 +19,10 @@ const classNames = {
 };
 
 const Comment: FC<CommentProps> = props => {
-  const { data, user, highlighted } = props;
-
-  const modifiers = {
-    ["comment--highlighted"]: highlighted,
-  };
+  const { comment, user } = props;
 
   return (
-    <div className={classes(classNames.root, modifiers)}>
+    <div className={classes(classNames.root)}>
       <div className={classes(classNames.header)}>
         <img
           alt='My Picture %s'
@@ -37,7 +33,7 @@ const Comment: FC<CommentProps> = props => {
         <address className={classes(classNames.author.root)}>
           <a
             rel='author'
-            href={`#${data.id}`}
+            href={`#${comment.id}`}
             className={classes(classNames.author.link)}
           >
             {user.nickname}
@@ -47,12 +43,12 @@ const Comment: FC<CommentProps> = props => {
             dateTime='%t'
             className={classes(classNames.author.time)}
           >
-            {time(data.created_at)}
+            {time(comment.created_at)}
           </time>
         </address>
       </div>
 
-      <div className={classes(classNames.body)}>{data.body}</div>
+      <div className={classes(classNames.body)}>{comment.body}</div>
     </div>
   );
 };

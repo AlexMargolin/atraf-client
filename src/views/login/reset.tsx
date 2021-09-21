@@ -55,7 +55,7 @@ const Reset: FC = () => {
       ref={modalHandler}
       __activator={
         <Button size='small' color='primary' variant='outlined'>
-          Password Reset
+          Reset
         </Button>
       }
     >
