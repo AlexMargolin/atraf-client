@@ -1,17 +1,14 @@
 {
   "version": "1.0.0-alpha",
-  "name": "image-board",
-  "author": "Alex Margolin <csight@msn.com>",
-  "bugs": {
-    "email": "csight@msn.com"
-  },
+  "name": "atraf",
+  "author": "Alex Margolin",
   "sideEffects": [
     "*.scss",
     "*.css"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlexMargolin/image-board"
+    "url": "https://github.com/AlexMargolin/atraf-client"
   },
   "scripts": {
     "dev": "node scripts/dev",

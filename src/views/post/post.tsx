@@ -49,7 +49,7 @@ const Post: FC = () => {
   }, [id]);
 
   if (!user || !post) {
-    return <div>loading post...</div>;
+    return null;
   }
 
   return (

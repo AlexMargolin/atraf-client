@@ -1,5 +1,6 @@
 import api from "@/api";
 import { Post } from "@/api/posts";
+import logo from "@/assets/logo.png";
 import { Icon, Spinner } from "@/base";
 import { POSTS_LIMIT } from "@/defines";
 import { Container } from "@/components";

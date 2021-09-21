@@ -30,6 +30,8 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
       <div ref={forwardedRef} className={classes(classNames.root)}>
         <h3 className={classes(classNames.title)}>
           <a
+            target='_blank'
+            rel='noreferrer'
             href={`/post/${post.id}`}
             className={classes(classNames.link)}
           >

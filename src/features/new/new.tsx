@@ -4,9 +4,9 @@ import { Icon, Modal } from "@/base";
 import { makeClasses } from "@/hooks";
 import modules from "./new.module.scss";
 import { ModalHandle } from "@/base/modal";
-import React, { FC, useRef, useState } from "react";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Alert, Button, Card, Input } from "@/components";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 const classes = makeClasses(modules);
 
@@ -21,11 +21,24 @@ export const fields = {
 };
 
 const New: FC = () => {
+  const [files, setFiles] = useState<FileList>();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const modalHandler = useRef<ModalHandle>();
+  const inputRef = useRef<HTMLInputElement>();
   const attachmentRef = useRef<HTMLInputElement>();
+
+  useEffect(() => {
+    if (inputRef.current) {
+      let val = "";
+
+      if (files && 0 !== files.length) {
+        val = files.item(0).name;
+      }
+      inputRef.current.value = val;
+    }
+  }, [files]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -70,6 +83,15 @@ const New: FC = () => {
         <Card.Title>Create New Post</Card.Title>
 
         <form onSubmit={handleSubmit} autoComplete='off'>
+          {null === error && (
+            <Alert flat type='info'>
+              <div>
+                Max attachment size: <strong>10mb</strong>. Supported
+                content types: <strong>[ jpg, png ]</strong>
+              </div>
+            </Alert>
+          )}
+
           {null !== error && (
             <Alert type='error'>
               <span>Umm... Something went wrong</span>{" "}
@@ -95,13 +117,20 @@ const New: FC = () => {
             __start={<Icon iconId='icon-edit' />}
           />
 
-          <Input
+          <input
             required
             type='file'
-            disabled={loading}
-            label='Attachment'
             ref={attachmentRef}
             name={fields.attachment}
+            style={{ display: "none" }}
+            onChange={e => setFiles(e.target.files)}
+          />
+
+          <Input
+            required
+            ref={inputRef}
+            disabled={loading}
+            label='Attachment'
             __start={<Icon iconId='icon-attachment' />}
             __end={
               <Button
