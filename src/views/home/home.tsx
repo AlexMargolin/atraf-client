@@ -1,6 +1,5 @@
 import api from "@/api";
 import { Post } from "@/api/posts";
-import { NavigateTo } from "@/router";
 import { Icon, Spinner } from "@/base";
 import { POSTS_LIMIT } from "@/defines";
 import modules from "./home.module.scss";
@@ -35,6 +34,7 @@ const Home: FC = () => {
     );
     setLoading(false);
 
+    // 404 is handled by the middleware
     if (!response.ok) {
       return;
     }

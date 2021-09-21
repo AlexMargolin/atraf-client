@@ -19,7 +19,7 @@ const AccountProvider: FC = props => {
     }
   }, [account]);
 
-  // catch api 401 responses and unset the user data
+  // catch api 401 responses and unset the account
   useEffect(() => {
     const reset = () => setAccount(null);
 
