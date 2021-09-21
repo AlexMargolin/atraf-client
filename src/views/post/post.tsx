@@ -1,8 +1,8 @@
 import api from "@/api";
 import { User } from "@/api/users";
+import { Comments } from "@/layout";
 import { Post } from "@/api/posts";
 import { makeClasses } from "@/hooks";
-import { Comments } from "@/features";
 import modules from "./post.module.scss";
 import { Container } from "@/components";
 import { useParams } from "react-router-dom";

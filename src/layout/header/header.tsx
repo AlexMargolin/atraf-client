@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { New } from "@/features";
 import { Icon } from "@/base";
+import { New } from "@/features";
 import { makeClasses } from "@/hooks";
 import modules from "./header.module.scss";
 import { useAccount } from "@/providers/account";

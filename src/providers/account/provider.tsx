@@ -1,8 +1,11 @@
 import api from "@/api";
+import { AccountSetter } from "./";
 import { Account } from "@/api/account";
 import { createContext, FC, useEffect, useState } from "react";
 
-export const AccountContext = createContext(null);
+export const AccountContext = createContext<[Account, AccountSetter]>(
+  [null, null],
+);
 
 const AccountProvider: FC = props => {
   const [account, setAccount] = useState<Account>(() => {

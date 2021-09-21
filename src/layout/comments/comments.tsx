@@ -1,12 +1,14 @@
 import api from "@/api";
 import { CommentsProps } from "./";
+import { Editor } from "@/features";
 import { makeClasses } from "@/hooks";
+import { Icon, Spinner } from "@/base";
 import { Comment } from "@/api/comments";
 import { MappedUsers } from "@/api/users";
 import modules from "./comments.module.scss";
 import { FC, useEffect, useState } from "react";
 import { dispatchSnackbar } from "@/features/snackbar";
-import { Comment as CommentComponent, Editor } from "@/features";
+import { Comment as CommentComponent } from "@/layout";
 
 const classes = makeClasses(modules);
 
@@ -16,6 +18,7 @@ export const classNames = {
   count: "comments__count",
   list: "comments__list",
   empty: "comments__empty",
+  loader: "comments__loader",
 };
 
 export const messages = {
@@ -70,7 +73,6 @@ const Comments: FC<CommentsProps> = props => {
   // the user will also be fetched and the state will be updated.
   const handleCreateComment = async (value: string) => {
     setCreating(true);
-
     const [create, response] = await api.comments.create({
       body: value,
       source_id: sourceId,
@@ -105,10 +107,6 @@ const Comments: FC<CommentsProps> = props => {
     dispatchSnackbar({ message: messages.comments.success });
   };
 
-  if (loading) {
-    return <div>loading comments...</div>;
-  }
-
   return (
     <div className={classes(classNames.root)}>
       <Editor
@@ -118,14 +116,21 @@ const Comments: FC<CommentsProps> = props => {
         onSubmit={handleCreateComment}
       />
 
-      {0 === comments.length && (
-        <div className={classes(classNames.empty)}>
-          There arent any comments just yet, be the first to write
-          something nice :)
-        </div>
+      {loading && (
+        <Spinner
+          absolute={false}
+          className={classes(classNames.loader)}
+        />
       )}
 
-      {0 < comments.length && (
+      {!loading && 0 === comments.length && (
+        <Icon
+          iconId='icon-sad'
+          className={classes(classNames.empty)}
+        />
+      )}
+
+      {!loading && 0 < comments.length && (
         <>
           <h2 className={classes(classNames.header)}>
             <strong className={classes(classNames.count)}>

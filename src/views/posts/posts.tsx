@@ -6,7 +6,7 @@ import { Container } from "@/components";
 import { MappedUsers } from "@/api/users";
 import modules from "./posts.module.scss";
 import { makeClasses, useInView } from "@/hooks";
-import { Post as PostComponent } from "@/features";
+import { Post as PostComponent } from "@/layout";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 const classes = makeClasses(modules);
