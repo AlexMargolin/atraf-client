@@ -16,7 +16,7 @@ export const classNames = {
 };
 
 const Notfound: FC = () => {
-  const modalController = useRef<ModalHandle>();
+  const modalHandler = useRef<ModalHandle>();
 
   return (
     <div className={classes(classNames.root)}>
@@ -33,7 +33,7 @@ const Notfound: FC = () => {
         </Button>
 
         <Modal
-          ref={modalController}
+          ref={modalHandler}
           __activator={
             <Button variant='outlined' color='secondary'>
               Read some Lorem Ipsum
@@ -59,7 +59,7 @@ const Notfound: FC = () => {
             <Card.Actions>
               <Button
                 color='secondary'
-                onClick={() => modalController.current.close()}
+                onClick={() => modalHandler.current.close()}
               >
                 That was great, thank you!
               </Button>

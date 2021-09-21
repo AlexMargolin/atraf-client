@@ -18,7 +18,7 @@ export const classNames = {
 };
 
 const Reset: FC = () => {
-  const modalController = useRef<ModalHandle>();
+  const modalHandler = useRef<ModalHandle>();
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -45,14 +45,14 @@ const Reset: FC = () => {
 
     setError(null);
     setComplete(true);
-    setTimeout(() => modalController.current.close(), ALERTS_TIMEOUT);
+    setTimeout(() => modalHandler.current.close(), ALERTS_TIMEOUT);
   };
 
   return (
     <Modal
       persistent
       defaultVisible={false}
-      ref={modalController}
+      ref={modalHandler}
       __activator={
         <Button size='small' color='primary' variant='outlined'>
           Password Reset
@@ -111,7 +111,7 @@ const Reset: FC = () => {
               color='secondary'
               variant='outlined'
               disabled={loading}
-              onClick={() => modalController.current.close()}
+              onClick={() => modalHandler.current.close()}
             >
               close
             </Button>

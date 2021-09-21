@@ -23,7 +23,7 @@ const New: FC = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const modalController = useRef<ModalHandle>();
+  const modalHandler = useRef<ModalHandle>();
   const attachmentRef = useRef<HTMLInputElement>();
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -46,14 +46,14 @@ const New: FC = () => {
       return;
     }
 
-    modalController.current.close();
+    modalHandler.current.close();
     dispatchSnackbar({ message: "Post created Successfully" });
   };
 
   return (
     <Modal
       persistent
-      ref={modalController}
+      ref={modalHandler}
       __activator={
         <Button variant='outlined' color='primary'>
           new post
@@ -129,7 +129,7 @@ const New: FC = () => {
               color='primary'
               variant='outlined'
               disabled={loading}
-              onClick={() => modalController.current.close()}
+              onClick={() => modalHandler.current.close()}
             >
               Cancel
             </Button>

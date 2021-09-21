@@ -7,7 +7,7 @@ const routes = {
   home: {
     path: "/",
     component: lazy(
-      () => import(/* webpackChunkName: "home" */ "@/views/home"),
+      () => import(/* webpackChunkName: "home" */ "@/views/posts"),
     ),
   },
 

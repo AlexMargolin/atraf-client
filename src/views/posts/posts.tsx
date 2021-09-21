@@ -2,9 +2,9 @@ import api from "@/api";
 import { Post } from "@/api/posts";
 import { Icon, Spinner } from "@/base";
 import { POSTS_LIMIT } from "@/defines";
-import modules from "./home.module.scss";
 import { Container } from "@/components";
 import { MappedUsers } from "@/api/users";
+import modules from "./posts.module.scss";
 import { makeClasses, useInView } from "@/hooks";
 import { Post as PostComponent } from "@/features";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
@@ -12,12 +12,12 @@ import { FC, useCallback, useEffect, useRef, useState } from "react";
 const classes = makeClasses(modules);
 
 export const classNames = {
-  root: "home",
-  end: "home__end",
-  loader: "home__loader",
+  root: "posts",
+  end: "posts__end",
+  loader: "posts__loader",
 };
 
-const Home: FC = () => {
+const Posts: FC = () => {
   const [cursor, setCursor] = useState<string>();
   const [posts, setPosts] = useState<Post[]>([]);
   const [users, setUsers] = useState<MappedUsers>({});
@@ -108,4 +108,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default Posts;

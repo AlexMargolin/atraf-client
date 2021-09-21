@@ -7,10 +7,6 @@ import {
 import { FC, Suspense } from "react";
 import { routes, history, Protected, Public } from "./";
 
-/**
- * History Router Component
- * @constructor
- */
 const Router: FC = () => {
   return (
     <HistoryRouter history={history}>
