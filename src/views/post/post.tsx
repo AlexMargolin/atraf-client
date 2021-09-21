@@ -1,4 +1,5 @@
 import api from "@/api";
+import { time } from "@/utils";
 import { User } from "@/api/users";
 import { Comments } from "@/layout";
 import { Post } from "@/api/posts";
@@ -57,18 +58,16 @@ const Post: FC = () => {
 
       <div className={classes(classNames.info)}>
         <address className={classes(classNames.author.root)}>
-          By
           <a
             href=''
             rel='author'
             className={classes(classNames.author.link)}
           >
-            <span role='presentation'>@</span>
             {user.email}
           </a>
         </address>
         <time className={classes(classNames.author.time)}>
-          {post.created_at}
+          {time(post.created_at)}
         </time>
       </div>
 

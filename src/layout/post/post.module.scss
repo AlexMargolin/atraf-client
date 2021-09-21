@@ -50,8 +50,8 @@
       font-weight: 400;
       text-decoration: none;
       display: inline-block;
-      color: get-part-color(white);
-      background-color: get-palette(primary);
+      color: get-palette(primary);
+      border: 1px solid get-palette(primary);
       border-radius: get-size(border-radius-2);
     }
 

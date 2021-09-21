@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { time } from "@/utils";
 import { CommentProps } from "./";
 import { makeClasses } from "@/hooks";
 import modules from "./comment.module.scss";
@@ -46,7 +47,7 @@ const Comment: FC<CommentProps> = props => {
             dateTime='%t'
             className={classes(classNames.author.time)}
           >
-            {data.created_at}
+            {time(data.created_at)}
           </time>
         </address>
       </div>

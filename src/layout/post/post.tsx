@@ -1,3 +1,4 @@
+import { time } from "@/utils";
 import { PostProps } from "./";
 import { forwardRef } from "react";
 import { makeClasses } from "@/hooks";
@@ -41,7 +42,7 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
             {user.email}
           </a>
           <time className={classes(classNames.author.time)}>
-            {post.created_at}
+            {time(post.created_at)}
           </time>
         </div>
 

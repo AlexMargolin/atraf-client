@@ -1,5 +1,7 @@
 export { default as mergeRefs } from "./mergeRefs/mergeRefs";
 
+export { default as time } from "./time/time";
+
 export {
   addClass,
   setStyle,
