@@ -4,8 +4,8 @@ import {
   Redirect,
   Router as HistoryRouter,
 } from "react-router-dom";
-import { history, routes } from "./";
 import { FC, Suspense } from "react";
+import { routes, history, Protected, Public } from "./";
 
 /**
  * History Router Component
@@ -16,34 +16,37 @@ const Router: FC = () => {
     <HistoryRouter history={history}>
       <Suspense fallback=''>
         <Switch>
-          <Route
+          <Protected
             exact
+            status='active'
             path={routes.home.path}
             component={routes.home.component}
           />
 
-          <Route
+          <Protected
+            exact
+            status='active'
+            path={routes.post.path}
+            component={routes.post.component}
+          />
+
+          <Protected
+            exact
+            status='inactive'
+            path={routes.activate.path}
+            component={routes.activate.component}
+          />
+
+          <Public
             exact
             path={routes.login.path}
             component={routes.login.component}
           />
 
-          <Route
+          <Public
             exact
             path={routes.register.path}
             component={routes.register.component}
-          />
-
-          <Route
-            exact
-            path={routes.activate.path}
-            component={routes.activate.component}
-          />
-
-          <Route
-            exact
-            path={routes.post.path}
-            component={routes.post.component}
           />
 
           <Route

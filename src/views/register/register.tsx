@@ -1,9 +1,9 @@
 import api from "@/api";
 import { Icon } from "@/base";
-import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
 import React, { FC, useState } from "react";
 import modules from "./register.module.scss";
+import { useAccount } from "@/providers/account";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Alert, Button, Card, Input, Link } from "@/components";
 
@@ -26,6 +26,7 @@ export const messages = {
 };
 
 const Register: FC = () => {
+  const [, setAccount] = useAccount();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -37,7 +38,7 @@ const Register: FC = () => {
     const confirm_password = data.get(fields.confirm) as string;
 
     setLoading(true);
-    const [, response] = await api.account.register({
+    const [account, response] = await api.account.register({
       email: email,
       password: password,
     });
@@ -48,9 +49,8 @@ const Register: FC = () => {
       return;
     }
 
-    setError(null);
+    setAccount(account);
     dispatchSnackbar({ message: messages.success });
-    NavigateTo("activate");
   };
 
   return (

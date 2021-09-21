@@ -37,7 +37,6 @@ export default class Account extends AccountStore {
       registerResponse = response.data as RegisterResponse;
     }
 
-    this.setStore(registerResponse);
     return [registerResponse, response];
   };
 
@@ -56,7 +55,6 @@ export default class Account extends AccountStore {
       activateResponse = response.data as ActivateResponse;
     }
 
-    this.setStore(activateResponse);
     return [activateResponse, response];
   };
 
@@ -76,7 +74,6 @@ export default class Account extends AccountStore {
       loginResponse = response.data as LoginResponse;
     }
 
-    this.setStore(loginResponse);
     return [loginResponse, response];
   };
 

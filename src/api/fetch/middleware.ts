@@ -1,24 +1,31 @@
 import { FetchMiddleware } from "./";
 import { NavigateTo } from "@/router";
-
-const HTTP_STATUS_NOT_FOUND = 404;
-const HTTP_STATUS_UNAUTHORIZED = 401;
+import { dispatchSnackbar } from "@/features/snackbar";
 
 /**
  * @param {false|Response} response
  */
-export const auth: FetchMiddleware = response => {
-  // empty response means there's a network error
-  // or the server might be down
+export const dispatchStatus: FetchMiddleware = response => {
+  dispatchEvent(
+    new Event(`api.status.${response ? response.status : false}`),
+  );
+};
+
+/**
+ * @param {false|Response} response
+ */
+export const intercept: FetchMiddleware = response => {
+  // empty response means there's a network error or the server might be down
   if (!response) {
+    NavigateTo("notFound");
     return;
   }
 
   switch (response.status) {
-    case HTTP_STATUS_UNAUTHORIZED:
-      NavigateTo("login");
+    case 401:
+      dispatchSnackbar({ message: "You've been logged out" });
       break;
-    case HTTP_STATUS_NOT_FOUND:
+    case 404:
       NavigateTo("notFound");
       break;
   }

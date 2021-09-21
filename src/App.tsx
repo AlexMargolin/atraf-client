@@ -3,12 +3,14 @@ import Router from "@/router";
 import { Header } from "@/layout";
 import { Snackbar } from "@/features";
 
-const App: FC = () => (
-  <>
-    <Header />
-    <Router />
-    <Snackbar />
-  </>
-);
+const App: FC = () => {
+  return (
+    <>
+      <Header />
+      <Router />
+      <Snackbar />
+    </>
+  );
+};
 
 export default App;

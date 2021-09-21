@@ -1,5 +1,6 @@
 import api from "@/api";
 import { Post } from "@/api/posts";
+import { NavigateTo } from "@/router";
 import { Icon, Spinner } from "@/base";
 import { POSTS_LIMIT } from "@/defines";
 import modules from "./home.module.scss";
@@ -7,7 +8,6 @@ import { Container } from "@/components";
 import { MappedUsers } from "@/api/users";
 import { makeClasses, useInView } from "@/hooks";
 import { Post as PostComponent } from "@/features";
-import { dispatchSnackbar } from "@/features/snackbar";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 const classes = makeClasses(modules);
@@ -36,9 +36,6 @@ const Home: FC = () => {
     setLoading(false);
 
     if (!response.ok) {
-      dispatchSnackbar({
-        message: `Oh oh, Something went wrong (${response.status})`,
-      });
       return;
     }
 

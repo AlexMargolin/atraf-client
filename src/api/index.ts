@@ -1,9 +1,9 @@
 import Fetch from "./fetch/fetch";
 import Posts from "./posts/posts";
 import Users from "./users/users";
+import { middleware } from "./fetch";
 import Account from "./account/account";
 import Comments from "./comments/comments";
-import { auth } from "./fetch/middleware";
 
 export type ResponseStatic = {
   ok: boolean;
@@ -30,8 +30,8 @@ export interface Handler {
 // Default API Url
 Fetch.setBaseUrl(process.env.APP_API_URL);
 
-// Response Middleware
-Fetch.use(auth);
+// Response middleware
+Fetch.use(middleware.dispatchStatus, middleware.intercept);
 
 // Handler instance
 const HTTP = new Fetch();

@@ -152,9 +152,9 @@ export default class Fetch implements Handler {
   };
 
   /**
-   * @param args
+   * @param middleware
    */
-  public static use = (...args: FetchMiddleware[]) => {
-    this.middleware = args;
+  public static use = (...middleware: FetchMiddleware[]) => {
+    this.middleware = middleware;
   };
 }

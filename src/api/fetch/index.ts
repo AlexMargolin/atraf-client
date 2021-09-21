@@ -12,3 +12,5 @@ export type RequestFunc = (
 ) => Promise<ResponseStatic>;
 
 export type FetchMiddleware = (response: false | Response) => void;
+
+export * as middleware from "./middleware";

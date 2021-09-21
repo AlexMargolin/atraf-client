@@ -1,9 +1,9 @@
 import api from "@/api";
 import { Icon } from "@/base";
-import { NavigateTo } from "@/router";
 import { makeClasses } from "@/hooks";
 import React, { FC, useState } from "react";
 import modules from "./activate.module.scss";
+import { useAccount } from "@/providers/account";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Alert, Button, Card, Input, Link } from "@/components";
 
@@ -24,6 +24,7 @@ export const messages = {
 };
 
 const Activate: FC = () => {
+  const [, setAccount] = useAccount();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +34,7 @@ const Activate: FC = () => {
     const code = data.get(fields.code) as string;
 
     setLoading(true);
-    const [, response] = await api.account.activate({
+    const [account, response] = await api.account.activate({
       code: code,
     });
     setLoading(false);
@@ -43,9 +44,8 @@ const Activate: FC = () => {
       return;
     }
 
-    setError(null);
+    setAccount(account);
     dispatchSnackbar({ message: messages.success });
-    NavigateTo("home");
   };
 
   return (

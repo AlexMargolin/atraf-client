@@ -3,8 +3,8 @@ import { Icon } from "@/base";
 import { FC, useState } from "react";
 import { Reset } from "@/views/login";
 import { makeClasses } from "@/hooks";
-import { NavigateTo } from "@/router";
 import modules from "./login.module.scss";
+import { useAccount } from "@/providers/account";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Button, Card, Input, Link, Alert } from "@/components";
 
@@ -28,6 +28,7 @@ export const messages = {
 };
 
 const Login: FC = () => {
+  const [, setAccount] = useAccount();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -38,7 +39,7 @@ const Login: FC = () => {
     const password = data.get(fields.password) as string;
 
     setLoading(true);
-    const [, response] = await api.account.login({
+    const [account, response] = await api.account.login({
       email: email,
       password: password,
     });
@@ -49,9 +50,8 @@ const Login: FC = () => {
       return;
     }
 
-    setError(null);
+    setAccount(account);
     dispatchSnackbar({ message: messages.login.success });
-    NavigateTo("home");
   };
 
   return (
