@@ -1,4 +1,5 @@
 import api from "@/api";
+import { history } from "@/router";
 import { Icon, Modal } from "@/base";
 import { makeClasses } from "@/hooks";
 import modules from "./new.module.scss";
@@ -34,7 +35,7 @@ const New: FC = () => {
     const attachment = data.get(fields.attachment) as File;
 
     setLoading(true);
-    const [, response] = await api.posts.create({
+    const [result, response] = await api.posts.create({
       title: title,
       body: body,
       attachment: attachment,
@@ -47,6 +48,7 @@ const New: FC = () => {
     }
 
     modalHandler.current.close();
+    history.push(`/post/${result.post_id}`);
     dispatchSnackbar({ message: "Post created Successfully" });
   };
 
