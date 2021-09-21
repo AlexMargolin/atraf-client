@@ -16,7 +16,8 @@ const time = (time: string): string => {
   const YEAR = MONTH * 12;
 
   if (seconds < MINUTE) {
-    return `${seconds} second(s) ago`;
+    const s = Math.floor(seconds);
+    return 0 === s ? "now" : `${s} second(s) ago`;
   } else if (seconds < HOUR) {
     return `${Math.floor(seconds / MINUTE)} minute(s) ago`;
   } else if (seconds < DAY) {
