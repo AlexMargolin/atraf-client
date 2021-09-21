@@ -33,7 +33,7 @@ const Activate: FC = () => {
     const code = data.get(fields.code) as string;
 
     setLoading(true);
-    const [account, response] = await api.account.activate({
+    const [result, response] = await api.account.activate({
       code: code,
     });
     setLoading(false);
@@ -43,7 +43,7 @@ const Activate: FC = () => {
       return;
     }
 
-    setAccount(account);
+    setAccount(result.account);
     dispatchSnackbar({ message: messages.success });
   };
 

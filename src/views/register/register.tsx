@@ -40,7 +40,7 @@ const Register: FC = () => {
     const confirm_password = data.get(fields.confirm) as string;
 
     setLoading(true);
-    const [account, response] = await api.account.register({
+    const [result, response] = await api.account.register({
       email: email,
       password: password,
       nickname: nickname,
@@ -52,7 +52,7 @@ const Register: FC = () => {
       return;
     }
 
-    setAccount(account);
+    setAccount(result.account);
     dispatchSnackbar({ message: messages.success });
   };
 

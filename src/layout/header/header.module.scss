@@ -6,10 +6,10 @@
   display: flex;
   position: sticky;
   align-items: center;
+  padding: get-size(spacing-20);
   justify-content: space-between;
   background-color: get-part-color(white);
   border-bottom: 1px solid get-part-color(border);
-  padding: get-size(spacing-10) get-size(spacing-20);
 
   &__icon {
     width: 24px;

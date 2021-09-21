@@ -3,7 +3,6 @@ import { Icon, Modal } from "@/base";
 import { makeClasses } from "@/hooks";
 import modules from "./new.module.scss";
 import { ModalHandle } from "@/base/modal";
-import { useAccount } from "@/providers/account";
 import React, { FC, useRef, useState } from "react";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Alert, Button, Card, Input } from "@/components";
@@ -21,7 +20,6 @@ export const fields = {
 };
 
 const New: FC = () => {
-  const [account] = useAccount();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -70,12 +68,6 @@ const New: FC = () => {
         <Card.Title>Create New Post</Card.Title>
 
         <form onSubmit={handleSubmit} autoComplete='off'>
-          {null === error && (
-            <Alert type='info' flat>
-              Publishing as [<strong>{account.nickname}</strong>]
-            </Alert>
-          )}
-
           {null !== error && (
             <Alert type='error'>
               <span>Umm... Something went wrong</span>{" "}

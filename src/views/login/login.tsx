@@ -39,7 +39,7 @@ const Login: FC = () => {
     const password = data.get(fields.password) as string;
 
     setLoading(true);
-    const [account, response] = await api.account.login({
+    const [result, response] = await api.account.login({
       email: email,
       password: password,
     });
@@ -50,7 +50,7 @@ const Login: FC = () => {
       return;
     }
 
-    setAccount(account);
+    setAccount(result.account);
     dispatchSnackbar({ message: messages.login.success });
   };
 
