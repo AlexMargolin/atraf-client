@@ -3,6 +3,7 @@ import { Icon, Modal } from "@/base";
 import { makeClasses } from "@/hooks";
 import modules from "./new.module.scss";
 import { ModalHandle } from "@/base/modal";
+import { useAccount } from "@/providers/account";
 import React, { FC, useRef, useState } from "react";
 import { dispatchSnackbar } from "@/features/snackbar";
 import { Alert, Button, Card, Input } from "@/components";
@@ -20,6 +21,7 @@ export const fields = {
 };
 
 const New: FC = () => {
+  const [account] = useAccount();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -70,8 +72,7 @@ const New: FC = () => {
         <form onSubmit={handleSubmit} autoComplete='off'>
           {null === error && (
             <Alert type='info' flat>
-              Since you haven&apos;t updated your personal details,
-              post author will be anonymous.
+              Publishing as [<strong>{account.nickname}</strong>]
             </Alert>
           )}
 

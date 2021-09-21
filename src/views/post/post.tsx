@@ -63,7 +63,7 @@ const Post: FC = () => {
             rel='author'
             className={classes(classNames.author.link)}
           >
-            {user.email}
+            {user.nickname}
           </a>
         </address>
         <time className={classes(classNames.author.time)}>

@@ -40,7 +40,7 @@ const Comment: FC<CommentProps> = props => {
             href={`#${data.id}`}
             className={classes(classNames.author.link)}
           >
-            {user.email}
+            {user.nickname}
           </a>
 
           <time

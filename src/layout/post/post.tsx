@@ -39,7 +39,7 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
 
         <div className={classes(classNames.author.root)}>
           <a href='#' className={classes(classNames.author.link)}>
-            {user.email}
+            {user.nickname}
           </a>
           <time className={classes(classNames.author.time)}>
             {time(post.created_at)}
