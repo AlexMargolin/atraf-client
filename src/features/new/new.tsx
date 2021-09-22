@@ -139,7 +139,7 @@ const New: FC = () => {
                 variant='outlined'
                 onClick={() => attachmentRef.current.click()}
               >
-                Select file
+                Browse
               </Button>
             }
           />
