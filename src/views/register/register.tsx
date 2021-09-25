@@ -19,7 +19,6 @@ export const fields = {
   email: "email",
   password: "password",
   nickname: "nickname",
-  confirm: "password_confirm",
 };
 
 export const messages = {
@@ -37,7 +36,6 @@ const Register: FC = () => {
     const email = data.get(fields.email) as string;
     const password = data.get(fields.password) as string;
     const nickname = data.get(fields.nickname) as string;
-    const confirm_password = data.get(fields.confirm) as string;
 
     setLoading(true);
     const [result, response] = await api.account.register({
@@ -63,12 +61,12 @@ const Register: FC = () => {
 
         <form onSubmit={handleSubmit}>
           {null === error ? (
-            <Alert flat type='info'>
+            <Alert flat type="info">
               An email will be sent to the provided mailbox with the
               account verification code.
             </Alert>
           ) : (
-            <Alert type='error'>
+            <Alert type="error">
               Umm... Something went wrong <code>(code: {error})</code>
             </Alert>
           )}
@@ -76,44 +74,35 @@ const Register: FC = () => {
           <Input
             required
             autoFocus
-            type='email'
-            label='Email'
+            type="email"
+            label="Email"
             name={fields.email}
             disabled={loading}
-            __start={<Icon iconId='icon-at' />}
-            __helper='Kept private. Only used as the account identifier'
+            __start={<Icon iconId="icon-at" />}
+            __helper="Kept private. Only used as the account identifier"
           />
 
           <Input
             required
-            type='text'
-            label='Nickname'
+            type="text"
+            label="Nickname"
             disabled={loading}
             name={fields.nickname}
-            __helper='Your publicly visible name'
-            __start={<Icon iconId='icon-user' />}
+            __helper="Your publicly visible name"
+            __start={<Icon iconId="icon-user" />}
           />
 
           <Input
             required
-            type='password'
-            label='Password'
+            type="password"
+            label="Password"
             disabled={loading}
             name={fields.password}
-            __start={<Icon iconId='icon-lock-regular' />}
-          />
-
-          <Input
-            required
-            type='password'
-            disabled={loading}
-            name={fields.confirm}
-            label='Confirm Password'
-            __start={<Icon iconId='icon-lock-bold' />}
+            __start={<Icon iconId="icon-lock-regular" />}
           />
 
           <Card.Actions>
-            <Button type='submit' color='primary' disabled={loading}>
+            <Button type="submit" color="primary" disabled={loading}>
               Create Account
             </Button>
           </Card.Actions>
@@ -121,7 +110,7 @@ const Register: FC = () => {
       </Card>
 
       <div className={classes(classNames.options)}>
-        <Link route='login'>I already have an account</Link>
+        <Link route="login">I already have an account</Link>
       </div>
 
       <div className={classes(classNames.recaptcha)}>
