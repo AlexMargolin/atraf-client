@@ -83,7 +83,7 @@ const htmlPlugin = new HtmlWebpackPlugin({
   title: process.env.npm_package_name,
   meta: {
     charset: "UTF-8",
-    description: "Minimal dependency React Starter",
+    description: "Atraf image board",
   },
   template: appendRoot(defaults.publicDir, "index.ejs"),
   favicon: appendRoot(defaults.publicDir, "favicon.ico"),
