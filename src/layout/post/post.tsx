@@ -1,6 +1,7 @@
 import { time } from "@/utils";
 import { PostProps } from "./";
-import { forwardRef } from "react";
+import { history } from "@/router";
+import React, { forwardRef } from "react";
 import { makeClasses } from "@/hooks";
 import modules from "./post.module.scss";
 
@@ -26,12 +27,16 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
   (props, forwardedRef) => {
     const { post, user } = props;
 
+    const handleClick = (event: React.MouseEvent) => {
+      event.preventDefault();
+      history.push(`/post/${post.id}`);
+    };
+
     return (
       <div ref={forwardedRef} className={classes(classNames.root)}>
         <h3 className={classes(classNames.title)}>
           <a
-            target='_blank'
-            rel='noreferrer'
+            onClick={handleClick}
             href={`/post/${post.id}`}
             className={classes(classNames.link)}
           >
@@ -40,7 +45,7 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
         </h3>
 
         <div className={classes(classNames.author.root)}>
-          <a href='#' className={classes(classNames.author.link)}>
+          <a href="#" className={classes(classNames.author.link)}>
             {user.nickname}
           </a>
           <time className={classes(classNames.author.time)}>
@@ -50,7 +55,7 @@ const Post = forwardRef<HTMLDivElement, PostProps>(
 
         <div className={classes(classNames.media.root)}>
           <img
-            loading='lazy'
+            loading="lazy"
             alt={post.body}
             src={post.attachment}
             className={classes(classNames.media.image)}
