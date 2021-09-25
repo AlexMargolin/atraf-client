@@ -113,7 +113,7 @@ const cleanPlugin = new CleanWebpackPlugin({
 /**
  * @type {webpack.EnvironmentPlugin}
  */
-const environmentPlugin = new webpack.EnvironmentPlugin(envs);
+const environmentPlugin = new webpack.EnvironmentPlugin(Object.keys(process.env));
 
 /**
  * @type {webpack.Configuration}
