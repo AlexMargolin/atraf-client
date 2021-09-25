@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Router from "@/router";
+import { Router } from "@/router";
 import { Header } from "@/layout";
 import { Snackbar } from "@/features";
 
