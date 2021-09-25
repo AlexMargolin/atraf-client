@@ -5,5 +5,5 @@ module.exports = {
     "^@/(.*)": "<rootDir>/src/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
-  testPathIgnorePatterns: ["/node_modules/", "/build/"],
+  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 }

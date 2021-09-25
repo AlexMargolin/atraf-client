@@ -11,7 +11,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
  */
 const defaults = {
   srcDir: "src",
-  outputDir: "build",
+  outputDir: "dist",
   publicDir: "public",
   mainFile: "index.tsx",
 };
